@@ -15,7 +15,7 @@ sealed class NavigationItem(
 ) {
     data object Home : NavigationItem(
         screen = Screen.HomeScreen,
-        nameItem = "Главная",
+        nameItem = "Home",
         icon = Icons.Filled.Home
     )
 
@@ -33,7 +33,7 @@ sealed class NavigationItem(
 
     data object Profile : NavigationItem(
         screen = Screen.ProfileScreen,
-        nameItem = "Профиль",
+        nameItem = "Profile",
         icon = Icons.Filled.Person
     )
 }

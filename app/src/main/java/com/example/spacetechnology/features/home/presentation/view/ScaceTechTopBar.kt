@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.spacetechnology.R
+import com.example.spacetechnology.core.ui.theme.SpaceTechColor
 
 @Composable
 fun SpaceTechTopBar() {
@@ -24,9 +25,11 @@ fun SpaceTechTopBar() {
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Box {
+        Box(
+            modifier = Modifier.padding(start = 6.dp)
+        ) {
             Image(
-                modifier = Modifier.size(width = 60.dp, height = 30.dp),
+                modifier = Modifier.size(width = 63.dp, height = 34.dp),
                 painter = painterResource(id = R.drawable.space_tech_logo),
                 contentDescription = "spaceX",
                 contentScale = ContentScale.Crop
@@ -34,7 +37,8 @@ fun SpaceTechTopBar() {
         }
         Box {
             Text(
-                modifier = Modifier.padding(top = 11.dp, end = 12.dp),
+                color = SpaceTechColor.white,
+                modifier = Modifier.padding(top = 12.dp, end = 10.dp),
                 text = "Search"
             )
         }
