@@ -8,6 +8,6 @@ import com.example.spacetechnology.navigation.Screen
 
 fun NavGraphBuilder.addSpacexScreen(navController: NavController) {
     composable(Screen.SpacexScreen.route) {
-        SpacexScreen()
+        SpacexScreen(navController = navController)
     }
 }

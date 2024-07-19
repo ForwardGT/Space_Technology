@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
-            SpaceTechnologyTheme {
+            SpaceTechnologyTheme(darkTheme = true) {
                 NavigationGraph(navController = navController)
             }
         }

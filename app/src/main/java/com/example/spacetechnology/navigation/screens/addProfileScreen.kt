@@ -8,6 +8,6 @@ import com.example.spacetechnology.navigation.Screen
 
 fun NavGraphBuilder.addProfileScreen(navController: NavController) {
     composable(Screen.ProfileScreen.route) {
-        ProfileScreen()
+        ProfileScreen(navController = navController)
     }
 }
