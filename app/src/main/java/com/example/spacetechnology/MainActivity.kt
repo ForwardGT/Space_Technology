@@ -1,21 +1,23 @@
 package com.example.spacetechnology
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.ui.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.navigation.NavigationGraph
+import io.github.aagrishankov.platform.setContentThemeWithStatusBars
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            val navController = rememberNavController()
 
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        enableEdgeToEdge()
+
+        setContentThemeWithStatusBars {
+            val navController = rememberNavController()
             SpaceTechnologyTheme(darkTheme = true) {
                 NavigationGraph(navController = navController)
             }
