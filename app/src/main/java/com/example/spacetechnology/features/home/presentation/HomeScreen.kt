@@ -14,14 +14,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import com.example.spacetechnology.features.auth.presentation.ProfileScreen
 import com.example.spacetechnology.features.nasa.presentation.NasaScreen
+import com.example.spacetechnology.features.profile.presentation.ProfileScreen
 import com.example.spacetechnology.features.spacex.presentation.SpacexScreen
 import org.koin.androidx.compose.koinViewModel
 
@@ -92,10 +90,4 @@ fun HomeScreen(navController: NavController) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun Test() {
-    HomeScreen(navController = rememberNavController())
 }

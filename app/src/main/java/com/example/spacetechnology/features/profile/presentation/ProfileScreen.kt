@@ -1,4 +1,4 @@
-package com.example.spacetechnology.features.auth.presentation
+package com.example.spacetechnology.features.profile.presentation
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
