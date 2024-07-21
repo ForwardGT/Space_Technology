@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.spacetechnology.core.ui.navigation.SpaceTechNavigationBar
+import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 
 @Composable
 fun NasaScreen(

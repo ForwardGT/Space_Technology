@@ -1,4 +1,4 @@
-package com.example.spacetechnology.core.ui.theme
+package com.example.spacetechnology.core.uikit.theme
 
 import androidx.compose.ui.graphics.Color
 

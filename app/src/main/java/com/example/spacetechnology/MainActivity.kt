@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
-import com.example.spacetechnology.core.ui.theme.SpaceTechnologyTheme
+import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.navigation.NavigationGraph
 import io.github.aagrishankov.platform.setContentThemeWithStatusBars
 

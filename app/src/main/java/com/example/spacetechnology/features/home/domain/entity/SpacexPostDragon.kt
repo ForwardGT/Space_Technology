@@ -1,4 +1,4 @@
-package com.example.spacetechnology.core.ui.entity
+package com.example.spacetechnology.features.home.domain.entity
 
 data class SpacexPostDragon(
     val name: String = "",

@@ -1,4 +1,4 @@
-package com.example.spacetechnology.core.ui.navigation
+package com.example.spacetechnology.core.uikit.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
@@ -18,8 +18,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.spacetechnology.core.ui.theme.SpaceTechColor
-import com.example.spacetechnology.core.ui.theme.SpaceTechnologyTheme
+import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
+import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.features.home.presentation.HomeScreen
 import com.example.spacetechnology.features.home.presentation.NavigationItem
 import com.example.spacetechnology.navigation.navigateTo
