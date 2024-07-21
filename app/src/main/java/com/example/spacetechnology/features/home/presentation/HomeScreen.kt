@@ -1,22 +1,35 @@
 package com.example.spacetechnology.features.home.presentation
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.spacetechnology.core.ui.theme.SpaceTechnologyTheme
-import com.example.spacetechnology.features.home.presentation.view.SpaceTechNavigationBar
+import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
+import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
+import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeCrewCard
+import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeDragonCard
+import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeRocketCard
+import com.example.spacetechnology.features.home.presentation.view.CardsSpacex
 import com.example.spacetechnology.features.home.presentation.view.SpaceTechTopBar
 
 @Composable
 fun HomeScreen(
     navController: NavController
 ) {
+    val spacexPost = listOf(
+        SpacexPostHomeCrewCard(),
+        SpacexPostHomeRocketCard(),
+        SpacexPostHomeDragonCard()
+    )
 
     Scaffold(
         topBar = {
@@ -26,8 +39,17 @@ fun HomeScreen(
             SpaceTechNavigationBar(navController)
         }
     ) { paddingValues ->
-        Box(Modifier.padding(paddingValues)) {
-            Text(text = "Home")
+        Column(
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
+                .padding(top = 10.dp)
+        ) {
+
+            CardsSpacex(spacexPost)
+
         }
     }
 }
@@ -35,7 +57,7 @@ fun HomeScreen(
 @Preview
 @Composable
 private fun P() {
-    SpaceTechnologyTheme (true) {
+    SpaceTechnologyTheme(true) {
         HomeScreen(navController = rememberNavController())
     }
 }

@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.compose.icons.core)
     implementation(libs.compose.icons.extender)
+    implementation(libs.cme.status.bars)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

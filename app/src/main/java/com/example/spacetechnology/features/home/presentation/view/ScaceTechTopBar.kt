@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -13,8 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.R
+import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
+import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
+import com.example.spacetechnology.features.home.presentation.HomeScreen
 
 @Composable
 fun SpaceTechTopBar() {
@@ -24,19 +30,32 @@ fun SpaceTechTopBar() {
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Box {
+        Box(
+            modifier = Modifier.padding(start = 6.dp)
+        ) {
             Image(
-                modifier = Modifier.size(width = 60.dp, height = 30.dp),
-                painter = painterResource(id = R.drawable.space_tech_logo),
+                modifier = Modifier
+                    .size(42.dp)
+                    .aspectRatio(0.7f),
+                painter = painterResource(id = R.drawable.space_tech_logo1),
                 contentDescription = "spaceX",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.FillHeight
             )
         }
         Box {
             Text(
-                modifier = Modifier.padding(top = 11.dp, end = 12.dp),
+                color = SpaceTechColor.white,
+                modifier = Modifier.padding(top = 12.dp, end = 10.dp),
                 text = "Search"
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun P() {
+    SpaceTechnologyTheme(true) {
+        HomeScreen(navController = rememberNavController())
     }
 }
