@@ -1,6 +1,6 @@
-package com.example.spacetechnology.features.home.domain.entity
+package com.example.spacetechnology.features.spacex.domain.entity
 
-data class SpacexPostCrew(
+data class SpacexCrew(
     val id: Int = 0,
     val name: String = "",
     val agency: String = "",

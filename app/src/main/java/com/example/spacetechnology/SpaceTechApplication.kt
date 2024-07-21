@@ -2,6 +2,7 @@ package com.example.spacetechnology
 
 import android.app.Application
 import com.example.spacetechnology.features.home.presentation.HomeViewModel
+import com.example.spacetechnology.features.spacex.presentation.SpacexViewModel
 import io.github.aagrishankov.platform.PreRenderCurrentThemeStatusBars
 import io.github.aagrishankov.platform.SystemThemeStatusBars
 import org.koin.android.ext.koin.androidContext
@@ -20,7 +21,8 @@ class SpaceTechApplication : Application() {
             androidContext(this@SpaceTechApplication)
 
             modules(
-                homeScreenViewModel
+                homeScreenViewModel,
+                spacexScreenViewModel
             )
         }
     }
@@ -28,4 +30,8 @@ class SpaceTechApplication : Application() {
 
 val homeScreenViewModel = module {
     viewModel { HomeViewModel() }
+}
+
+val spacexScreenViewModel = module {
+    viewModel { SpacexViewModel() }
 }

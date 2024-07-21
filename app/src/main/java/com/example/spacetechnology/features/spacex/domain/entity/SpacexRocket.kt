@@ -1,6 +1,6 @@
-package com.example.spacetechnology.features.home.domain.entity
+package com.example.spacetechnology.features.spacex.domain.entity
 
-data class SpacexPostRocket(
+data class SpacexRocket(
     val name: String = "",
     val boosters: Int = 0,
     val firstFlight: String = "",

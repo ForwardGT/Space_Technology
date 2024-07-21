@@ -2,7 +2,7 @@ package com.example.spacetechnology.features.home.domain.entity
 
 import androidx.compose.runtime.Composable
 
-sealed interface SpacePost {
+sealed interface SpacePostHome {
 
     @Composable
     fun Post()

@@ -25,14 +25,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
-import com.example.spacetechnology.features.home.domain.entity.SpacePost
+import com.example.spacetechnology.features.home.domain.entity.SpacePostHome
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.features.home.presentation.HomeScreen
 
 @Composable
 fun CardsSpacex(
-    posts: List<SpacePost>
+    posts: List<SpacePostHome>
 ) {
 
     LazyRow {

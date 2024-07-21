@@ -30,8 +30,8 @@ fun SpaceTechNavigationBar(
 ) {
     val barItem = listOf(
         NavigationItem.Home,
-        NavigationItem.Nasa,
         NavigationItem.SpaceX,
+        NavigationItem.Nasa,
         NavigationItem.Profile,
     )
 

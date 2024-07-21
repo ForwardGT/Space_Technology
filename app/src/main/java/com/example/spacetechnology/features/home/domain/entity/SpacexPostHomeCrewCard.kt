@@ -5,10 +5,10 @@ import com.example.spacetechnology.R
 import com.example.spacetechnology.features.home.presentation.view.ClickableIcon
 import com.example.spacetechnology.features.home.presentation.view.OneCard
 
-class SpacexPostDragonCard(
-    private val description: String = "Dragon spacecraft: Learn about the revolutionary vessels for cargo and crewed missions",
-    private val imagePreview: Int = R.drawable.dragon_preview,
-) : SpacePost, SpacexPostRes() {
+class SpacexPostHomeCrewCard(
+    private val description: String = "Meet the astronauts: Discover the heroes embarking on SpaceX missions.",
+    private val imagePreview: Int = R.drawable.crew_preview
+) : SpacePostHome, SpacexPostHomeRes() {
 
     @Composable
     override fun Post() {
