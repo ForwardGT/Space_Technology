@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class HomeViewModel : ViewModel() {
+class ViewModelHome : ViewModel() {
     private val _screenState = MutableStateFlow<NavigationItem>(NavigationItem.Home)
     var screenState = _screenState.asStateFlow()
 

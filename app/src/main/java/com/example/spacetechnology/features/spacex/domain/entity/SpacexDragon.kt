@@ -7,7 +7,7 @@ data class SpacexDragon(
     val diameter: Float,
     val dryMassKg: Int,
     val wikipedia: String,
-    val image: List<String> = listOf(),
+    val image: List<String>,
     val description: String,
     val launchPayloadMass: Int
 )

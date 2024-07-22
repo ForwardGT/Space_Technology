@@ -5,7 +5,7 @@ import com.example.spacetechnology.R
 import com.example.spacetechnology.features.home.presentation.view.ClickableIcon
 import com.example.spacetechnology.features.home.presentation.view.OneCard
 
-class SpacexPostHomeCrewCard(
+class SpacexPostHomeCrewImpl(
     private val description: String = "Meet the astronauts: Discover the heroes embarking on SpaceX missions.",
     private val imagePreview: Int = R.drawable.crew_preview
 ) : SpacePostHome, SpacexPostHomeRes() {

@@ -5,7 +5,7 @@ import com.example.spacetechnology.R
 import com.example.spacetechnology.features.home.presentation.view.ClickableIcon
 import com.example.spacetechnology.features.home.presentation.view.OneCard
 
-class SpacexPostHomeDragonCard(
+class SpacexPostHomeDragonImpl(
     private val description: String = "Dragon spacecraft: Learn about the revolutionary vessels for cargo and crewed missions",
     private val imagePreview: Int = R.drawable.dragon_preview,
 ) : SpacePostHome, SpacexPostHomeRes() {

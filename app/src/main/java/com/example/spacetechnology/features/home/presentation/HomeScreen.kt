@@ -15,9 +15,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
-import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeCrewCard
-import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeDragonCard
-import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeRocketCard
+import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeCrewImpl
+import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeDragonImpl
+import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeRocketImpl
 import com.example.spacetechnology.features.home.presentation.view.CardsSpacex
 import com.example.spacetechnology.features.home.presentation.view.SpaceTechTopBar
 
@@ -26,9 +26,9 @@ fun HomeScreen(
     navController: NavController
 ) {
     val spacexPost = listOf(
-        SpacexPostHomeCrewCard(),
-        SpacexPostHomeRocketCard(),
-        SpacexPostHomeDragonCard()
+        SpacexPostHomeCrewImpl(),
+        SpacexPostHomeRocketImpl(),
+        SpacexPostHomeDragonImpl()
     )
 
     Scaffold(
