@@ -17,12 +17,16 @@ class ViewModelSpacex : ViewModel() {
     val state = _state.asStateFlow()
 
     init {
+        loadAllPost()
+    }
+
+    fun loadAllPost() {
         loadDragons()
         loadRocket()
         loadLandPads()
     }
 
-    fun loadDragons() {
+    private fun loadDragons() {
         viewModelScope.launch {
             _state.reduce {
                 it.copy(isLoading = true)
@@ -42,7 +46,7 @@ class ViewModelSpacex : ViewModel() {
         }
     }
 
-    fun loadRocket() {
+    private fun loadRocket() {
         viewModelScope.launch {
             val posts = repository.loadRocket()
             val lastPost = posts.lastOrNull()
@@ -62,7 +66,7 @@ class ViewModelSpacex : ViewModel() {
         }
     }
 
-    fun loadLandPads() {
+    private fun loadLandPads() {
         viewModelScope.launch {
             val posts = repository.loadLandPads()
             val lastPost = posts.lastOrNull()

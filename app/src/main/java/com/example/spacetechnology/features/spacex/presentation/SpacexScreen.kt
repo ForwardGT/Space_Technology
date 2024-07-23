@@ -42,12 +42,15 @@ fun SpacexScreen(
 
         Column(
             modifier = Modifier
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()) // Из за скролла контент не выравнивается по середине экрана
                 .padding(paddingValues)
         ) {
             when {
                 errorStateRocket || errorStateDragon || errorStateLandPads -> {
-                    LoadButton { viewModel.loadDragons() }
+                    LoadButton {
+                        viewModel.loadAllPost()
+                    }
+
                 }
 
                 state.isLoading -> {

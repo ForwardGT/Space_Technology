@@ -25,12 +25,15 @@ fun LoadButton(
     onClick: () -> Unit
 ) {
 
-    Box {
+    Box (
+        Modifier.fillMaxSize()
+    ) {
         Button(
             onClick = { onClick() },
             modifier = Modifier
                 .height(40.dp)
-                .width(130.dp),
+                .width(130.dp)
+                .align(Alignment.Center),
             colors = ButtonDefaults.buttonColors(Color.Transparent),
             shape = RoundedCornerShape(12.dp),
             contentPadding = PaddingValues()

@@ -5,9 +5,9 @@ import com.example.spacetechnology.R
 import com.example.spacetechnology.features.home.presentation.view.ClickableIcon
 import com.example.spacetechnology.features.home.presentation.view.OneCard
 
-class SpacexPostHomeCrewImpl(
-    private val description: String = "Meet the astronauts: Discover the heroes embarking on SpaceX missions.",
-    private val imagePreview: Int = R.drawable.crew_preview
+class SpacexPostHomeLandPadImpl(
+    private val description: String = "SpaceX landpad: a designated platform for rocket landings, equipped with guiding markers and the SpaceX logo, often located on ocean barges or coastal sites.",
+    private val imagePreview: Int = R.drawable.landpads_preview
 ) : SpacePostHome, SpacexPostHomeRes() {
 
     @Composable
