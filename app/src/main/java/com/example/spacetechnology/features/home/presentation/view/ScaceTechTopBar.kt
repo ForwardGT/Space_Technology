@@ -14,14 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.R
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
-import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
-import com.example.spacetechnology.features.home.presentation.HomeScreen
-
 @Composable
 fun SpaceTechTopBar() {
     Row(
@@ -49,13 +44,5 @@ fun SpaceTechTopBar() {
                 text = "Search"
             )
         }
-    }
-}
-
-@Preview
-@Composable
-private fun P() {
-    SpaceTechnologyTheme(true) {
-        HomeScreen(navController = rememberNavController())
     }
 }

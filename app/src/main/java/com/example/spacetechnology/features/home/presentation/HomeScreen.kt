@@ -9,12 +9,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
-import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeDragonImpl
 import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeLandPadImpl
 import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeRocketImpl
@@ -51,13 +48,5 @@ fun HomeScreen(
             CardsSpacex(spacexPost)
 
         }
-    }
-}
-
-@Preview
-@Composable
-private fun P() {
-    SpaceTechnologyTheme(true) {
-        HomeScreen(navController = rememberNavController())
     }
 }

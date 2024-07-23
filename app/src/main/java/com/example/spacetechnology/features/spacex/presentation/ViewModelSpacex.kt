@@ -2,6 +2,7 @@ package com.example.spacetechnology.features.spacex.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.spacetechnology.core.utils.extensions.isError
 import com.example.spacetechnology.core.utils.extensions.reduce
 import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
@@ -29,59 +30,59 @@ class ViewModelSpacex : ViewModel() {
     private fun loadDragons() {
         viewModelScope.launch {
             _state.reduce {
-                it.copy(isLoading = true)
+                it.copy(isLoadingDragon = true)
             }
             val posts = repository.loadDragon()
             val lastPost = posts.lastOrNull()
             _state.reduce {
-                it.copy(isLoading = false, postDragon = lastPost)
+                it.copy(postDragon = lastPost)
             }
             _state.reduce {
                 it.copy(loadingStateSpacexPosts = _state.value.loadingStateSpacexPosts + 1)
             }
-        }.invokeOnCompletion {
+        }.invokeOnCompletion { throwError ->
             _state.reduce {
-                it.copy(isLoading = false, isError = it.isError)
+                it.copy(isLoadingDragon = false, isError = throwError.isError)
             }
         }
     }
 
     private fun loadRocket() {
         viewModelScope.launch {
+            _state.reduce {
+                it.copy(isLoadingRockets = true)
+            }
             val posts = repository.loadRocket()
             val lastPost = posts.lastOrNull()
             _state.reduce {
-                it.copy(isLoading = true)
-            }
-            _state.reduce {
-                it.copy(isLoading = false, postRocket = lastPost)
+                it.copy(postRocket = lastPost)
             }
             _state.reduce {
                 it.copy(loadingStateSpacexPosts = _state.value.loadingStateSpacexPosts + 1)
             }
-        }.invokeOnCompletion {
+        }.invokeOnCompletion { throwError ->
             _state.reduce {
-                it.copy(isLoading = false, isError = it.isError)
+                it.copy(isLoadingRockets = false, isError = throwError.isError)
             }
         }
     }
 
     private fun loadLandPads() {
         viewModelScope.launch {
+            _state.reduce {
+                it.copy(isLoadingLandPads = true)
+            }
             val posts = repository.loadLandPads()
             val lastPost = posts.lastOrNull()
             _state.reduce {
-                it.copy(isLoading = true)
-            }
-            _state.reduce {
-                it.copy(isLoading = false, postLandPads = lastPost)
+                it.copy(postLandPads = lastPost)
             }
             _state.reduce {
                 it.copy(loadingStateSpacexPosts = _state.value.loadingStateSpacexPosts + 1)
             }
-        }.invokeOnCompletion {
+        }.invokeOnCompletion { throwError ->
             _state.reduce {
-                it.copy(isLoading = false, isError = it.isError)
+                it.copy(isLoadingLandPads = false, isError = throwError.isError)
             }
         }
     }

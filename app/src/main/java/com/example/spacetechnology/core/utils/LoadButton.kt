@@ -15,18 +15,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
+import com.example.spacetechnology.core.utils.extensions.thenIf
 
 @Composable
 fun LoadButton(
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    scroll: Boolean = false
 ) {
+    val viewWidth = with(LocalDensity.current) {
+        (LocalView.current.rootView.height.toDp())
+    }
 
     Box (
-        Modifier.fillMaxSize()
+        Modifier
+            .fillMaxSize()
+            .thenIf(scroll, modifier = Modifier.height(viewWidth))
     ) {
         Button(
             onClick = { onClick() },
@@ -56,14 +64,5 @@ fun LoadButton(
                 )
             }
         }
-    }
-}
-
-
-@Preview
-@Composable
-fun Q() {
-    LoadButton {
-
     }
 }

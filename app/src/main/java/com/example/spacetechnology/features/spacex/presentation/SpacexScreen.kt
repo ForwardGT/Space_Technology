@@ -30,9 +30,10 @@ fun SpacexScreen(
     val viewModel: ViewModelSpacex = koinViewModel()
     val state by viewModel.state.collectAsState()
 
-    val errorStateDragon = state.isError || state.postDragon == null && !state.isLoading
-    val errorStateRocket = state.isError || state.postRocket == null && !state.isLoading
-    val errorStateLandPads = state.isError || state.postLandPads == null && !state.isLoading
+    val errorStateDragon = state.isError || state.postDragon == null && !state.isLoadingDragon
+    val errorStateRocket = state.isError || state.postRocket == null && !state.isLoadingRockets
+    val errorStateLandPads = state.isError || state.postLandPads == null && !state.isLoadingLandPads
+    val loadingState = state.isLoadingDragon || state.isLoadingRockets || state.isLoadingLandPads
 
     Scaffold(
         bottomBar = {
@@ -42,22 +43,22 @@ fun SpacexScreen(
 
         Column(
             modifier = Modifier
-                .verticalScroll(rememberScrollState()) // Из за скролла контент не выравнивается по середине экрана
+                .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
         ) {
             when {
                 errorStateRocket || errorStateDragon || errorStateLandPads -> {
-                    LoadButton {
-                        viewModel.loadAllPost()
-                    }
-
+                    LoadButton(
+                        onClick = { viewModel.loadAllPost() },
+                        scroll = true
+                    )
                 }
 
-                state.isLoading -> {
-                    CirProgIndicator()
+                loadingState -> {
+                    CirProgIndicator(needHeightScreen = true)
                 }
 
-                else -> {
+                state.loadingStateSpacexPosts == 3 -> {
                     state.postDragon?.let { dragon ->
                         PostsSpacex(
                             description = dragon.description,
@@ -79,6 +80,10 @@ fun SpacexScreen(
                             titlePost = "Last Land Pads"
                         )
                     }
+                }
+
+                else -> {
+
                 }
             }
         }
