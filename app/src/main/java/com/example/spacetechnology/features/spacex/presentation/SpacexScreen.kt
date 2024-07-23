@@ -1,37 +1,25 @@
 package com.example.spacetechnology.features.spacex.presentation
 
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
-import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
-import com.example.spacetechnology.features.spacex.domain.entity.SpacexDragon
+import com.example.spacetechnology.core.utils.CirProgIndicator
+import com.example.spacetechnology.core.utils.LoadButton
+import com.example.spacetechnology.features.spacex.presentation.view.DescriptionPost
+import com.example.spacetechnology.features.spacex.presentation.view.PhotoCarousel
 import com.example.spacetechnology.features.spacex.presentation.view.TitleWithLines
 import org.koin.androidx.compose.koinViewModel
 
@@ -42,6 +30,10 @@ fun SpacexScreen(
     val viewModel: ViewModelSpacex = koinViewModel()
     val state by viewModel.state.collectAsState()
 
+    val errorStateDragon = state.isError || state.postDragon == null && !state.isLoading
+    val errorStateRocket = state.isError || state.postRocket == null && !state.isLoading
+    val errorStateLandPads = state.isError || state.postLandPads == null && !state.isLoading
+
     Scaffold(
         bottomBar = {
             SpaceTechNavigationBar(navController)
@@ -49,39 +41,42 @@ fun SpacexScreen(
     ) { paddingValues ->
 
         Column(
-            Modifier
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
-                .border(2.dp, SpaceTechColor.navigationElement)
         ) {
             when {
-                state.isError || state.post == null && !state.isLoading -> {
-
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        //TODO написать кнопку для обновления экрана
-                    }
+                errorStateRocket || errorStateDragon || errorStateLandPads -> {
+                    LoadButton { viewModel.loadDragons() }
                 }
 
                 state.isLoading -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
+                    CirProgIndicator()
+                }
+
+                else -> {
+                    state.postDragon?.let { dragon ->
+                        PostsSpacex(
+                            description = dragon.description,
+                            image = dragon.image,
+                            titlePost = "Last Dragon"
+                        )
+                    }
+                    state.postRocket?.let { rocket ->
+                        PostsSpacex(
+                            description = rocket.description,
+                            image = rocket.image,
+                            titlePost = "Last Rocket"
+                        )
+                    }
+                    state.postLandPads?.let { landPad ->
+                        PostsSpacex(
+                            description = landPad.description,
+                            image = landPad.image,
+                            titlePost = "Last Land Pads"
+                        )
                     }
                 }
-
-                else -> state.post?.also { post ->
-
-                    TitleWithLines("Last Dragon")
-
-                    PhotoCarousel(post)
-
-                    DescriptionPost(post)
-
-                }
             }
         }
     }
@@ -89,58 +84,19 @@ fun SpacexScreen(
 
 
 @Composable
-fun PhotoCarousel(
-    post: SpacexDragon
+private fun PostsSpacex(
+    image: List<String>,
+    description: String,
+    titlePost: String
 ) {
-
-    val viewWidth = with(LocalDensity.current) {
-        (LocalView.current.rootView.width.toDp())
-    }
-
-    LazyRow {
-        items(post.image) {
-            Box(
-                modifier = Modifier
-                    .height(250.dp)
-                    .width(viewWidth)
-            ) {
-                AsyncImage(
-                    modifier = Modifier.fillMaxSize(),
-                    model = it,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun DescriptionPost(
-    post: SpacexDragon
-) {
-
-
-    Column(
+    Card(
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        border = BorderStroke(2.dp, SpaceTechColor.navigationElement),
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
+            .padding(6.dp)
     ) {
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            text = "Description"
-        )
-        Text(text = post.description)
+        TitleWithLines(titlePost)
+        PhotoCarousel(image)
+        DescriptionPost(description)
     }
 }
-
-
-@Preview
-@Composable
-fun Tqq() {
-    SpaceTechnologyTheme(darkTheme = true) {
-        TitleWithLines("Hello")
-    }
-}
-

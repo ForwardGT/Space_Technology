@@ -6,7 +6,7 @@ import com.example.spacetechnology.features.spacex.domain.entity.SpacexDragon
 fun mapperSpacexDragon(
     response: List<DragonInformationDto>
 ): List<SpacexDragon> {
-    val spacexDragonsPosts = mutableListOf<SpacexDragon>()
+    val posts = mutableListOf<SpacexDragon>()
 
     response.forEach { item ->
         val post = SpacexDragon(
@@ -20,7 +20,7 @@ fun mapperSpacexDragon(
             description = item.description,
             launchPayloadMass = item.launchPayloadMass.kg
         )
-        spacexDragonsPosts.add(post)
+        posts.add(post)
     }
-    return spacexDragonsPosts
+    return posts
 }
