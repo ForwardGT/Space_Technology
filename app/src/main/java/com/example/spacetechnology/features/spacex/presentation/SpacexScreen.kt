@@ -58,7 +58,7 @@ fun SpacexScreen(
                     CirProgIndicator(needHeightScreen = true)
                 }
 
-                state.loadingStateSpacexPosts == 3 -> {
+                else -> {
                     state.postDragon?.let { dragon ->
                         PostsSpacex(
                             description = dragon.description,
@@ -80,10 +80,6 @@ fun SpacexScreen(
                             titlePost = "Last Land Pads"
                         )
                     }
-                }
-
-                else -> {
-
                 }
             }
         }

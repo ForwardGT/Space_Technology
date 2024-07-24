@@ -4,8 +4,11 @@ sealed class Screen(
     val route: String
 ) {
     data object HomeScreen : Screen(HOME_SCREEN)
+
     data object SpacexScreen : Screen(SPACEX_SCREEN)
+
     data object NasaScreen : Screen(NASA_SCREEN)
+
     data object ProfileScreen : Screen(PROFILE_SCREEN)
 
 

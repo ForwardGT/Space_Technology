@@ -10,7 +10,7 @@ fun NavigationGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SpacexScreen.route
+        startDestination = Screen.NasaScreen.route
     ) {
         addSettingNavGraph(navController)
     }
