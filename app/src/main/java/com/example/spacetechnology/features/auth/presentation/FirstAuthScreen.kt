@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.spacetechnology.R
+import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.core.utils.CustomSpacer
 import com.example.spacetechnology.core.utils.LoadButton
 import com.example.spacetechnology.navigation.Screen
@@ -42,13 +43,15 @@ fun FirstAuthScreen(
             LoadButton(
                 onClick = { navController.navigateTo(Screen.AuthScreen.route) },
                 label = "Authorisation",
-                defaultButton = true
+                defaultButton = true,
+                gradient = SpaceTechColor.buttonGradientFirstAuthScreen
             )
             CustomSpacer(v = 4.dp)
             LoadButton(
                 onClick = { navController.navigateTo(Screen.RegistrationScreen.route) },
                 label = "Registration",
-                defaultButton = true
+                defaultButton = true,
+                gradient = SpaceTechColor.buttonGradientFirstAuthScreen
             )
         }
     }

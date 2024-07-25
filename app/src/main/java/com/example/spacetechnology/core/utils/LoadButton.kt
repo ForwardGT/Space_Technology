@@ -27,7 +27,8 @@ fun LoadButton(
     onClick: () -> Unit,
     scroll: Boolean = false,
     label: String = "Try Again Load",
-    defaultButton: Boolean = false
+    defaultButton: Boolean = false,
+    gradient: List<Color> = SpaceTechColor.buttonGradientDefault,
 ) {
     val viewWidth = with(LocalDensity.current) {
         (LocalView.current.rootView.height.toDp())
@@ -52,7 +53,7 @@ fun LoadButton(
                 modifier = Modifier
                     .background(
                         brush = Brush.horizontalGradient(
-                            SpaceTechColor.buttonGradient
+                            gradient
                         ),
                         shape = RoundedCornerShape(12.dp)
                     )

@@ -11,8 +11,11 @@ object SpaceTechColor {
     val gray = Color(0xffA4A5A6)
     val white = Color(0xffffffff)
     val red = Color(0xFFFF0000)
+    private val purple = Color(0xff4c2a70)
+    private val lightPurple = Color(0xff8868a1)
 
     //Gradients
-    val buttonGradient = listOf(navigationElement, gray)
+    val buttonGradientDefault = listOf(navigationElement, gray)
+    val buttonGradientFirstAuthScreen = listOf(purple, lightPurple)
 
 }
