@@ -29,11 +29,22 @@ import com.example.spacetechnology.features.home.domain.entity.SpacePostHome
 
 @Composable
 fun CardsPreviewSpaceTech(
-    posts: List<SpacePostHome>
+    postsSpacex: List<SpacePostHome>,
+    postsNasa: List<SpacePostHome>
+
 ) {
 
     LazyRow {
-        items(posts) { it.Post() }
+        items(postsSpacex) { it.Post() }
+    }
+    LazyRow {
+        items(postsNasa) { it.Post() }
+    }
+    LazyRow {
+        items(postsSpacex) { it.Post() }
+    }
+    LazyRow {
+        items(postsNasa) { it.Post() }
     }
 }
 

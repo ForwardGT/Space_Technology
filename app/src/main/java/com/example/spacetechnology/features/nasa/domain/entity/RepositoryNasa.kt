@@ -6,4 +6,6 @@ interface RepositoryNasa {
 
     suspend fun loadTechTransfer(): List<PostTechTransfer>
 
+    suspend fun loadAsteroids(): List<Asteroid>
+
 }

@@ -60,21 +60,21 @@ fun SpacexScreen(
 
                 else -> {
                     state.postDragon?.let { dragon ->
-                        PostsSpacex(
+                        MediumPreviewPosts(
                             description = dragon.description,
                             image = dragon.image,
                             titlePost = "Last Dragon"
                         )
                     }
                     state.postRocket?.let { rocket ->
-                        PostsSpacex(
+                        MediumPreviewPosts(
                             description = rocket.description,
                             image = rocket.image,
                             titlePost = "Last Rocket"
                         )
                     }
                     state.postLandPads?.let { landPad ->
-                        PostsSpacex(
+                        MediumPreviewPosts(
                             description = landPad.description,
                             image = landPad.image,
                             titlePost = "Last Land Pads"
@@ -88,10 +88,10 @@ fun SpacexScreen(
 
 
 @Composable
-private fun PostsSpacex(
+fun MediumPreviewPosts(
     image: List<String>,
     description: String,
-    titlePost: String
+    titlePost: String,
 ) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
@@ -100,7 +100,9 @@ private fun PostsSpacex(
             .padding(6.dp)
     ) {
         TitleWithLines(titlePost)
-        PhotoCarousel(image)
+
+        if (image.isNotEmpty()) PhotoCarousel(image) else Unit
+
         DescriptionPost(description)
     }
 }
