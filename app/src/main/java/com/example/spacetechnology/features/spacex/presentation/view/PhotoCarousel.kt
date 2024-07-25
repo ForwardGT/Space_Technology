@@ -21,8 +21,6 @@ import com.example.spacetechnology.core.utils.CirProgIndicator
 fun PhotoCarousel(
     imageList: List<String>
 ) {
-
-
     val viewWidth = with(LocalDensity.current) {
         (LocalView.current.rootView.width.toDp())
     }
