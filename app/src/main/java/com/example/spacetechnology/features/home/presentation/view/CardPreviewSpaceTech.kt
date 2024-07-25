@@ -28,7 +28,7 @@ import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.features.home.domain.entity.SpacePostHome
 
 @Composable
-fun CardsSpacex(
+fun CardsPreviewSpaceTech(
     posts: List<SpacePostHome>
 ) {
 

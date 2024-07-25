@@ -15,7 +15,7 @@ import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeDragonImpl
 import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeLandPadImpl
 import com.example.spacetechnology.features.home.domain.entity.SpacexPostHomeRocketImpl
-import com.example.spacetechnology.features.home.presentation.view.CardsSpacex
+import com.example.spacetechnology.features.home.presentation.view.CardsPreviewSpaceTech
 import com.example.spacetechnology.features.home.presentation.view.SpaceTechTopBar
 
 @Composable
@@ -45,7 +45,7 @@ fun HomeScreen(
                 .padding(top = 10.dp)
         ) {
 
-            CardsSpacex(spacexPost)
+            CardsPreviewSpaceTech(spacexPost)
 
         }
     }

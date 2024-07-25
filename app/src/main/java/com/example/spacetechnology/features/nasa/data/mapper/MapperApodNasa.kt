@@ -1,12 +1,12 @@
 package com.example.spacetechnology.features.nasa.data.mapper
 
 import com.example.spacetechnology.features.nasa.data.model.PostApodDto
-import com.example.spacetechnology.features.nasa.domain.entity.PostApod
+import com.example.spacetechnology.features.nasa.domain.entity.PostApodNasa
 
-fun mapperApod(
+fun mapperApodNasa(
     apod: PostApodDto
-): PostApod {
-    val postApod = PostApod(
+): PostApodNasa {
+    val postApod = PostApodNasa(
         date = apod.date,
         urlImage = apod.urlImage,
         explanation = apod.explanation,

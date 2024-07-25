@@ -7,6 +7,7 @@ import com.example.spacetechnology.features.spacex.data.model.RocketInformationD
 import retrofit2.http.GET
 
 interface ApiServiceSpacex {
+
     @GET("rockets")
     suspend fun getRockets(): List<RocketInformationDto>
 

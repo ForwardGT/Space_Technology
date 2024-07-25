@@ -1,9 +1,8 @@
 package com.example.spacetechnology.features.nasa.presentation
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,20 +19,23 @@ fun NasaScreen(
     navController: NavController
 ) {
     val viewModel: ViewModelNasa = koinViewModel()
-    val postApod by viewModel.postApod.collectAsState()
+    val lastPostApod by viewModel.lastPostApod.collectAsState()
+    val lastTech by viewModel.lastPostTechTransfer.collectAsState()
 
     Scaffold(
         bottomBar = {
             SpaceTechNavigationBar(navController)
         }
     ) { paddingValues ->
-        Column(
+        LazyColumn(
             Modifier
-                .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
         ) {
-            AsyncImage(model = postApod.urlImage, contentDescription = null)
-            Text(text = "${postApod.date} \n ${postApod.title} \n ${postApod.explanation}")
+            items(lastTech) {
+                Text(text = it.name)
+                Text(text = it.description)
+                AsyncImage(model = it.image, contentDescription = null)
+            }
         }
     }
 }

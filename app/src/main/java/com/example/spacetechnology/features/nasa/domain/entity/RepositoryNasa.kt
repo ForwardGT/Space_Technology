@@ -2,6 +2,8 @@ package com.example.spacetechnology.features.nasa.domain.entity
 
 interface RepositoryNasa {
 
-    suspend fun loadApod(): PostApod
+    suspend fun loadApod(): PostApodNasa
+
+    suspend fun loadTechTransfer(): List<PostTechTransfer>
 
 }
