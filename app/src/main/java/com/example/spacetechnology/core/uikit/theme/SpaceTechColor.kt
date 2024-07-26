@@ -18,4 +18,5 @@ object SpaceTechColor {
     val buttonGradientDefault = listOf(navigationElement, gray)
     val buttonGradientFirstAuthScreen = listOf(purple, lightPurple)
 
+
 }

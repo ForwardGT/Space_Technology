@@ -1,5 +1,6 @@
 package com.example.spacetechnology.features.auth.presentation.view
 
+
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -23,37 +24,35 @@ import com.example.spacetechnology.features.auth.presentation.RegistrationScreen
 
 @Composable
 fun TextFieldCustom(
+    value: String,
     label: String,
-    visibilityIcon: Boolean = false,
+    isPassword: Boolean = false,
+    onValueChange: (String) -> Unit
 ) {
 
-    var value by remember {
-        mutableStateOf("")
-    }
-    var visibility by remember {
+    var visibilityIcon by remember {
         mutableStateOf(false)
     }
 
     TextField(
         value = value,
-        onValueChange = { value = it },
+        onValueChange = onValueChange,
         label = { Text(text = label) },
         visualTransformation =
-        if (!visibility && visibilityIcon) PasswordVisualTransformation()
+        if (!visibilityIcon && isPassword) PasswordVisualTransformation()
         else VisualTransformation.None,
         singleLine = true,
         supportingText = { Text(text = "Hello") },
         trailingIcon = {
             when {
-                visibilityIcon && visibility -> {
-                    IconTextField(visibilityOn = true) { visibility = !visibility }
+                isPassword && visibilityIcon -> {
+                    IconTextField(visibilityOn = true) { visibilityIcon = !visibilityIcon }
                 }
 
-                visibilityIcon && !visibility -> {
-                    IconTextField { visibility = !visibility }
+                isPassword && !visibilityIcon -> {
+                    IconTextField { visibilityIcon = !visibilityIcon }
                 }
             }
-
         },
         modifier = Modifier
             .fillMaxWidth()
@@ -82,5 +81,4 @@ fun Q() {
     SpaceTechnologyTheme(darkTheme = true) {
         RegistrationScreen(navController = rememberNavController())
     }
-
 }

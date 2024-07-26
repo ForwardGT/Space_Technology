@@ -53,7 +53,6 @@ fun FirstAuthScreen(
                 defaultButton = true,
                 gradient = SpaceTechColor.buttonGradientFirstAuthScreen
             )
-            CustomSpacer(v = 4.dp)
         }
     }
 }

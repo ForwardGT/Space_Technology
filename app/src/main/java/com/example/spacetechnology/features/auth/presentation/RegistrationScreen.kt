@@ -19,12 +19,16 @@ import com.example.spacetechnology.core.utils.CustomSpacer
 import com.example.spacetechnology.core.utils.LoadButton
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
 import com.example.spacetechnology.features.auth.presentation.view.TextFieldCustom
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun RegistrationScreen(
     navController: NavController
 ) {
+
+    val viewModel: ViewModelRegistration = koinViewModel()
+
     Scaffold { paddingValues ->
         AuthNavigationTopBar(
             navController = navController,
@@ -33,7 +37,8 @@ fun RegistrationScreen(
         )
         MainContentRegistration(
             paddingValues = paddingValues,
-            navController = navController
+            navController = navController,
+            viewModel
         )
     }
 }
@@ -42,7 +47,8 @@ fun RegistrationScreen(
 @Composable
 private fun MainContentRegistration(
     paddingValues: PaddingValues,
-    navController: NavController
+    navController: NavController,
+    viewModel: ViewModelRegistration
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -53,16 +59,22 @@ private fun MainContentRegistration(
     ) {
         TextFieldCustom(
             label = "Email",
-            visibilityIcon = false
+            isPassword = false,
+            value = viewModel.email,
+            onValueChange = { viewModel.email = it }
         )
 
         TextFieldCustom(
             label = "Password",
-            visibilityIcon = true
+            isPassword = true,
+            value = viewModel.password,
+            onValueChange = { viewModel.password = it }
         )
         TextFieldCustom(
             label = "Repeat password",
-            visibilityIcon = true
+            isPassword = true,
+            value = viewModel.repeatPassword,
+            onValueChange = { viewModel.repeatPassword = it }
         )
 
         CustomSpacer(v = 20.dp)
@@ -75,14 +87,13 @@ private fun MainContentRegistration(
             )
             CustomSpacer(h = 16.dp)
             LoadButton(
-                onClick = { /*TODO*/ },
+                onClick = { },
                 defaultButton = true,
-                label = "Login",
+                label = "Registration",
             )
         }
     }
 }
-
 
 @Preview
 @Composable

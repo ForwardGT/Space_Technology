@@ -46,7 +46,7 @@ fun LoadButton(
                 .width(130.dp)
                 .align(Alignment.Center),
             colors = ButtonDefaults.buttonColors(Color.Transparent),
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(8.dp),
             contentPadding = PaddingValues()
         ) {
             Box(
@@ -55,7 +55,7 @@ fun LoadButton(
                         brush = Brush.horizontalGradient(
                             gradient
                         ),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(8.dp)
                     )
                     .fillMaxSize(),
                 contentAlignment = Alignment.Center

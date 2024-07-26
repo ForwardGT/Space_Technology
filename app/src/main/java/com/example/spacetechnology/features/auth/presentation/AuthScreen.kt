@@ -37,11 +37,11 @@ fun AuthScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            TextFieldCustom(label = "Email")
-            TextFieldCustom(
-                label = "Password",
-                visibilityIcon = true
-            )
+//            TextFieldCustom(label = "Email")
+//            TextFieldCustom(
+//                label = "Password",
+//                visibilityIcon = true
+//            )
 
             CustomSpacer(v = 20.dp)
 
