@@ -15,10 +15,11 @@ class MainActivity : ComponentActivity() {
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         enableEdgeToEdge()
-
         setContentThemeWithStatusBars {
+
             val navController = rememberNavController()
             SpaceTechnologyTheme(darkTheme = true) {
+
                 NavigationGraph(navController = navController)
             }
         }

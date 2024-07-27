@@ -1,16 +1,18 @@
 package com.example.spacetechnology.features.auth.presentation
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,6 +26,8 @@ import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
 import com.example.spacetechnology.features.auth.presentation.view.TextFieldCustom
 import com.example.spacetechnology.navigation.Screen
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -32,9 +36,7 @@ fun RegistrationScreen(
     navController: NavController
 ) {
     val viewModel: ViewModelAuth = koinViewModel()
-    val state by viewModel.registrationState.collectAsState()
-    Log.d("TAG", "RegistrationScreen: ${state.registrationSuccess}")
-
+    val state by viewModel.authState.collectAsState()
 
     Scaffold { paddingValues ->
 
@@ -58,17 +60,20 @@ private fun MainContentRegistration(
     paddingValues: PaddingValues,
     navController: NavController,
     viewModel: ViewModelAuth,
-    state: RegistrationState
+    state: AuthState
 
 ) {
+    val scope = rememberCoroutineScope()
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
+            .imePadding()
     ) {
         TextFieldCustom(
+            state = state,
             label = "Email",
             isPassword = false,
             value = state.email,
@@ -77,6 +82,7 @@ private fun MainContentRegistration(
         )
 
         TextFieldCustom(
+            state = state,
             label = "Password",
             isPassword = true,
             value = state.password,
@@ -86,6 +92,7 @@ private fun MainContentRegistration(
         )
 
         TextFieldCustom(
+            state = state,
             label = "Repeat password",
             isPassword = true,
             value = state.repeatPassword,
@@ -94,19 +101,28 @@ private fun MainContentRegistration(
 
         )
 
-        CustomSpacer(v = 20.dp)
+        CustomSpacer(v = 10.dp)
 
-        Row {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp),
+        ) {
             LoadButton(
                 onClick = navController::popBackStack,
                 defaultButton = true,
-                label = "Exit"
+                label = "Exit",
             )
-            CustomSpacer(h = 16.dp)
             LoadButton(
                 onClick = {
                     viewModel.setUserData {
-                        if (it) { navController.navigateTo(Screen.AuthScreen.route) }
+                        if (it) {
+                            scope.launch {
+                                delay(1500) // From imitation load
+                                navController.navigateTo(Screen.AuthScreen.route)
+                            }
+                        }
                     }
                 },
                 defaultButton = true,

@@ -1,16 +1,17 @@
 package com.example.spacetechnology.features.auth.presentation
 
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +26,8 @@ import com.example.spacetechnology.core.utils.extensions.navigation.navigateToCl
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
 import com.example.spacetechnology.features.auth.presentation.view.TextFieldCustom
 import com.example.spacetechnology.navigation.Screen
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -32,13 +35,10 @@ fun AuthScreen(
     navController: NavController
 ) {
     val viewModel: ViewModelAuth = koinViewModel()
-    val state by viewModel.registrationState.collectAsState()
+    val state by viewModel.authState.collectAsState()
+    val scope = rememberCoroutineScope()
 
     Scaffold { paddingValues ->
-
-        Log.d("TAG", "AuthScreen: ${state.errors}")
-        Log.d("TAG", "AuthScreen: ${state.email}")
-        Log.d("TAG", "AuthScreen: ${state.password}")
 
         AuthNavigationTopBar(
             route = { navController.navigateTo(Screen.FirstAuthScreen.route) },
@@ -51,9 +51,11 @@ fun AuthScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .imePadding()
         ) {
 
             TextFieldCustom(
+                state = state,
                 label = "Email",
                 isPassword = false,
                 value = state.email,
@@ -62,6 +64,7 @@ fun AuthScreen(
 
             )
             TextFieldCustom(
+                state = state,
                 label = "Password",
                 isPassword = true,
                 value = state.password,
@@ -81,7 +84,12 @@ fun AuthScreen(
                     onClick = {
                         viewModel.getUserData(
                             onResult = {
-                                if (it) { navController.navigateTo(Screen.HomeScreen.route) }
+                                if (it) {
+                                    scope.launch {
+                                        delay(1500) // From imitation load
+                                        navController.navigateTo(Screen.HomeScreen.route)
+                                    }
+                                }
                             }
                         )
                     },

@@ -1,11 +1,11 @@
 package com.example.spacetechnology.core.utils.validators
 
-import com.example.spacetechnology.features.auth.domain.RegistrationErrors
+import com.example.spacetechnology.features.auth.domain.AuthErrors
 
 fun validatorLogin(
     email: String,
     password: String,
-): RegistrationErrors {
+): AuthErrors {
     val emailError = when {
         email.isBlank() -> "Emails can't be blank"
         !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> "Incorrect Email"
@@ -16,5 +16,5 @@ fun validatorLogin(
         else -> ""
     }
     val repeatPasswordError = ""
-    return RegistrationErrors(emailError, passwordError, repeatPasswordError)
+    return AuthErrors(emailError, passwordError, repeatPasswordError)
 }

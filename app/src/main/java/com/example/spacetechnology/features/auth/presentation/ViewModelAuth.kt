@@ -16,11 +16,11 @@ class ViewModelAuth : ViewModel() {
 
     private val dataStore: DataStoreManager by Injector.inject()
 
-    private val _registrationState = MutableStateFlow(RegistrationState())
-    val registrationState = _registrationState.asStateFlow()
+    private val _authState = MutableStateFlow(AuthState())
+    val authState = _authState.asStateFlow()
 
     val setEmail = { email: String ->
-        _registrationState.reduce {
+        _authState.reduce {
             it.copy(
                 email = email,
                 errors = it.errors.copy(emailError = "")
@@ -29,7 +29,7 @@ class ViewModelAuth : ViewModel() {
     }
 
     val setPassword = { password: String ->
-        _registrationState.reduce {
+        _authState.reduce {
             it.copy(
                 password = password,
                 errors = it.errors.copy(passwordError = "")
@@ -38,7 +38,7 @@ class ViewModelAuth : ViewModel() {
     }
 
     val setRepeatPassword = { repeatPassword: String ->
-        _registrationState.reduce {
+        _authState.reduce {
             it.copy(
                 repeatPassword = repeatPassword,
                 errors = it.errors.copy(repeatPasswordError = "")
@@ -47,39 +47,41 @@ class ViewModelAuth : ViewModel() {
     }
 
     fun clearState() {
-        _registrationState.reduce {
+        _authState.reduce {
             it.copy(
                 registrationSuccess = false
             )
         }
     }
 
+
     fun setUserData(onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
             val errors = validatorRegistration(
-                email = _registrationState.value.email,
-                password = _registrationState.value.password,
-                repeatPassword = _registrationState.value.repeatPassword
+                email = _authState.value.email,
+                password = _authState.value.password,
+                repeatPassword = _authState.value.repeatPassword
             )
-            _registrationState.reduce {
+            _authState.reduce {
                 it.copy(errors = errors)
             }
+
             if (errors.emailError == "" && errors.passwordError == "" && errors.repeatPasswordError == "") {
                 dataStore.setUserData(
                     userData = UserData(
-                        email = _registrationState.value.email,
-                        password = _registrationState.value.password
+                        email = _authState.value.email,
+                        password = _authState.value.password
                     )
                 )
-                _registrationState.reduce {
+                _authState.reduce {
                     it.copy(registrationSuccess = true)
                 }
-                val isMatch = (_registrationState.value.registrationSuccess)
+                val isMatch = (_authState.value.registrationSuccess)
                 onResult(isMatch)
             }
         }.invokeOnCompletion { throwError ->
             if (throwError != null) {
-                _registrationState.reduce {
+                _authState.reduce {
                     it.copy(
                         registrationSuccess = false,
                         errors = it.errors.copy(
@@ -91,28 +93,51 @@ class ViewModelAuth : ViewModel() {
         }
     }
 
+
     fun getUserData(onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
             val errors = validatorLogin(
-                email = _registrationState.value.email,
-                password = _registrationState.value.password,
+                email = _authState.value.email,
+                password = _authState.value.password,
             )
-            _registrationState.reduce {
+            _authState.reduce {
                 it.copy(errors = errors)
             }
+
             if (errors.emailError == "" && errors.passwordError == "") {
                 dataStore.getUserData().collect { storedUserData ->
-                    val isMatch = storedUserData.email == _registrationState.value.email && storedUserData.password == _registrationState.value.password
+
+                    if (storedUserData.email != _authState.value.email) {
+                        _authState.reduce {
+                            it.copy(
+                                errors = it.errors.copy(
+                                    emailError = "Email doesn't exist."
+                                )
+                            )
+                        }
+                    }
+
+                    if (storedUserData.email == _authState.value.email && storedUserData.password != _authState.value.password) {
+                        _authState.reduce {
+                            it.copy(
+                                errors = it.errors.copy(
+                                    passwordError = "Wrong password"
+                                )
+                            )
+                        }
+                    }
+                    val isMatch =
+                        storedUserData.email == _authState.value.email && storedUserData.password == _authState.value.password
                     onResult(isMatch)
 
-                    if (isMatch) _registrationState.reduce {
+                    if (isMatch) _authState.reduce {
                         it.copy(registrationSuccess = true)
                     }
                 }
             }
         }.invokeOnCompletion { throwError ->
             if (throwError != null) {
-                _registrationState.reduce {
+                _authState.reduce {
                     it.copy(
                         loginSuccess = false,
                         errors = it.errors.copy(

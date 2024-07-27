@@ -3,10 +3,14 @@ package com.example.spacetechnology.features.auth.presentation.view
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,12 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
-import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
-import com.example.spacetechnology.features.auth.presentation.RegistrationScreen
+import com.example.spacetechnology.features.auth.presentation.AuthState
+import kotlinx.coroutines.delay
+import kotlin.random.Random
 
 @Composable
 fun TextFieldCustom(
@@ -28,11 +31,23 @@ fun TextFieldCustom(
     label: String,
     isPassword: Boolean = false,
     onValueChange: (String) -> Unit,
-    errorMessage: String
+    errorMessage: String,
+    state: AuthState
 ) {
 
     var visibilityIcon by remember {
         mutableStateOf(false)
+    }
+
+    var showCheckIcon by remember { mutableStateOf(false) }
+
+    LaunchedEffect(state.registrationSuccess, state.loginSuccess) {
+        if (state.registrationSuccess || state.loginSuccess) {
+            delay(Random.nextLong(450L, 1500L)) // // From imitation load
+            showCheckIcon = true
+        } else {
+            showCheckIcon = false
+        }
     }
 
     TextField(
@@ -46,6 +61,13 @@ fun TextFieldCustom(
         supportingText = { Text(text = errorMessage) },
         trailingIcon = {
             when {
+                showCheckIcon -> {
+                    Icon(
+                        imageVector = Icons.Default.CheckCircle, contentDescription = null,
+                        tint = SpaceTechColor.green,
+                    )
+                }
+
                 isPassword && visibilityIcon -> {
                     IconTextField(visibilityOn = true) { visibilityIcon = !visibilityIcon }
                 }
@@ -74,12 +96,4 @@ fun TextFieldCustom(
             focusedLabelColor = SpaceTechColor.gray,
         )
     )
-}
-
-@Preview
-@Composable
-fun Q() {
-    SpaceTechnologyTheme(darkTheme = true) {
-        RegistrationScreen(navController = rememberNavController())
-    }
 }
