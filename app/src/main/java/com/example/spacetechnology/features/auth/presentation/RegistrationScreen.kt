@@ -1,15 +1,19 @@
 package com.example.spacetechnology.features.auth.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -19,6 +23,8 @@ import com.example.spacetechnology.core.utils.CustomSpacer
 import com.example.spacetechnology.core.utils.LoadButton
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
 import com.example.spacetechnology.features.auth.presentation.view.TextFieldCustom
+import com.example.spacetechnology.navigation.Screen
+import com.example.spacetechnology.navigation.navigateTo
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -26,7 +32,6 @@ import org.koin.androidx.compose.koinViewModel
 fun RegistrationScreen(
     navController: NavController
 ) {
-
     val viewModel: ViewModelRegistration = koinViewModel()
 
     Scaffold { paddingValues ->
@@ -39,7 +44,7 @@ fun RegistrationScreen(
             paddingValues = paddingValues,
             navController = navController,
             viewModel
-        )
+        ) { viewModel.setUserData() }
     }
 }
 
@@ -48,7 +53,9 @@ fun RegistrationScreen(
 private fun MainContentRegistration(
     paddingValues: PaddingValues,
     navController: NavController,
-    viewModel: ViewModelRegistration
+    viewModel: ViewModelRegistration,
+    registration: () -> Unit
+
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -81,13 +88,13 @@ private fun MainContentRegistration(
 
         Row {
             LoadButton(
-                onClick = { navController.popBackStack() },
+                onClick = { navController.navigateTo(Screen.AuthScreen.route) },
                 defaultButton = true,
                 label = "Exit"
             )
             CustomSpacer(h = 16.dp)
             LoadButton(
-                onClick = { },
+                onClick = { registration() },
                 defaultButton = true,
                 label = "Registration",
             )

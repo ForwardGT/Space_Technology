@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,11 +19,18 @@ import com.example.spacetechnology.core.utils.CustomSpacer
 import com.example.spacetechnology.core.utils.LoadButton
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
 import com.example.spacetechnology.features.auth.presentation.view.TextFieldCustom
+import com.example.spacetechnology.navigation.Screen
+import com.example.spacetechnology.navigation.navigateTo
+import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AuthScreen(
     navController: NavController
 ) {
+    val viewModel: ViewModelRegistration = koinViewModel()
+    val scope = rememberCoroutineScope()
+
     Scaffold { paddingValues ->
 
         AuthNavigationTopBar(
@@ -37,12 +45,19 @@ fun AuthScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-//            TextFieldCustom(label = "Email")
-//            TextFieldCustom(
-//                label = "Password",
-//                visibilityIcon = true
-//            )
 
+            TextFieldCustom(
+                label = "Email",
+                isPassword = false,
+                value = viewModel.email,
+                onValueChange = { viewModel.email = it }
+            )
+            TextFieldCustom(
+                label = "Password",
+                isPassword = true,
+                value = viewModel.password,
+                onValueChange = { viewModel.password = it }
+            )
             CustomSpacer(v = 20.dp)
 
             Row {
@@ -53,7 +68,19 @@ fun AuthScreen(
                 )
                 CustomSpacer(h = 16.dp)
                 LoadButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        scope.launch {
+                            viewModel.getUserData(
+                                email = viewModel.email,
+                                password = viewModel.password,
+                                onResult = {
+                                    if (it) {
+                                        navController.navigateTo(Screen.HomeScreen.route)
+                                    }
+                                }
+                            )
+                        }
+                    },
                     label = "Login",
                     defaultButton = true
                 )
