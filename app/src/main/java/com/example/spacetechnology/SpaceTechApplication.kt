@@ -1,9 +1,8 @@
 package com.example.spacetechnology
 
 import android.app.Application
-import android.content.Context
 import com.example.spacetechnology.features.auth.domain.DataStoreManager
-import com.example.spacetechnology.features.auth.presentation.ViewModelRegistration
+import com.example.spacetechnology.features.auth.presentation.ViewModelAuth
 import com.example.spacetechnology.features.home.presentation.ViewModelHome
 import com.example.spacetechnology.features.nasa.data.repository.RepositoryNasaImpl
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
@@ -34,7 +33,7 @@ class SpaceTechApplication : Application() {
                 repositorySpacex,
                 nasaScreenViewModel,
                 repositoryNasa,
-                registrationScreenViewModel,
+                AuthScreensViewModel,
                 dataStore
             )
         }
@@ -53,8 +52,8 @@ val nasaScreenViewModel = module {
     viewModel { ViewModelNasa() }
 }
 
-val registrationScreenViewModel = module {
-    viewModel { ViewModelRegistration() }
+val AuthScreensViewModel = module {
+    viewModel { ViewModelAuth() }
 }
 
 val repositorySpacex = module {

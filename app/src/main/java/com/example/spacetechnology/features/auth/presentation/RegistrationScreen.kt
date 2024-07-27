@@ -1,19 +1,18 @@
 package com.example.spacetechnology.features.auth.presentation
 
-import androidx.compose.foundation.background
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -21,10 +20,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.core.utils.CustomSpacer
 import com.example.spacetechnology.core.utils.LoadButton
+import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
 import com.example.spacetechnology.features.auth.presentation.view.TextFieldCustom
 import com.example.spacetechnology.navigation.Screen
-import com.example.spacetechnology.navigation.navigateTo
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -32,19 +31,24 @@ import org.koin.androidx.compose.koinViewModel
 fun RegistrationScreen(
     navController: NavController
 ) {
-    val viewModel: ViewModelRegistration = koinViewModel()
+    val viewModel: ViewModelAuth = koinViewModel()
+    val state by viewModel.registrationState.collectAsState()
+    Log.d("TAG", "RegistrationScreen: ${state.registrationSuccess}")
+
 
     Scaffold { paddingValues ->
+
         AuthNavigationTopBar(
-            navController = navController,
+            route = { navController.navigateTo(Screen.FirstAuthScreen.route) },
             titleScreen = "Registration",
             paddingValues = paddingValues
         )
         MainContentRegistration(
             paddingValues = paddingValues,
             navController = navController,
-            viewModel
-        ) { viewModel.setUserData() }
+            viewModel = viewModel,
+            state = state
+        )
     }
 }
 
@@ -53,8 +57,8 @@ fun RegistrationScreen(
 private fun MainContentRegistration(
     paddingValues: PaddingValues,
     navController: NavController,
-    viewModel: ViewModelRegistration,
-    registration: () -> Unit
+    viewModel: ViewModelAuth,
+    state: RegistrationState
 
 ) {
     Column(
@@ -67,34 +71,44 @@ private fun MainContentRegistration(
         TextFieldCustom(
             label = "Email",
             isPassword = false,
-            value = viewModel.email,
-            onValueChange = { viewModel.email = it }
+            value = state.email,
+            onValueChange = viewModel.setEmail,
+            errorMessage = state.errors.emailError
         )
 
         TextFieldCustom(
             label = "Password",
             isPassword = true,
-            value = viewModel.password,
-            onValueChange = { viewModel.password = it }
+            value = state.password,
+            onValueChange = viewModel.setPassword,
+            errorMessage = state.errors.passwordError
+
         )
+
         TextFieldCustom(
             label = "Repeat password",
             isPassword = true,
-            value = viewModel.repeatPassword,
-            onValueChange = { viewModel.repeatPassword = it }
+            value = state.repeatPassword,
+            onValueChange = viewModel.setRepeatPassword,
+            errorMessage = state.errors.repeatPasswordError
+
         )
 
         CustomSpacer(v = 20.dp)
 
         Row {
             LoadButton(
-                onClick = { navController.navigateTo(Screen.AuthScreen.route) },
+                onClick = navController::popBackStack,
                 defaultButton = true,
                 label = "Exit"
             )
             CustomSpacer(h = 16.dp)
             LoadButton(
-                onClick = { registration() },
+                onClick = {
+                    viewModel.setUserData {
+                        if (it) { navController.navigateTo(Screen.AuthScreen.route) }
+                    }
+                },
                 defaultButton = true,
                 label = "Registration",
             )

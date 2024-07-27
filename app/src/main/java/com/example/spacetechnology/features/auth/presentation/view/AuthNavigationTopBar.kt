@@ -14,13 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.core.utils.CustomSpacer
 
 @Composable
 fun AuthNavigationTopBar(
-    navController: NavController,
+    route: () -> Unit,
     titleScreen: String,
     paddingValues: PaddingValues
 ) {
@@ -31,7 +30,7 @@ fun AuthNavigationTopBar(
     ) {
         IconButton(
             modifier = Modifier.size(26.dp),
-            onClick = { navController.popBackStack() },
+            onClick = { route() },
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,

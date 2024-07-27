@@ -17,7 +17,7 @@ import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.core.utils.CustomSpacer
 import com.example.spacetechnology.core.utils.LoadButton
 import com.example.spacetechnology.navigation.Screen
-import com.example.spacetechnology.navigation.navigateTo
+import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 
 @Composable
 fun FirstAuthScreen(

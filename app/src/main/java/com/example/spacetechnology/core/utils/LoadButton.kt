@@ -42,8 +42,8 @@ fun LoadButton(
         Button(
             onClick = { onClick() },
             modifier = Modifier
-                .height(40.dp)
-                .width(130.dp)
+                .height(50.dp)
+                .width(150.dp)
                 .align(Alignment.Center),
             colors = ButtonDefaults.buttonColors(Color.Transparent),
             shape = RoundedCornerShape(8.dp),

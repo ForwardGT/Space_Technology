@@ -27,7 +27,8 @@ fun TextFieldCustom(
     value: String,
     label: String,
     isPassword: Boolean = false,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    errorMessage: String
 ) {
 
     var visibilityIcon by remember {
@@ -42,7 +43,7 @@ fun TextFieldCustom(
         if (!visibilityIcon && isPassword) PasswordVisualTransformation()
         else VisualTransformation.None,
         singleLine = true,
-        supportingText = { Text(text = "Hello") },
+        supportingText = { Text(text = errorMessage) },
         trailingIcon = {
             when {
                 isPassword && visibilityIcon -> {
