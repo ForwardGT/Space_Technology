@@ -25,7 +25,10 @@ import com.example.spacetechnology.core.utils.extensions.thenIf
 @Composable
 fun LoadButton(
     onClick: () -> Unit,
-    scroll: Boolean = false
+    scroll: Boolean = false,
+    label: String = "Try Again Load",
+    defaultButton: Boolean = false,
+    gradient: List<Color> = SpaceTechColor.buttonGradientDefault,
 ) {
     val viewWidth = with(LocalDensity.current) {
         (LocalView.current.rootView.height.toDp())
@@ -33,33 +36,33 @@ fun LoadButton(
 
     Box (
         Modifier
-            .fillMaxSize()
+            .thenIf(!defaultButton, modifier = Modifier.fillMaxSize())
             .thenIf(scroll, modifier = Modifier.height(viewWidth))
     ) {
         Button(
             onClick = { onClick() },
             modifier = Modifier
-                .height(40.dp)
-                .width(130.dp)
+                .height(50.dp)
+                .width(150.dp)
                 .align(Alignment.Center),
             colors = ButtonDefaults.buttonColors(Color.Transparent),
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(8.dp),
             contentPadding = PaddingValues()
         ) {
             Box(
                 modifier = Modifier
                     .background(
                         brush = Brush.horizontalGradient(
-                            SpaceTechColor.buttonGradient
+                            gradient
                         ),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(8.dp)
                     )
                     .fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     color = SpaceTechColor.white,
-                    text = "Try Again Load",
+                    text = label,
                     textAlign = TextAlign.Center
                 )
             }

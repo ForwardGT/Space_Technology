@@ -1,4 +1,4 @@
-package com.example.spacetechnology.navigation
+package com.example.spacetechnology.core.utils.extensions.navigation
 
 import androidx.navigation.NavController
 

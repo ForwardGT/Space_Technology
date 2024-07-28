@@ -1,6 +1,8 @@
 package com.example.spacetechnology
 
 import android.app.Application
+import com.example.spacetechnology.features.auth.domain.DataStoreManager
+import com.example.spacetechnology.features.auth.presentation.ViewModelAuth
 import com.example.spacetechnology.features.home.presentation.ViewModelHome
 import com.example.spacetechnology.features.nasa.data.repository.RepositoryNasaImpl
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
@@ -30,7 +32,9 @@ class SpaceTechApplication : Application() {
                 spacexScreenViewModel,
                 repositorySpacex,
                 nasaScreenViewModel,
-                repositoryNasa
+                repositoryNasa,
+                AuthScreensViewModel,
+                dataStore
             )
         }
     }
@@ -48,10 +52,18 @@ val nasaScreenViewModel = module {
     viewModel { ViewModelNasa() }
 }
 
+val AuthScreensViewModel = module {
+    viewModel { ViewModelAuth() }
+}
+
 val repositorySpacex = module {
     single<RepositorySpacex> { RepositorySpacexImpl() }
 }
 
 val repositoryNasa = module {
     single<RepositoryNasa> { RepositoryNasaImpl() }
+}
+
+val dataStore = module {
+    single { DataStoreManager(androidContext()) }
 }
