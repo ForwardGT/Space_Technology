@@ -77,7 +77,7 @@ private fun MainContentRegistration(
             label = "Email",
             isPassword = false,
             value = state.email,
-            onValueChange = viewModel.setEmail,
+            onValueChange = { viewModel.setEmail(it) },
             errorMessage = state.errors.emailError
         )
 
@@ -86,9 +86,8 @@ private fun MainContentRegistration(
             label = "Password",
             isPassword = true,
             value = state.password,
-            onValueChange = viewModel.setPassword,
+            onValueChange = { viewModel.setPassword(it) },
             errorMessage = state.errors.passwordError
-
         )
 
         TextFieldCustom(
@@ -96,9 +95,8 @@ private fun MainContentRegistration(
             label = "Repeat password",
             isPassword = true,
             value = state.repeatPassword,
-            onValueChange = viewModel.setRepeatPassword,
+            onValueChange = { viewModel.setRepeatPassword(it) },
             errorMessage = state.errors.repeatPasswordError
-
         )
 
         CustomSpacer(v = 10.dp)

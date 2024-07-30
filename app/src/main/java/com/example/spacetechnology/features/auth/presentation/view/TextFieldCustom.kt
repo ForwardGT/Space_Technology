@@ -3,6 +3,7 @@ package com.example.spacetechnology.features.auth.presentation.view
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Icon
@@ -17,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -37,13 +39,13 @@ fun TextFieldCustom(
 
     var visibilityIcon by remember {
         mutableStateOf(false)
-    }
+}
 
     var showCheckIcon by remember { mutableStateOf(false) }
 
     LaunchedEffect(state.registrationSuccess, state.loginSuccess) {
         if (state.registrationSuccess || state.loginSuccess) {
-            delay(Random.nextLong(450L, 1500L)) // // From imitation load
+            delay(Random.nextLong(450L, 1500L)) // From imitation load
             showCheckIcon = true
         } else {
             showCheckIcon = false
@@ -51,9 +53,10 @@ fun TextFieldCustom(
     }
 
     TextField(
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         value = value,
         onValueChange = onValueChange,
-        label = { Text(text = label) },
+        label = { Text( text = label) },
         visualTransformation =
         if (!visibilityIcon && isPassword) PasswordVisualTransformation()
         else VisualTransformation.None,
@@ -86,7 +89,7 @@ fun TextFieldCustom(
             focusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
             focusedContainerColor = SpaceTechColor.navigationElement,
-            focusedTextColor = SpaceTechColor.white, //TODO от сюда берет цвет подчеркивания падла
+            focusedTextColor = SpaceTechColor.white,
             unfocusedTextColor = SpaceTechColor.gray,
             disabledTextColor = SpaceTechColor.gray,
             unfocusedSupportingTextColor = SpaceTechColor.red,

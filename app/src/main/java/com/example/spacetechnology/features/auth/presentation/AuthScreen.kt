@@ -59,18 +59,20 @@ fun AuthScreen(
                 label = "Email",
                 isPassword = false,
                 value = state.email,
-                onValueChange = viewModel.setEmail,
+                onValueChange = { viewModel.setEmail(it) },
                 errorMessage = state.errors.emailError
 
             )
+
             TextFieldCustom(
                 state = state,
                 label = "Password",
                 isPassword = true,
                 value = state.password,
-                onValueChange = viewModel.setPassword,
+                onValueChange = { viewModel.setPassword(it) },
                 errorMessage = state.errors.passwordError
             )
+
             CustomSpacer(v = 20.dp)
 
             Row {

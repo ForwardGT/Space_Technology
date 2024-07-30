@@ -1,6 +1,7 @@
 package com.example.spacetechnology
 
 import android.app.Application
+import android.content.Context
 import com.example.spacetechnology.features.auth.domain.DataStoreManager
 import com.example.spacetechnology.features.auth.presentation.ViewModelAuth
 import com.example.spacetechnology.features.home.presentation.ViewModelHome
@@ -65,5 +66,5 @@ val repositoryNasa = module {
 }
 
 val dataStore = module {
-    single { DataStoreManager(androidContext()) }
+    single { DataStoreManager(get<Context>()) }
 }

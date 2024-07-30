@@ -19,7 +19,7 @@ class ViewModelAuth : ViewModel() {
     private val _authState = MutableStateFlow(AuthState())
     val authState = _authState.asStateFlow()
 
-    val setEmail = { email: String ->
+    fun setEmail(email: String) {
         _authState.reduce {
             it.copy(
                 email = email,
@@ -28,7 +28,7 @@ class ViewModelAuth : ViewModel() {
         }
     }
 
-    val setPassword = { password: String ->
+    fun setPassword(password: String) {
         _authState.reduce {
             it.copy(
                 password = password,
@@ -37,7 +37,7 @@ class ViewModelAuth : ViewModel() {
         }
     }
 
-    val setRepeatPassword = { repeatPassword: String ->
+    fun setRepeatPassword(repeatPassword: String) {
         _authState.reduce {
             it.copy(
                 repeatPassword = repeatPassword,
