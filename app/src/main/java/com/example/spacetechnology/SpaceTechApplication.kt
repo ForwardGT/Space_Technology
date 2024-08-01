@@ -8,6 +8,7 @@ import com.example.spacetechnology.features.home.presentation.ViewModelHome
 import com.example.spacetechnology.features.nasa.data.repository.RepositoryNasaImpl
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
 import com.example.spacetechnology.features.nasa.presentation.ViewModelNasa
+import com.example.spacetechnology.features.profile.presentation.ViewModelProfile
 import com.example.spacetechnology.features.spacex.data.repository.RepositorySpacexImpl
 import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
 import com.example.spacetechnology.features.spacex.presentation.ViewModelSpacex
@@ -29,42 +30,47 @@ class SpaceTechApplication : Application() {
             androidContext(this@SpaceTechApplication)
 
             modules(
-                homeScreenViewModel,
-                spacexScreenViewModel,
+                viewModelHome,
+                viewModelSpacex,
+                viewModelNasa,
+                viewModelAuth,
+                viewModelProfile,
                 repositorySpacex,
-                nasaScreenViewModel,
                 repositoryNasa,
-                AuthScreensViewModel,
                 dataStore
             )
         }
     }
 }
 
-val homeScreenViewModel = module {
+private val viewModelHome = module {
     viewModel { ViewModelHome() }
 }
 
-val spacexScreenViewModel = module {
+private val viewModelSpacex = module {
     viewModel { ViewModelSpacex() }
 }
 
-val nasaScreenViewModel = module {
+private val viewModelNasa = module {
     viewModel { ViewModelNasa() }
 }
 
-val AuthScreensViewModel = module {
+private val viewModelAuth = module {
     viewModel { ViewModelAuth() }
 }
 
-val repositorySpacex = module {
+private val viewModelProfile = module {
+    viewModel { ViewModelProfile() }
+}
+
+private val repositorySpacex = module {
     single<RepositorySpacex> { RepositorySpacexImpl() }
 }
 
-val repositoryNasa = module {
+private val repositoryNasa = module {
     single<RepositoryNasa> { RepositoryNasaImpl() }
 }
 
-val dataStore = module {
-    single { DataStoreManager(get<Context>()) }
+private val dataStore = module {
+    factory { DataStoreManager(get<Context>()) }
 }

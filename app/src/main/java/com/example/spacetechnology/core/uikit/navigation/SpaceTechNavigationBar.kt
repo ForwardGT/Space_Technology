@@ -17,8 +17,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
-import com.example.spacetechnology.features.home.presentation.NavigationItem
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
+import com.example.spacetechnology.features.home.presentation.NavigationItem
 
 @Composable
 fun SpaceTechNavigationBar(

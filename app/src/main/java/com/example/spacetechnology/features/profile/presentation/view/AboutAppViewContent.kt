@@ -51,9 +51,7 @@ fun AboutAppViewContent() {
 
 
 @Composable
-private fun MainHeadline(
-    text: String
-) {
+private fun MainHeadline(text: String) {
     Text(
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center,
@@ -66,9 +64,7 @@ private fun MainHeadline(
 }
 
 @Composable
-private fun SecondHeadline(
-    text: String
-) {
+private fun SecondHeadline(text: String) {
     Text(
         color = SpaceTechColor.white,
         fontSize = 20.sp,
@@ -79,9 +75,7 @@ private fun SecondHeadline(
 }
 
 @Composable
-private fun TextContent(
-    text: String
-) {
+private fun TextContent(text: String) {
     Text(
         color = SpaceTechColor.white,
         text = text
