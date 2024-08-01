@@ -5,16 +5,14 @@ import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -28,12 +26,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toFile
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.features.nasa.data.network.apiKeyNasa
@@ -63,7 +59,7 @@ fun ProfileScreen(
         }
     ) { paddingValues ->
         Box(Modifier.padding(paddingValues)) {
-
+            ProfileView(viewModel)
 
 //            ModalNavigationDrawer(
 //                drawerState = drawerState,
@@ -122,47 +118,60 @@ private fun ApikeyView() {
 private fun ProfileView(
     viewModel: ViewModelProfile
 ) {
-
-    val scope = rememberCoroutineScope()
-
-    val photoPickLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickVisualMedia(),
-        onResult = { uri ->
-
-            viewModel.saveImageToInternalStorage(it)
-        }
-    )
+    val state = viewModel.imageUri.collectAsState(initial = null)
 
     var avatarImage by remember {
         mutableStateOf<Uri?>(null)
     }
 
+    val photoPickLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) { uri ->
+            uri?.let {
+                viewModel.save(it.toString())
+                avatarImage = it
+            }
+        }
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
-
-
-        IconButton(onClick = {
-            photoPickLauncher.launch(
-                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-            )
-
-        }
+        IconButton(
+            onClick = {
+                photoPickLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }
         ) {
-            Icon(imageVector = Icons.Filled.AccountCircle, contentDescription = null)
+            Text("Pick Profile Picture")
         }
 
-        AsyncImage(
-            model = avatarImage,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .clip(CircleShape)
-                .size(150.dp)
-        )
+        state.value?.let {
+            Log.d("TAG", "ProfileView: it = $it")
+            Image(
+                painter = rememberAsyncImagePainter(it),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(128.dp)
+                    .clip(CircleShape)
+            )
+        } ?: run {
+            Text("No Profile Photo")
+        }
+
+
+
+
+//        AsyncImage(
+//            model = avatarImage ,
+//            contentDescription = null,
+//            contentScale = ContentScale.Crop,
+//            modifier = Modifier
+//                .clip(CircleShape)
+//                .size(150.dp)
+//        )
     }
 }
+
 
 @Preview
 @Composable

@@ -7,9 +7,8 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.spacetechnology.features.auth.domain.entity.UserData
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.runBlocking
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("data_store")
 
@@ -30,15 +29,16 @@ class DataStoreManager(
         )
     }
 
-    suspend fun saveProfileImagePath(imagePath: String) {
+    suspend fun setProfileImagePath(imagePath: String) {
         context.dataStore.edit { pref ->
             pref[IMAGE_STORE_PATH_KEY] = imagePath
         }
     }
 
-    fun getProfileImagePath(): String? = runBlocking {
-        val pref = context.dataStore.data.first()
-        return@runBlocking pref[IMAGE_STORE_PATH_KEY]
+    fun getProfileImagePath(): Flow<String?> {
+        return context.dataStore.data.map { pref ->
+            pref[IMAGE_STORE_PATH_KEY]
+        }
     }
 
 
