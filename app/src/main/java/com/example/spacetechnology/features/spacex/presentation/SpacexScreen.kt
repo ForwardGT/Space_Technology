@@ -17,7 +17,7 @@ import androidx.navigation.NavController
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.core.utils.CirProgIndicator
-import com.example.spacetechnology.core.utils.LoadButton
+import com.example.spacetechnology.core.utils.CustomButton
 import com.example.spacetechnology.features.spacex.presentation.view.DescriptionPost
 import com.example.spacetechnology.features.spacex.presentation.view.PhotoCarousel
 import com.example.spacetechnology.features.spacex.presentation.view.TitleWithLines
@@ -48,7 +48,7 @@ fun SpacexScreen(
         ) {
             when {
                 errorStateRocket || errorStateDragon || errorStateLandPads -> {
-                    LoadButton(
+                    CustomButton(
                         onClick = { viewModel.loadAllPost() },
                         scroll = true
                     )

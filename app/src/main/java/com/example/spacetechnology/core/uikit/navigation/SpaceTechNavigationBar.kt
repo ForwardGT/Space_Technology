@@ -34,7 +34,7 @@ fun SpaceTechNavigationBar(
     NavigationBar(
         modifier = Modifier
             .padding(start = 10.dp, end = 10.dp, bottom = 10.dp)
-            .background(SpaceTechColor.navigationElement, RoundedCornerShape(20.dp)),
+            .background(SpaceTechColor.navigationElement, RoundedCornerShape(18.dp)),
         containerColor = Color.Transparent,
 
         content = {

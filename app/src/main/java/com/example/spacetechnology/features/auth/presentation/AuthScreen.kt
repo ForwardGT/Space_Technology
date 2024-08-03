@@ -20,7 +20,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.core.utils.CustomSpacer
-import com.example.spacetechnology.core.utils.LoadButton
+import com.example.spacetechnology.core.utils.CustomButton
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateToClearBackStack
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
@@ -76,13 +76,13 @@ fun AuthScreen(
             CustomSpacer(v = 20.dp)
 
             Row {
-                LoadButton(
+                CustomButton(
                     onClick = { navController.navigateToClearBackStack(Screen.FirstAuthScreen.route) },
                     label = "Exit",
                     defaultButton = true
                 )
                 CustomSpacer(h = 16.dp)
-                LoadButton(
+                CustomButton(
                     onClick = {
                         viewModel.getUserData(
                             onResult = {

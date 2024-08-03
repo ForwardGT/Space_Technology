@@ -15,7 +15,7 @@ import androidx.navigation.NavController
 import com.example.spacetechnology.R
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.core.utils.CustomSpacer
-import com.example.spacetechnology.core.utils.LoadButton
+import com.example.spacetechnology.core.utils.CustomButton
 import com.example.spacetechnology.navigation.Screen
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 
@@ -40,14 +40,14 @@ fun FirstAuthScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            LoadButton(
+            CustomButton(
                 onClick = { navController.navigateTo(Screen.AuthScreen.route) },
                 label = "Authorisation",
                 defaultButton = true,
                 gradient = SpaceTechColor.buttonGradientFirstAuthScreen
             )
             CustomSpacer(v = 4.dp)
-            LoadButton(
+            CustomButton(
                 onClick = { navController.navigateTo(Screen.RegistrationScreen.route) },
                 label = "Registration",
                 defaultButton = true,

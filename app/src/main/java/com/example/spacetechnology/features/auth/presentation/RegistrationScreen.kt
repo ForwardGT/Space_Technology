@@ -21,7 +21,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.core.utils.CustomSpacer
-import com.example.spacetechnology.core.utils.LoadButton
+import com.example.spacetechnology.core.utils.CustomButton
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
 import com.example.spacetechnology.features.auth.presentation.view.TextFieldCustom
@@ -107,12 +107,12 @@ private fun MainContentRegistration(
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp),
         ) {
-            LoadButton(
+            CustomButton(
                 onClick = navController::popBackStack,
                 defaultButton = true,
                 label = "Exit",
             )
-            LoadButton(
+            CustomButton(
                 onClick = {
                     viewModel.setUserData {
                         if (it) {

@@ -47,6 +47,13 @@ class DataStoreManager(
         }
     }
 
+    suspend fun deleteProfile() {
+        context.dataStore.edit { pref ->
+            pref[EMAIL_KEY] = ""
+            pref[PASSWORD_KEY] = ""
+        }
+    }
+
     private companion object {
         val EMAIL_KEY = stringPreferencesKey("email")
         val PASSWORD_KEY = stringPreferencesKey("password")

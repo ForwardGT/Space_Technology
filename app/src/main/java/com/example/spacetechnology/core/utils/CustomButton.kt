@@ -4,7 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -18,32 +20,38 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.core.utils.extensions.thenIf
 
 @Composable
-fun LoadButton(
+fun CustomButton(
     onClick: () -> Unit,
     scroll: Boolean = false,
     label: String = "Try Again Load",
     defaultButton: Boolean = false,
     gradient: List<Color> = SpaceTechColor.buttonGradientDefault,
+    height: Dp = 50.dp,
+    width: Dp = 150.dp,
+    fillMaxWidth: Boolean = false,
 ) {
     val viewWidth = with(LocalDensity.current) {
         (LocalView.current.rootView.height.toDp())
     }
 
-    Box (
+    Box(
         Modifier
             .thenIf(!defaultButton, modifier = Modifier.fillMaxSize())
             .thenIf(scroll, modifier = Modifier.height(viewWidth))
+            .thenIf(fillMaxWidth, modifier = Modifier.padding(10.dp))
     ) {
         Button(
             onClick = { onClick() },
             modifier = Modifier
-                .height(50.dp)
-                .width(150.dp)
+                .height(height)
+                .thenIf(fillMaxWidth, modifier = Modifier.fillMaxWidth())
+                .thenIf(!fillMaxWidth, modifier = Modifier.width(width))
                 .align(Alignment.Center),
             colors = ButtonDefaults.buttonColors(Color.Transparent),
             shape = RoundedCornerShape(8.dp),

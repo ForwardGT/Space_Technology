@@ -21,8 +21,15 @@ class ViewModelProfile : ViewModel() {
     private val _imageUri = MutableStateFlow<Uri?>(null)
     val imageUri = _imageUri.asStateFlow()
 
+    private val _userEmail = MutableStateFlow("")
+    val userEmail = _userEmail.asStateFlow()
+
+    private val _userPassword = MutableStateFlow("")
+    val userPassword = _userPassword.asStateFlow()
+
     init {
         loadImageFromDevice()
+        showEmailProfile()
     }
 
     fun saveImageToDevice(uri: Uri) {
@@ -54,4 +61,20 @@ class ViewModelProfile : ViewModel() {
             }
         }
     }
+
+    private fun showEmailProfile() {
+         viewModelScope.launch {
+            dataStore.getUserData().collect {
+                _userEmail.value = it.email
+            }
+        }
+    }
+
+    fun deleteProfile() {
+        viewModelScope.launch {
+            dataStore.deleteProfile()
+        }
+    }
+
+
 }
