@@ -47,7 +47,6 @@ class DataStoreManager(
         }
     }
 
-
     private companion object {
         val EMAIL_KEY = stringPreferencesKey("email")
         val PASSWORD_KEY = stringPreferencesKey("password")

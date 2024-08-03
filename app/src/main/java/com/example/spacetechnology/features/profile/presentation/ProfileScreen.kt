@@ -9,11 +9,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AcUnit
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
@@ -32,17 +33,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.spacetechnology.R
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.features.nasa.data.network.apiKeyNasa
@@ -146,35 +145,36 @@ private fun ProfileView(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        IconButton(
-            onClick = {
-                photoPickLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-            }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier =  Modifier.fillMaxWidth()
         ) {
-            Icon(imageVector = Icons.Filled.AcUnit, contentDescription = null)
-        }
+            stateUri.value?.let {
+                Log.d("TAG", "ProfileView: it = $it")
+                Image(
+                    painter = rememberAsyncImagePainter(it),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(128.dp)
+                )
+            } ?: run {
+                Icon(
+                    imageVector = Icons.Filled.AccountCircle,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(128.dp)
+                        .clip(shape = CircleShape)
+                )
+            }
+            Button(onClick = { viewModel.clearPhotoImagePath() }) {
+                Text(text = "Delete photo")
+            }
+            Button(onClick = {
+                photoPickLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }) {
+                Text(text = "Update photo")
+            }
 
-
-
-        stateUri.value?.let {
-            Log.d("TAG", "ProfileView: it = $it")
-            Image(
-                painter = rememberAsyncImagePainter(it),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(128.dp)
-            )
-        } ?: run {
-            Image(
-                bitmap = ImageBitmap.imageResource(id = R.drawable.profile_photo_default),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(128.dp)
-                    .clip(shape = CircleShape)
-            )
-        }
-        Button(onClick = { viewModel.clearPhotoImagePath() }) {
-            Text(text = "Delete photo")
         }
     }
 }
