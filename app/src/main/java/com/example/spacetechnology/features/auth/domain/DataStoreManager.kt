@@ -37,7 +37,13 @@ class DataStoreManager(
 
     fun getProfileImagePath(): Flow<String?> {
         return context.dataStore.data.map { pref ->
-            pref[IMAGE_URI_KEY]
+            pref[IMAGE_URI_KEY] ?: ""
+        }
+    }
+
+    suspend fun clearPhotoImagePath() {
+        context.dataStore.edit { pref ->
+            pref[IMAGE_URI_KEY] = ""
         }
     }
 
