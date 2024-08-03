@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AcUnit
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -104,6 +105,7 @@ fun ProfileScreen(
     }
 }
 
+
 @Composable
 private fun ApikeyView() {
     Column(
@@ -114,11 +116,12 @@ private fun ApikeyView() {
     }
 }
 
+
 @Composable
 private fun ProfileView(
     viewModel: ViewModelProfile
 ) {
-    val state = viewModel.imageUri.collectAsState(initial = null)
+    val state = viewModel.imageUri.collectAsState()
 
     var avatarImage by remember {
         mutableStateOf<Uri?>(null)
@@ -127,11 +130,10 @@ private fun ProfileView(
     val photoPickLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) { uri ->
             uri?.let {
-                viewModel.save(it.toString())
+                viewModel.save(it)
                 avatarImage = it
             }
         }
-
 
     Column(
         modifier = Modifier
@@ -142,7 +144,7 @@ private fun ProfileView(
                 photoPickLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
             }
         ) {
-            Text("Pick Profile Picture")
+            Icon(imageVector = Icons.Filled.AcUnit, contentDescription = null)
         }
 
         state.value?.let {
@@ -152,23 +154,10 @@ private fun ProfileView(
                 contentDescription = null,
                 modifier = Modifier
                     .size(128.dp)
-                    .clip(CircleShape)
             )
         } ?: run {
             Text("No Profile Photo")
         }
-
-
-
-
-//        AsyncImage(
-//            model = avatarImage ,
-//            contentDescription = null,
-//            contentScale = ContentScale.Crop,
-//            modifier = Modifier
-//                .clip(CircleShape)
-//                .size(150.dp)
-//        )
     }
 }
 

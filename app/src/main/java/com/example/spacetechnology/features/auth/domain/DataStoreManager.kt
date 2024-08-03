@@ -31,13 +31,13 @@ class DataStoreManager(
 
     suspend fun setProfileImagePath(imagePath: String) {
         context.dataStore.edit { pref ->
-            pref[IMAGE_STORE_PATH_KEY] = imagePath
+            pref[IMAGE_URI_KEY] = imagePath
         }
     }
 
     fun getProfileImagePath(): Flow<String?> {
         return context.dataStore.data.map { pref ->
-            pref[IMAGE_STORE_PATH_KEY]
+            pref[IMAGE_URI_KEY]
         }
     }
 
@@ -45,6 +45,6 @@ class DataStoreManager(
     private companion object {
         val EMAIL_KEY = stringPreferencesKey("email")
         val PASSWORD_KEY = stringPreferencesKey("password")
-        val IMAGE_STORE_PATH_KEY = stringPreferencesKey("profile_image_path")
+        val IMAGE_URI_KEY = stringPreferencesKey("profile_image_path")
     }
 }
