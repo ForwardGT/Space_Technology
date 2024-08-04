@@ -1,4 +1,4 @@
-package com.example.spacetechnology.features.profile.presentation.view
+package com.example.spacetechnology.features.profile.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,11 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
-import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.core.utils.CustomSpacer
 
 @Composable
@@ -101,13 +99,4 @@ private fun TextContent(text: String) {
         text = text
     )
     CustomSpacer(v = 6.dp)
-}
-
-
-@Preview
-@Composable
-private fun Z() {
-    SpaceTechnologyTheme(true) {
-        AboutAppViewContent()
-    }
 }
