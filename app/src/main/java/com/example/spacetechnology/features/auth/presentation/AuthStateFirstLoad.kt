@@ -1,11 +1,15 @@
 package com.example.spacetechnology.features.auth.presentation
 
-sealed class AuthStateFirstLoad {
+import com.example.spacetechnology.navigation.Screen
 
-    data object Loading: AuthStateFirstLoad()
+sealed class AuthStateFirstLoad(
+    val route: String
+) {
 
-    data object Authorised: AuthStateFirstLoad()
+    data object Loading : AuthStateFirstLoad("")
 
-    data object NotAuthorised: AuthStateFirstLoad()
+    data object Authorised : AuthStateFirstLoad(Screen.HomeScreen.route)
+
+    data object NotAuthorised : AuthStateFirstLoad(Screen.FirstAuthScreen.route)
 
 }

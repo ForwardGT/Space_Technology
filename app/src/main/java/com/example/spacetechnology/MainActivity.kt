@@ -12,7 +12,6 @@ import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.features.auth.presentation.AuthStateFirstLoad
 import com.example.spacetechnology.features.auth.presentation.ViewModelAuth
 import com.example.spacetechnology.navigation.NavigationGraph
-import com.example.spacetechnology.navigation.Screen
 import io.github.aagrishankov.platform.setContentThemeWithStatusBars
 import org.koin.androidx.compose.koinViewModel
 
@@ -30,22 +29,18 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             SpaceTechnologyTheme(darkTheme = true) {
 
-                when (authorisedState) {
-
-
-
-
-                    AuthStateFirstLoad.Authorised -> NavigationGraph(
-                        startDestination = Screen.HomeScreen.route,
-                        navController = navController
-                    )
-                    AuthStateFirstLoad.Loading -> CircularProgressIndicator()
-                    AuthStateFirstLoad.NotAuthorised -> NavigationGraph(
-                        startDestination = Screen.FirstAuthScreen.route,
+                if (authorisedState is AuthStateFirstLoad.Loading) {
+                    CircularProgressIndicator()
+                } else {
+                    NavigationGraph(
+                        startDestination = when (authorisedState) {
+                            AuthStateFirstLoad.Loading -> AuthStateFirstLoad.Loading.route
+                            AuthStateFirstLoad.Authorised -> AuthStateFirstLoad.Authorised.route
+                            AuthStateFirstLoad.NotAuthorised -> AuthStateFirstLoad.NotAuthorised.route
+                        },
                         navController = navController
                     )
                 }
-
             }
         }
     }
