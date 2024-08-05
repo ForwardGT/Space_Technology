@@ -117,7 +117,7 @@ private fun MainContentRegistration(
                     viewModel.setUserData {
                         if (it) {
                             scope.launch {
-                                delay(1500) // From imitation load
+                                delay(800) // From imitation load
                                 navController.navigateTo(Screen.AuthScreen.route)
                             }
                         }

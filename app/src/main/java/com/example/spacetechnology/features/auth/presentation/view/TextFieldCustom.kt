@@ -45,7 +45,7 @@ fun TextFieldCustom(
 
     LaunchedEffect(state.registrationSuccess, state.loginSuccess) {
         if (state.registrationSuccess || state.loginSuccess) {
-            delay(Random.nextLong(450L, 1500L)) // From imitation load
+            delay(Random.nextLong(400L, 800L)) // From imitation load
             showCheckIcon = true
         } else {
             showCheckIcon = false

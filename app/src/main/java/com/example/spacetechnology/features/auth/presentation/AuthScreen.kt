@@ -14,13 +14,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
-import com.example.spacetechnology.core.utils.CustomSpacer
 import com.example.spacetechnology.core.utils.CustomButton
+import com.example.spacetechnology.core.utils.CustomSpacer
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateToClearBackStack
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
@@ -88,7 +85,7 @@ fun AuthScreen(
                             onResult = {
                                 if (it) {
                                     scope.launch {
-                                        delay(1500) // From imitation load
+                                        delay(800) // From imitation load
                                         navController.navigateTo(Screen.HomeScreen.route)
                                     }
                                 }
@@ -104,13 +101,5 @@ fun AuthScreen(
     BackHandler {
         viewModel.clearState()
         navController.popBackStack()
-    }
-}
-
-@Preview
-@Composable
-fun Qqq() {
-    SpaceTechnologyTheme(true) {
-        AuthScreen(navController = rememberNavController())
     }
 }

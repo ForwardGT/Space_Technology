@@ -19,6 +19,25 @@ class ViewModelAuth : ViewModel() {
     private val _authState = MutableStateFlow(AuthState())
     val authState = _authState.asStateFlow()
 
+    private val _startDestination = MutableStateFlow<AuthStateFirstLoad>(AuthStateFirstLoad.Loading)
+    val startDestination = _startDestination.asStateFlow()
+
+    init {
+        startDestination()
+    }
+
+    private fun startDestination() {
+        viewModelScope.launch {
+            dataStore.getUserData().collect {
+
+                if (it.email.isNotBlank() && it.password.isNotBlank()) _startDestination.value =
+                    AuthStateFirstLoad.Authorised
+                else _startDestination.value = AuthStateFirstLoad.NotAuthorised
+            }
+        }
+    }
+
+
     fun setEmail(email: String) {
         _authState.reduce {
             it.copy(

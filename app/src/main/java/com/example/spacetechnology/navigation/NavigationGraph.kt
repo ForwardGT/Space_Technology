@@ -6,11 +6,12 @@ import androidx.navigation.compose.NavHost
 
 @Composable
 fun NavigationGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    startDestination: String
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.ProfileScreen.route
+        startDestination = startDestination
     ) {
         addSettingNavGraph(navController)
     }
