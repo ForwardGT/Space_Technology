@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
-import com.example.spacetechnology.core.utils.CirProgIndicator
-import com.example.spacetechnology.core.utils.CustomButton
+import com.example.spacetechnology.core.utils.view.CustomButton
+import com.example.spacetechnology.core.utils.view.CustomCircleProgressIndicator
 import com.example.spacetechnology.features.spacex.presentation.view.DescriptionPost
 import com.example.spacetechnology.features.spacex.presentation.view.PhotoCarousel
 import com.example.spacetechnology.features.spacex.presentation.view.TitleWithLines
@@ -55,7 +55,7 @@ fun SpacexScreen(
                 }
 
                 loadingState -> {
-                    CirProgIndicator(needHeightScreen = true)
+                    CustomCircleProgressIndicator(needHeightScreen = true)
                 }
 
                 else -> {

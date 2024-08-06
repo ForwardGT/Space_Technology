@@ -6,7 +6,7 @@ import com.example.spacetechnology.core.utils.extensions.reduce
 import com.example.spacetechnology.core.utils.validators.validatorLogin
 import com.example.spacetechnology.core.utils.validators.validatorRegistration
 import com.example.spacetechnology.di.Injector
-import com.example.spacetechnology.features.auth.domain.DataStoreManager
+import com.example.spacetechnology.features.auth.domain.DataStore
 import com.example.spacetechnology.features.auth.domain.entity.UserData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class ViewModelAuth : ViewModel() {
 
-    private val dataStore: DataStoreManager by Injector.inject()
+    private val dataStore: DataStore by Injector.inject()
 
     private val _authState = MutableStateFlow(AuthState())
     val authState = _authState.asStateFlow()

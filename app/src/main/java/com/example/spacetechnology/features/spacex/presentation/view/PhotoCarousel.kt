@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
-import com.example.spacetechnology.core.utils.CirProgIndicator
+import com.example.spacetechnology.core.utils.view.CustomCircleProgressIndicator
 
 @Composable
 fun PhotoCarousel(
@@ -41,7 +41,7 @@ fun PhotoCarousel(
                     val state = painter.state
 
                     if (state is AsyncImagePainter.State.Loading || state is AsyncImagePainter.State.Error) {
-                        CirProgIndicator()
+                        CustomCircleProgressIndicator()
                     } else {
                         SubcomposeAsyncImageContent()
                     }

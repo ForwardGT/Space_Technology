@@ -1,4 +1,4 @@
-package com.example.spacetechnology.core.utils
+package com.example.spacetechnology.core.utils.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

@@ -16,12 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.spacetechnology.core.utils.CustomButton
-import com.example.spacetechnology.core.utils.CustomSpacer
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateToClearBackStack
+import com.example.spacetechnology.core.utils.view.CustomButton
+import com.example.spacetechnology.core.utils.view.CustomSpacer
+import com.example.spacetechnology.core.utils.view.CustomTextField
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
-import com.example.spacetechnology.features.auth.presentation.view.TextFieldCustom
 import com.example.spacetechnology.navigation.Screen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -51,7 +51,7 @@ fun AuthScreen(
                 .imePadding()
         ) {
 
-            TextFieldCustom(
+            CustomTextField(
                 state = state,
                 label = "Email",
                 isPassword = false,
@@ -61,7 +61,7 @@ fun AuthScreen(
 
             )
 
-            TextFieldCustom(
+            CustomTextField(
                 state = state,
                 label = "Password",
                 isPassword = true,

@@ -1,4 +1,4 @@
-package com.example.spacetechnology.features.auth.presentation.view
+package com.example.spacetechnology.core.utils.view
 
 
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,11 +24,12 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.features.auth.presentation.AuthState
+import com.example.spacetechnology.features.auth.presentation.view.IconTextField
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 @Composable
-fun TextFieldCustom(
+fun CustomTextField(
     value: String,
     label: String,
     isPassword: Boolean = false,

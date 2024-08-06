@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
-import com.example.spacetechnology.core.utils.CustomSpacer
+import com.example.spacetechnology.core.utils.view.CustomSpacer
 
 @Composable
 fun AuthNavigationTopBar(

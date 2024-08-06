@@ -4,11 +4,11 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
+import com.example.spacetechnology.core.utils.view.CustomCircleProgressIndicator
 import com.example.spacetechnology.features.auth.presentation.AuthStateFirstLoad
 import com.example.spacetechnology.features.auth.presentation.ViewModelAuth
 import com.example.spacetechnology.navigation.NavigationGraph
@@ -21,19 +21,18 @@ class MainActivity : ComponentActivity() {
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         enableEdgeToEdge()
+
         setContentThemeWithStatusBars {
-
             val viewModel: ViewModelAuth = koinViewModel()
-            val authorisedState by viewModel.startDestination.collectAsState()
-
+            val startDestinationState by viewModel.startDestination.collectAsState()
             val navController = rememberNavController()
-            SpaceTechnologyTheme(darkTheme = true) {
 
-                if (authorisedState is AuthStateFirstLoad.Loading) {
-                    CircularProgressIndicator()
+            SpaceTechnologyTheme(darkTheme = true) {
+                if (startDestinationState is AuthStateFirstLoad.Loading) {
+                    CustomCircleProgressIndicator()
                 } else {
                     NavigationGraph(
-                        startDestination = when (authorisedState) {
+                        startDestination = when (startDestinationState) {
                             AuthStateFirstLoad.Loading -> AuthStateFirstLoad.Loading.route
                             AuthStateFirstLoad.Authorised -> AuthStateFirstLoad.Authorised.route
                             AuthStateFirstLoad.NotAuthorised -> AuthStateFirstLoad.NotAuthorised.route

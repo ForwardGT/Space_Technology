@@ -6,7 +6,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.spacetechnology.di.Injector
-import com.example.spacetechnology.features.auth.domain.DataStoreManager
+import com.example.spacetechnology.features.auth.domain.DataStore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import java.io.FileOutputStream
 
 class ViewModelProfile : ViewModel() {
 
-    private val dataStore: DataStoreManager by Injector.inject()
+    private val dataStore: DataStore by Injector.inject()
     private val context: Context by Injector.inject()
 
     private val _imageUri = MutableStateFlow<Uri?>(null)

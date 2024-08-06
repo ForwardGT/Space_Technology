@@ -20,11 +20,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
-import com.example.spacetechnology.core.utils.CustomSpacer
-import com.example.spacetechnology.core.utils.CustomButton
+import com.example.spacetechnology.core.utils.view.CustomSpacer
+import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
-import com.example.spacetechnology.features.auth.presentation.view.TextFieldCustom
+import com.example.spacetechnology.core.utils.view.CustomTextField
 import com.example.spacetechnology.navigation.Screen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -72,7 +72,7 @@ private fun MainContentRegistration(
             .padding(paddingValues)
             .imePadding()
     ) {
-        TextFieldCustom(
+        CustomTextField(
             state = state,
             label = "Email",
             isPassword = false,
@@ -81,7 +81,7 @@ private fun MainContentRegistration(
             errorMessage = state.errors.emailError
         )
 
-        TextFieldCustom(
+        CustomTextField(
             state = state,
             label = "Password",
             isPassword = true,
@@ -90,7 +90,7 @@ private fun MainContentRegistration(
             errorMessage = state.errors.passwordError
         )
 
-        TextFieldCustom(
+        CustomTextField(
             state = state,
             label = "Repeat password",
             isPassword = true,

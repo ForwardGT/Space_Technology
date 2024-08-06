@@ -11,8 +11,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
-import com.example.spacetechnology.core.utils.CirProgIndicator
-import com.example.spacetechnology.core.utils.CustomButton
+import com.example.spacetechnology.core.utils.view.CustomCircleProgressIndicator
+import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.features.spacex.presentation.MediumPreviewPosts
 import org.koin.androidx.compose.koinViewModel
 
@@ -47,7 +47,7 @@ fun NasaScreen(
                 }
 
                 loadingState -> {
-                    CirProgIndicator(true)
+                    CustomCircleProgressIndicator(true)
                 }
 
                 else -> {

@@ -2,7 +2,7 @@ package com.example.spacetechnology
 
 import android.app.Application
 import android.content.Context
-import com.example.spacetechnology.features.auth.domain.DataStoreManager
+import com.example.spacetechnology.features.auth.domain.DataStore
 import com.example.spacetechnology.features.auth.presentation.ViewModelAuth
 import com.example.spacetechnology.features.home.presentation.ViewModelHome
 import com.example.spacetechnology.features.nasa.data.repository.RepositoryNasaImpl
@@ -72,5 +72,5 @@ private val repositoryNasa = module {
 }
 
 private val dataStore = module {
-    factory { DataStoreManager(get<Context>()) }
+    single { DataStore(get<Context>()) }
 }

@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.spacetechnology.R
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
-import com.example.spacetechnology.core.utils.CustomButton
-import com.example.spacetechnology.core.utils.CustomSpacer
+import com.example.spacetechnology.core.utils.view.CustomButton
+import com.example.spacetechnology.core.utils.view.CustomSpacer
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.navigation.Screen
 
