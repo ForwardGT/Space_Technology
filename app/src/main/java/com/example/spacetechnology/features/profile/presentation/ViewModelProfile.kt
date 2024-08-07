@@ -71,7 +71,7 @@ class ViewModelProfile : ViewModel() {
     fun deleteProfile() {
         viewModelScope.launch {
             dataStore.deleteProfile()
+            dataStore.setIsLoginUser(false)
         }
     }
-
 }

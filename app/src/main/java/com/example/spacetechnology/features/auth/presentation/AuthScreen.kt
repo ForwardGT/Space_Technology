@@ -86,7 +86,7 @@ fun AuthScreen(
                                 if (it) {
                                     scope.launch {
                                         delay(800) // From imitation load
-                                        navController.navigateTo(Screen.HomeScreen.route)
+                                        viewModel.setIsLoginIn(true)
                                     }
                                 }
                             }
@@ -99,7 +99,7 @@ fun AuthScreen(
         }
     }
     BackHandler {
-        viewModel.clearState()
+        viewModel.clearAuthState()
         navController.popBackStack()
     }
 }

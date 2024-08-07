@@ -3,6 +3,7 @@ package com.example.spacetechnology.features.auth.domain
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -54,9 +55,23 @@ class DataStore(
         }
     }
 
+    suspend fun setIsLoginUser(isLogin: Boolean) {
+        context.dataStore.edit { pref ->
+            pref[IS_LOGIN_KEY] = isLogin
+        }
+    }
+
+    fun getIsLoginUser(): Flow<Boolean> {
+        return context.dataStore.data.map { pref ->
+            pref[IS_LOGIN_KEY] ?: false
+        }
+    }
+
+
     private companion object {
         val EMAIL_KEY = stringPreferencesKey("email")
         val PASSWORD_KEY = stringPreferencesKey("password")
         val IMAGE_URI_KEY = stringPreferencesKey("profile_image_path")
+        val IS_LOGIN_KEY = booleanPreferencesKey("is_login")
     }
 }

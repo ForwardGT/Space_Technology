@@ -9,9 +9,9 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.core.utils.view.CustomCircleProgressIndicator
-import com.example.spacetechnology.features.auth.presentation.AuthStateFirstLoad
 import com.example.spacetechnology.features.auth.presentation.ViewModelAuth
 import com.example.spacetechnology.navigation.NavigationGraph
+import com.example.spacetechnology.navigation.Screen
 import io.github.aagrishankov.platform.setContentThemeWithStatusBars
 import org.koin.androidx.compose.koinViewModel
 
@@ -24,22 +24,23 @@ class MainActivity : ComponentActivity() {
 
         setContentThemeWithStatusBars {
             val viewModel: ViewModelAuth = koinViewModel()
-            val startDestinationState by viewModel.startDestination.collectAsState()
+            val isLoginState by viewModel.isLogin.collectAsState()
             val navController = rememberNavController()
 
             SpaceTechnologyTheme(darkTheme = true) {
-                if (startDestinationState is AuthStateFirstLoad.Loading) {
-                    CustomCircleProgressIndicator()
-                } else {
-                    NavigationGraph(
-                        startDestination = when (startDestinationState) {
-                            AuthStateFirstLoad.Loading -> AuthStateFirstLoad.Loading.route
-                            AuthStateFirstLoad.Authorised -> AuthStateFirstLoad.Authorised.route
-                            AuthStateFirstLoad.NotAuthorised -> AuthStateFirstLoad.NotAuthorised.route
-                        },
-                        navController = navController
-                    )
-                }
+                if (isLoginState == null) {
+                    CustomCircleProgressIndicator()}
+                    isLoginState?.let {
+                        when (it) {
+                            true -> Screen.HomeScreen.route
+                            false -> Screen.FirstAuthScreen.route
+                        }.run {
+                            NavigationGraph(
+                                startDestination = this,
+                                navController = navController
+                            )
+                        }
+                    }
             }
         }
     }

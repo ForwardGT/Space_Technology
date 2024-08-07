@@ -19,20 +19,25 @@ class ViewModelAuth : ViewModel() {
     private val _authState = MutableStateFlow(AuthState())
     val authState = _authState.asStateFlow()
 
-    private val _startDestination = MutableStateFlow<AuthStateFirstLoad>(AuthStateFirstLoad.Loading)
-    val startDestination = _startDestination.asStateFlow()
+    private val _isLogin = MutableStateFlow<Boolean?>(null)
+    val isLogin = _isLogin.asStateFlow()
 
     init {
-        startDestination()
+        getIsLoginIn()
     }
 
-    private fun startDestination() {
-        viewModelScope.launch {
-            dataStore.getUserData().collect {
 
-                if (it.email.isNotBlank() && it.password.isNotBlank()) _startDestination.value =
-                    AuthStateFirstLoad.Authorised
-                else _startDestination.value = AuthStateFirstLoad.NotAuthorised
+    fun setIsLoginIn(loginIn: Boolean) {
+        viewModelScope.launch {
+            dataStore.setIsLoginUser(loginIn)
+        }
+    }
+
+
+    private fun getIsLoginIn() {
+        viewModelScope.launch {
+            dataStore.getIsLoginUser().collect {
+                _isLogin.value = it
             }
         }
     }
@@ -47,6 +52,7 @@ class ViewModelAuth : ViewModel() {
         }
     }
 
+
     fun setPassword(password: String) {
         _authState.reduce {
             it.copy(
@@ -55,6 +61,7 @@ class ViewModelAuth : ViewModel() {
             )
         }
     }
+
 
     fun setRepeatPassword(repeatPassword: String) {
         _authState.reduce {
@@ -65,7 +72,8 @@ class ViewModelAuth : ViewModel() {
         }
     }
 
-    fun clearState() {
+
+    fun clearAuthState() {
         _authState.reduce {
             it.copy(
                 registrationSuccess = false
