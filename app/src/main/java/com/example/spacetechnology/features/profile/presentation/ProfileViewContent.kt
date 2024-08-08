@@ -19,10 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
+import com.example.spacetechnology.core.utils.extensions.navigation.navigateToClearBackStack
 import com.example.spacetechnology.core.utils.view.CustomAlertDialog
 import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.view.CustomSpacer
-import com.example.spacetechnology.core.utils.extensions.navigation.navigateToClearBackStack
 import com.example.spacetechnology.features.profile.presentation.view.PhotoProfile
 import com.example.spacetechnology.navigation.Screen
 
@@ -82,6 +82,7 @@ private fun ProfileImageBlock(
     val photoPickLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) { uri ->
             uri?.let {
+                viewModel.clearPhotoImagePath()
                 viewModel.saveImageToDevice(it)
             }
         }

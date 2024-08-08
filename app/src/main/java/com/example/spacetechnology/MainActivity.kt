@@ -28,19 +28,22 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
 
             SpaceTechnologyTheme(darkTheme = true) {
+
                 if (isLoginState == null) {
-                    CustomCircleProgressIndicator()}
-                    isLoginState?.let {
-                        when (it) {
-                            true -> Screen.HomeScreen.route
-                            false -> Screen.FirstAuthScreen.route
-                        }.run {
-                            NavigationGraph(
-                                startDestination = this,
-                                navController = navController
-                            )
-                        }
+                    CustomCircleProgressIndicator()
+                }
+
+                isLoginState?.let {
+                    when (it) {
+                        true -> Screen.HomeScreen.route
+                        false -> Screen.FirstAuthScreen.route
+                    }.run {
+                        NavigationGraph(
+                            startDestination = this,
+                            navController = navController
+                        )
                     }
+                }
             }
         }
     }

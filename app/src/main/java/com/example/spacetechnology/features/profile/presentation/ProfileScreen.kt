@@ -5,14 +5,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
@@ -29,8 +33,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
+import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.features.profile.domain.entity.DrawerNavigationItem
 import com.example.spacetechnology.features.profile.presentation.view.PhotoProfile
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -64,9 +70,13 @@ fun ProfileScreen(
             ModalNavigationDrawer(
                 drawerState = drawerState,
                 drawerContent = {
-                    ModalDrawerSheet {
-                        Box(modifier = Modifier.fillMaxWidth(),
-                            contentAlignment = Alignment.Center) {
+                    ModalDrawerSheet(
+                        modifier = Modifier.fillMaxWidth(0.8f)
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
                             PhotoProfile(
                                 stateImageProfile = stateImageProfile,
                                 emailProfile = emailProfile,
@@ -74,13 +84,12 @@ fun ProfileScreen(
                             )
                         }
                         items.forEach { item ->
-                            NavigationDrawerItem(
-                                label = { Text(item.title, fontSize = 22.sp) },
-                                selected = selectedItem == item.title,
-                                onClick = {
-                                    scope.launch { drawerState.close() }
-                                    selectedItem = item.title
-                                }
+                            ItemDrawer(
+                                item = item,
+                                scope = scope,
+                                selectedItem = selectedItem,
+                                drawerState = drawerState,
+                                onItemSelected = { selectedItem = it }
                             )
                         }
                     }
@@ -111,4 +120,44 @@ fun ProfileScreen(
             )
         }
     }
+}
+
+@Composable
+private fun ItemDrawer(
+    item: DrawerNavigationItem,
+    scope: CoroutineScope,
+    selectedItem: String,
+    drawerState: DrawerState,
+    onItemSelected: (String) -> Unit
+) {
+    NavigationDrawerItem(
+        modifier = Modifier.padding(
+            bottom = 4.dp,
+            end = 4.dp,
+            start = 4.dp
+        ),
+        shape = RoundedCornerShape(16.dp),
+        colors = NavigationDrawerItemDefaults.colors(
+            selectedContainerColor = SpaceTechColor.navigationElement,
+        ),
+        label = {
+            Text(
+                color = SpaceTechColor.white,
+                text = item.title, fontSize = 22.sp
+            )
+        },
+        icon = {
+            Icon(
+                modifier = Modifier.size(23.dp),
+                imageVector = item.iconItem,
+                contentDescription = null,
+                tint = SpaceTechColor.white
+            )
+        },
+        selected = selectedItem == item.title,
+        onClick = {
+            scope.launch { drawerState.close() }
+            onItemSelected(item.title)
+        }
+    )
 }
