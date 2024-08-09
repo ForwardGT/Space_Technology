@@ -13,9 +13,9 @@ import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
 
 class RepositoryNasaImpl : RepositoryNasa {
 
-    private val apodCache = CacheFactory.createCache<PostApodNasa>()
-    private val techTransferCache = CacheFactory.createCache<List<PostTechTransfer>>()
-    private val asteroidsCache = CacheFactory.createCache<List<Asteroid>>()
+    private val apodCache by lazy { CacheFactory.createCache<PostApodNasa>() }
+    private val techTransferCache by lazy { CacheFactory.createCache<List<PostTechTransfer>>() }
+    private val asteroidsCache by lazy { CacheFactory.createCache<List<Asteroid>>() }
 
     override suspend fun loadApod(): PostApodNasa {
         return apodCache.get(key = APOD) {
@@ -36,6 +36,12 @@ class RepositoryNasaImpl : RepositoryNasa {
             val responseApiService = ApiFactoryNasa.apiService.getAsteroids(apiKeyNasa)
             mapperAsteroidsNasa(responseApiService)
         }
+    }
+
+    override suspend fun clearCache() {
+        apodCache.invalidateAll()
+        techTransferCache.invalidateAll()
+        asteroidsCache.invalidateAll()
     }
 
     private companion object {

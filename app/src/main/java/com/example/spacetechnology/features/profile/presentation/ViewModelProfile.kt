@@ -7,7 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.features.auth.domain.DataStore
-import com.example.spacetechnology.features.spacex.data.repository.RepositorySpacexImpl
+import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
+import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -16,7 +17,8 @@ import java.io.FileOutputStream
 
 class ViewModelProfile : ViewModel() {
 
-    private val repositorySpacex :RepositorySpacexImpl by Injector.inject()
+    private val repositorySpacex : RepositorySpacex by Injector.inject()
+    private val repositoryNasa : RepositoryNasa by Injector.inject()
     private val dataStore: DataStore by Injector.inject()
     private val context: Context by Injector.inject()
 
@@ -34,6 +36,7 @@ class ViewModelProfile : ViewModel() {
     fun clearCache() {
         viewModelScope.launch {
             repositorySpacex.clearCache()
+            repositoryNasa.clearCache()
         }
     }
 

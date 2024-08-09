@@ -8,4 +8,6 @@ interface RepositoryNasa {
 
     suspend fun loadAsteroids(): List<Asteroid>
 
+    suspend fun clearCache()
+
 }
