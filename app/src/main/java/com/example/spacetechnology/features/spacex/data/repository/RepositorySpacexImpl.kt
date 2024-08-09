@@ -1,5 +1,6 @@
 package com.example.spacetechnology.features.spacex.data.repository
 
+import com.example.spacetechnology.cache.CacheFactory
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexDragon
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexLandPads
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexRocket
@@ -8,22 +9,12 @@ import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
 import com.example.spacetechnology.features.spacex.domain.entity.SpacexDragon
 import com.example.spacetechnology.features.spacex.domain.entity.SpacexLandPads
 import com.example.spacetechnology.features.spacex.domain.entity.SpacexRocket
-import io.github.reactivecircus.cache4k.Cache
-import kotlin.time.Duration.Companion.minutes
 
 class RepositorySpacexImpl : RepositorySpacex {
 
-    private val dragonCache = Cache.Builder<String, List<SpacexDragon>>()
-        .expireAfterWrite(5.minutes)
-        .build()
-
-    private val rocketCache = Cache.Builder<String, List<SpacexRocket>>()
-        .expireAfterWrite(5.minutes)
-        .build()
-
-    private val landPadsCache = Cache.Builder<String, List<SpacexLandPads>>()
-        .expireAfterWrite(5.minutes)
-        .build()
+    private val dragonCache = CacheFactory.createCache<List<SpacexDragon>>()
+    private val rocketCache = CacheFactory.createCache<List<SpacexRocket>>()
+    private val landPadsCache = CacheFactory.createCache<List<SpacexLandPads>>()
 
     override suspend fun loadDragon(): List<SpacexDragon> {
         return dragonCache.get(DRAGON) {

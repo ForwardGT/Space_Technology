@@ -5,8 +5,8 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
@@ -33,7 +33,8 @@ fun ProfileViewContent(
     emailProfile: String,
     stateImageProfile: Uri?
 ) {
-    var showDialog by remember { mutableStateOf(false) }
+    var showDialogDeleteProfile by remember { mutableStateOf(false) }
+    var showDialogClearCache by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -47,27 +48,47 @@ fun ProfileViewContent(
             stateImageProfile = stateImageProfile
         )
 
-        if (showDialog) {
+        if (showDialogDeleteProfile) {
             CustomAlertDialog(
                 onClickConfirm = {
-                    showDialog = false
+                    showDialogDeleteProfile = false
                     viewModel.clearPhotoImagePath()
                     viewModel.deleteProfile()
                     navController.navigateToClearBackStack(Screen.FirstAuthScreen.route)
                 },
-                onClickDismiss = { showDialog = false },
-                onClickDismissRequest = { showDialog = false }
+                onClickDismiss = { showDialogDeleteProfile = false },
+                onClickDismissRequest = { showDialogDeleteProfile = false }
             )
         }
 
-        Box {
+        if (showDialogDeleteProfile) {
+            CustomAlertDialog(
+                onClickConfirm = {
+                    showDialogDeleteProfile = false
+                },
+                onClickDismiss = { showDialogDeleteProfile = false },
+                onClickDismissRequest = { showDialogDeleteProfile = false }
+            )
+        }
+
+        Column {
 
             CustomButton(
-                onClick = { showDialog = true },
+                onClick = { showDialogClearCache = true },
+                label = "Clear cache",
+                defaultButton = true,
+                fillMaxWidth = true,
+                gradient = SpaceTechColor.buttonGradientDanger,
+                padding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
+            )
+
+            CustomButton(
+                onClick = { showDialogDeleteProfile = true },
                 label = "Delete profile",
                 defaultButton = true,
                 fillMaxWidth = true,
-                gradient = SpaceTechColor.buttonGradientDanger
+                gradient = SpaceTechColor.buttonGradientDanger,
+                padding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
             )
         }
     }

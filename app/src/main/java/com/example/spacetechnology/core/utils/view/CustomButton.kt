@@ -35,6 +35,9 @@ fun CustomButton(
     height: Dp = 50.dp,
     width: Dp = 150.dp,
     fillMaxWidth: Boolean = false,
+    padding: PaddingValues = PaddingValues(
+        start = 0.dp, top = 0.dp, end = 0.dp, bottom = 0.dp
+    )
 ) {
     val viewWidth = with(LocalDensity.current) {
         (LocalView.current.rootView.height.toDp())
@@ -44,7 +47,7 @@ fun CustomButton(
         Modifier
             .thenIf(!defaultButton, modifier = Modifier.fillMaxSize())
             .thenIf(scroll, modifier = Modifier.height(viewWidth))
-            .thenIf(fillMaxWidth, modifier = Modifier.padding(10.dp))
+            .then(Modifier.padding(padding))
     ) {
         Button(
             onClick = { onClick() },

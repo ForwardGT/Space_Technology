@@ -1,5 +1,6 @@
 package com.example.spacetechnology.features.nasa.data.repository
 
+import com.example.spacetechnology.cache.CacheFactory
 import com.example.spacetechnology.features.nasa.data.mapper.mapperApodNasa
 import com.example.spacetechnology.features.nasa.data.mapper.mapperAsteroidsNasa
 import com.example.spacetechnology.features.nasa.data.mapper.mapperTechNasa
@@ -9,22 +10,12 @@ import com.example.spacetechnology.features.nasa.domain.entity.Asteroid
 import com.example.spacetechnology.features.nasa.domain.entity.PostApodNasa
 import com.example.spacetechnology.features.nasa.domain.entity.PostTechTransfer
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
-import io.github.reactivecircus.cache4k.Cache
-import kotlin.time.Duration.Companion.minutes
 
 class RepositoryNasaImpl : RepositoryNasa {
 
-    private val apodCache = Cache.Builder<String, PostApodNasa>()
-        .expireAfterWrite(5.minutes)
-        .build()
-
-    private val techTransferCache = Cache.Builder<String, List<PostTechTransfer>>()
-        .expireAfterWrite(5.minutes)
-        .build()
-
-    private val asteroidsCache = Cache.Builder<String, List<Asteroid>>()
-        .expireAfterWrite(5.minutes)
-        .build()
+    private val apodCache = CacheFactory.createCache<PostApodNasa>()
+    private val techTransferCache = CacheFactory.createCache<List<PostTechTransfer>>()
+    private val asteroidsCache = CacheFactory.createCache<List<Asteroid>>()
 
     override suspend fun loadApod(): PostApodNasa {
         return apodCache.get(key = APOD) {

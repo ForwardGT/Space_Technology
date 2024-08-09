@@ -23,10 +23,4 @@ interface ApiServiceNasa {
         @Query("api_key") apiKey: String,
     ): AsteroidsNearEarthObjectsDto
 
-    //suspend fun getUserData(userId: Long) {
-//    val userData: String = cache.get(userId) { //сначала смотрит в кеше, если кеша нет или он устарел то дернет блок getUserDataEndpoint, как дернет сохранит сам в кеш
-//        getUserDataEndpoint(userId)
-//    }
-//}
-
 }
