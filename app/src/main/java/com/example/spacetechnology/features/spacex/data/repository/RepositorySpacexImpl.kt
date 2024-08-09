@@ -1,6 +1,7 @@
 package com.example.spacetechnology.features.spacex.data.repository
 
 import com.example.spacetechnology.cache.CacheFactory
+import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexDragon
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexLandPads
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexRocket
@@ -12,9 +13,11 @@ import com.example.spacetechnology.features.spacex.domain.entity.SpacexRocket
 
 class RepositorySpacexImpl : RepositorySpacex {
 
-    private val dragonCache by lazy { CacheFactory.createCache<List<SpacexDragon>>() }
-    private val rocketCache by lazy { CacheFactory.createCache<List<SpacexRocket>>() }
-    private val landPadsCache by lazy { CacheFactory.createCache<List<SpacexLandPads>>() }
+    private val cache: CacheFactory by Injector.inject()
+
+    private val dragonCache by lazy { cache.createCache<List<SpacexDragon>>() }
+    private val rocketCache by lazy { cache.createCache<List<SpacexRocket>>() }
+    private val landPadsCache by lazy { cache.createCache<List<SpacexLandPads>>() }
 
 
     override suspend fun loadDragon(): List<SpacexDragon> {

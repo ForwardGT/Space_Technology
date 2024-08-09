@@ -4,15 +4,8 @@ import io.github.reactivecircus.cache4k.Cache
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 
-object CacheFactory {
+interface CacheFactory {
 
-     fun <T : Any> createCache(time: Duration = 5.minutes): Cache<String, T> {
-        return Cache.Builder<String, T>()
-            .expireAfterWrite(time)
-            .build()
-    }
+    fun <T : Any> createCache(time: Duration = 5.minutes): Cache<String, T>
 
-    fun <T : Any> clearCache(cache: Cache<String, T>) {
-        cache.invalidateAll()
-    }
 }

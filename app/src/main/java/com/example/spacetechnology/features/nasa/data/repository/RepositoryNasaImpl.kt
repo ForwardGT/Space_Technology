@@ -1,6 +1,7 @@
 package com.example.spacetechnology.features.nasa.data.repository
 
 import com.example.spacetechnology.cache.CacheFactory
+import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.features.nasa.data.mapper.mapperApodNasa
 import com.example.spacetechnology.features.nasa.data.mapper.mapperAsteroidsNasa
 import com.example.spacetechnology.features.nasa.data.mapper.mapperTechNasa
@@ -13,9 +14,11 @@ import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
 
 class RepositoryNasaImpl : RepositoryNasa {
 
-    private val apodCache by lazy { CacheFactory.createCache<PostApodNasa>() }
-    private val techTransferCache by lazy { CacheFactory.createCache<List<PostTechTransfer>>() }
-    private val asteroidsCache by lazy { CacheFactory.createCache<List<Asteroid>>() }
+    private val cache: CacheFactory by Injector.inject()
+
+    private val apodCache by lazy { cache.createCache<PostApodNasa>() }
+    private val techTransferCache by lazy { cache.createCache<List<PostTechTransfer>>() }
+    private val asteroidsCache by lazy { cache.createCache<List<Asteroid>>() }
 
     override suspend fun loadApod(): PostApodNasa {
         return apodCache.get(key = APOD) {
