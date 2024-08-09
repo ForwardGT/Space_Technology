@@ -1,6 +1,5 @@
 package com.example.spacetechnology.features.nasa.data.network
 
-
 import com.example.spacetechnology.features.nasa.data.model.AsteroidsNearEarthObjectsDto
 import com.example.spacetechnology.features.nasa.data.model.PostApodDto
 import com.example.spacetechnology.features.nasa.data.model.PostsTechTransferDto
@@ -23,5 +22,11 @@ interface ApiServiceNasa {
     suspend fun getAsteroids(
         @Query("api_key") apiKey: String,
     ): AsteroidsNearEarthObjectsDto
+
+    //suspend fun getUserData(userId: Long) {
+//    val userData: String = cache.get(userId) { //сначала смотрит в кеше, если кеша нет или он устарел то дернет блок getUserDataEndpoint, как дернет сохранит сам в кеш
+//        getUserDataEndpoint(userId)
+//    }
+//}
 
 }
