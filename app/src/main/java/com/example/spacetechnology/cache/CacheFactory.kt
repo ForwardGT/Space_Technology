@@ -6,9 +6,13 @@ import kotlin.time.Duration.Companion.minutes
 
 object CacheFactory {
 
-    fun <T : Any> createCache(time: Duration = 5.minutes): Cache<String, T> {
+     fun <T : Any> createCache(time: Duration = 5.minutes): Cache<String, T> {
         return Cache.Builder<String, T>()
             .expireAfterWrite(time)
             .build()
+    }
+
+    fun <T : Any> clearCache(cache: Cache<String, T>) {
+        cache.invalidateAll()
     }
 }

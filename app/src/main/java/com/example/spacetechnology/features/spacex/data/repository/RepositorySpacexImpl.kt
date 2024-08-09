@@ -1,6 +1,7 @@
 package com.example.spacetechnology.features.spacex.data.repository
 
 import com.example.spacetechnology.cache.CacheFactory
+import com.example.spacetechnology.cache.CacheFactory.clearCache
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexDragon
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexLandPads
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexRocket
@@ -15,6 +16,12 @@ class RepositorySpacexImpl : RepositorySpacex {
     private val dragonCache = CacheFactory.createCache<List<SpacexDragon>>()
     private val rocketCache = CacheFactory.createCache<List<SpacexRocket>>()
     private val landPadsCache = CacheFactory.createCache<List<SpacexLandPads>>()
+
+    fun clearCache() {
+        clearCache(dragonCache)
+        clearCache(rocketCache)
+        clearCache(landPadsCache)
+    }
 
     override suspend fun loadDragon(): List<SpacexDragon> {
         return dragonCache.get(DRAGON) {

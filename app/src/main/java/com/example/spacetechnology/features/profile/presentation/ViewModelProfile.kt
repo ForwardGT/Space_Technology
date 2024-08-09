@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.features.auth.domain.DataStore
+import com.example.spacetechnology.features.spacex.data.repository.RepositorySpacexImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ import java.io.FileOutputStream
 
 class ViewModelProfile : ViewModel() {
 
+    private val repositorySpacex :RepositorySpacexImpl by Injector.inject()
     private val dataStore: DataStore by Injector.inject()
     private val context: Context by Injector.inject()
 
@@ -27,6 +29,12 @@ class ViewModelProfile : ViewModel() {
     init {
         loadImageFromDevice()
         showEmailProfile()
+    }
+
+    fun clearCache() {
+        viewModelScope.launch {
+            repositorySpacex.clearCache()
+        }
     }
 
     fun saveImageToDevice(uri: Uri) {

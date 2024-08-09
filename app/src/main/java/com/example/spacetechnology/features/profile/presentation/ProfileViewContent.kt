@@ -61,13 +61,14 @@ fun ProfileViewContent(
             )
         }
 
-        if (showDialogDeleteProfile) {
+        if (showDialogClearCache) {
             CustomAlertDialog(
                 onClickConfirm = {
-                    showDialogDeleteProfile = false
+                    showDialogClearCache = false
+                    viewModel.clearCache()
                 },
-                onClickDismiss = { showDialogDeleteProfile = false },
-                onClickDismissRequest = { showDialogDeleteProfile = false }
+                onClickDismiss = { showDialogClearCache = false },
+                onClickDismissRequest = { showDialogClearCache = false }
             )
         }
 
