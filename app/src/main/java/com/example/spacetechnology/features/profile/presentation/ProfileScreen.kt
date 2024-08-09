@@ -95,7 +95,7 @@ fun ProfileScreen(
                     }
                 },
                 content = {
-                    Column(Modifier.fillMaxSize()) {
+                    Column(modifier = Modifier.fillMaxSize()) {
                         Box {
                             IconButton(onClick = { scope.launch { drawerState.open() } },
                                 content = { Icon(Icons.Filled.Menu, null) }

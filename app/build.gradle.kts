@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.compose.icons.extender)
     implementation(libs.cme.status.bars)
     implementation(libs.datastore.preferences)
+    implementation(libs.reactivecircus.cache)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
