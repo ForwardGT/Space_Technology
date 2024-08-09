@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,8 +24,11 @@ import com.example.spacetechnology.core.utils.extensions.navigation.navigateToCl
 import com.example.spacetechnology.core.utils.view.CustomAlertDialog
 import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.view.CustomSpacer
+import com.example.spacetechnology.core.utils.view.CustomToast
 import com.example.spacetechnology.features.profile.presentation.view.PhotoProfile
 import com.example.spacetechnology.navigation.Screen
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun ProfileViewContent(
@@ -33,14 +37,17 @@ fun ProfileViewContent(
     emailProfile: String,
     stateImageProfile: Uri?
 ) {
+    var textForToast by remember { mutableStateOf("") }
     var showDialogDeleteProfile by remember { mutableStateOf(false) }
     var showDialogClearCache by remember { mutableStateOf(false) }
+    var showToast by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
 
-    ) {
+        ) {
 
         ProfileImageBlock(
             viewModel = viewModel,
@@ -48,24 +55,36 @@ fun ProfileViewContent(
             stateImageProfile = stateImageProfile
         )
 
-        if (showDialogDeleteProfile) {
-            CustomAlertDialog(
+        CustomToast(
+            message = textForToast,
+            isVisible = showToast,
+            onDismiss = { showToast = false }
+        )
+
+        when {
+            showDialogDeleteProfile -> CustomAlertDialog(
                 onClickConfirm = {
-                    showDialogDeleteProfile = false
-                    viewModel.clearPhotoImagePath()
-                    viewModel.deleteProfile()
-                    navController.navigateToClearBackStack(Screen.FirstAuthScreen.route)
+                    scope.launch {
+                        showDialogDeleteProfile = false
+                        showToast = true
+                        textForToast = "Your profile and all data have been successfully deleted!"
+                        delay(500) // delay for showToast
+                        viewModel.clearPhotoImagePath()
+                        viewModel.clearCache()
+                        viewModel.deleteProfile()
+                        navController.navigateToClearBackStack(Screen.FirstAuthScreen.route)
+                    }
                 },
                 onClickDismiss = { showDialogDeleteProfile = false },
                 onClickDismissRequest = { showDialogDeleteProfile = false }
             )
-        }
 
-        if (showDialogClearCache) {
-            CustomAlertDialog(
+            showDialogClearCache -> CustomAlertDialog(
                 onClickConfirm = {
                     showDialogClearCache = false
                     viewModel.clearCache()
+                    showToast = true
+                    textForToast = "All cache cleared successfully!"
                 },
                 onClickDismiss = { showDialogClearCache = false },
                 onClickDismissRequest = { showDialogClearCache = false }
@@ -82,7 +101,6 @@ fun ProfileViewContent(
                 gradient = SpaceTechColor.buttonGradientDanger,
                 padding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
             )
-
             CustomButton(
                 onClick = { showDialogDeleteProfile = true },
                 label = "Delete profile",
@@ -94,6 +112,7 @@ fun ProfileViewContent(
         }
     }
 }
+
 
 @Composable
 private fun ProfileImageBlock(

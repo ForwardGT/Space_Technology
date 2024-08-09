@@ -46,7 +46,10 @@ fun CustomAlertDialog(
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 CustomButton(
-                    onClick = { onClickConfirm() },
+                    onClick = {
+                        onClickConfirm()
+
+                              },
                     label = "Yes",
                     defaultButton = true,
                     height = 36.dp,
