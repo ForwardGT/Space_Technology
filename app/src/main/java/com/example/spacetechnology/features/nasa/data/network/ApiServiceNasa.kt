@@ -1,6 +1,5 @@
 package com.example.spacetechnology.features.nasa.data.network
 
-
 import com.example.spacetechnology.features.nasa.data.model.AsteroidsNearEarthObjectsDto
 import com.example.spacetechnology.features.nasa.data.model.PostApodDto
 import com.example.spacetechnology.features.nasa.data.model.PostsTechTransferDto

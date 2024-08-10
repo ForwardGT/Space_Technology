@@ -12,4 +12,6 @@ interface RepositorySpacex {
 
     suspend fun loadLandPads(): List<SpacexLandPads>
 
+    suspend fun clearCache()
+
 }
