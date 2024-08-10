@@ -15,10 +15,9 @@ class RepositorySpacexImpl : RepositorySpacex {
 
     private val cache: CacheFactory by Injector.inject()
 
-    private val dragonCache by lazy { cache.createCache<List<SpacexDragon>>() }
-    private val rocketCache by lazy { cache.createCache<List<SpacexRocket>>() }
-    private val landPadsCache by lazy { cache.createCache<List<SpacexLandPads>>() }
-
+    private val dragonCache = cache.dragonCache()
+    private val rocketCache = cache.rocketCache()
+    private val landPadsCache = cache.landPadsCache()
 
     override suspend fun loadDragon(): List<SpacexDragon> {
         return dragonCache.get(DRAGON) {

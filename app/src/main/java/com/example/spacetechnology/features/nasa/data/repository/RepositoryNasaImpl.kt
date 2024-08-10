@@ -16,9 +16,9 @@ class RepositoryNasaImpl : RepositoryNasa {
 
     private val cache: CacheFactory by Injector.inject()
 
-    private val apodCache by lazy { cache.createCache<PostApodNasa>() }
-    private val techTransferCache by lazy { cache.createCache<List<PostTechTransfer>>() }
-    private val asteroidsCache by lazy { cache.createCache<List<Asteroid>>() }
+    private val apodCache = cache.apodCache()
+    private val techTransferCache = cache.techTransferCache()
+    private val asteroidsCache = cache.asteroidsCache()
 
     override suspend fun loadApod(): PostApodNasa {
         return apodCache.get(key = APOD) {
