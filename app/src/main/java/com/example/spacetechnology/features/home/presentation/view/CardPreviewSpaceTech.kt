@@ -33,7 +33,6 @@ fun CardsPreviewSpaceTech(
     postsNasa: List<SpacePostHome>
 
 ) {
-
     LazyRow {
         items(postsSpacex) { it.Post() }
     }

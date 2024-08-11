@@ -1,26 +1,19 @@
 package com.example.spacetechnology.features.spacex.presentation
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
-import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.view.CustomCircleProgressIndicator
-import com.example.spacetechnology.features.spacex.presentation.view.DescriptionPost
-import com.example.spacetechnology.features.spacex.presentation.view.PhotoCarousel
-import com.example.spacetechnology.features.spacex.presentation.view.TitleWithLines
+import com.example.spacetechnology.core.utils.view.MediumPreviewPosts
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -83,26 +76,5 @@ fun SpacexScreen(
                 }
             }
         }
-    }
-}
-
-
-@Composable
-fun MediumPreviewPosts(
-    image: List<String>,
-    description: String,
-    titlePost: String,
-) {
-    Card(
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        border = BorderStroke(2.dp, SpaceTechColor.navigationElement),
-        modifier = Modifier
-            .padding(6.dp)
-    ) {
-        TitleWithLines(titlePost)
-
-        if (image.isNotEmpty()) PhotoCarousel(image) else Unit
-
-        DescriptionPost(description)
     }
 }

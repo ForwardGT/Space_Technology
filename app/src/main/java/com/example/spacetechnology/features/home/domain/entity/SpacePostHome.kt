@@ -6,4 +6,5 @@ sealed interface SpacePostHome {
 
     @Composable
     fun Post()
+
 }

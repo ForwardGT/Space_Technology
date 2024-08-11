@@ -20,10 +20,10 @@ interface CacheFactory {
 
     fun landPadsCache(): Cache<String, List<SpacexLandPads>>
 
-    fun apodCache() :Cache<String, PostApodNasa>
+    fun apodCache(): Cache<String, PostApodNasa>
 
-    fun techTransferCache() :Cache<String, List<PostTechTransfer>>
+    fun techTransferCache(): Cache<String, List<PostTechTransfer>>
 
-    fun asteroidsCache() :Cache<String, List<Asteroid>>
+    fun asteroidsCache(): Cache<String, List<Asteroid>>
 
 }
