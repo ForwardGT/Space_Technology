@@ -20,7 +20,7 @@ import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateToClearBackStack
 import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.view.CustomSpacer
-import com.example.spacetechnology.core.utils.view.CustomTextField
+import com.example.spacetechnology.core.utils.view.CustomTextFieldAuth
 import com.example.spacetechnology.features.auth.presentation.view.TopBarNavigation
 import com.example.spacetechnology.navigation.Screen
 import kotlinx.coroutines.delay
@@ -54,7 +54,7 @@ fun AuthScreen(
                     .padding(paddingValues)
                     .imePadding()
             ) {
-                CustomTextField(
+                CustomTextFieldAuth(
                     state = state,
                     label = "Email",
                     isPassword = false,
@@ -64,7 +64,7 @@ fun AuthScreen(
 
                 )
 
-                CustomTextField(
+                CustomTextFieldAuth(
                     state = state,
                     label = "Password",
                     isPassword = true,

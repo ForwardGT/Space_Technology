@@ -19,7 +19,7 @@ import androidx.navigation.NavController
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.view.CustomSpacer
-import com.example.spacetechnology.core.utils.view.CustomTextField
+import com.example.spacetechnology.core.utils.view.CustomTextFieldAuth
 import com.example.spacetechnology.features.auth.presentation.view.TopBarNavigation
 import com.example.spacetechnology.navigation.Screen
 import kotlinx.coroutines.delay
@@ -70,7 +70,7 @@ private fun MainContentRegistration(
             .fillMaxSize()
             .imePadding()
     ) {
-        CustomTextField(
+        CustomTextFieldAuth(
             state = state,
             label = "Email",
             isPassword = false,
@@ -79,7 +79,7 @@ private fun MainContentRegistration(
             errorMessage = state.errors.emailError
         )
 
-        CustomTextField(
+        CustomTextFieldAuth(
             state = state,
             label = "Password",
             isPassword = true,
@@ -88,7 +88,7 @@ private fun MainContentRegistration(
             errorMessage = state.errors.passwordError
         )
 
-        CustomTextField(
+        CustomTextFieldAuth(
             state = state,
             label = "Repeat password",
             isPassword = true,
