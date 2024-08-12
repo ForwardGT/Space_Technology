@@ -18,7 +18,7 @@ fun MediumPreviewPosts(
 ) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        border = BorderStroke(2.dp, SpaceTechColor.navigationElement),
+        border = BorderStroke(1.dp, SpaceTechColor.navigationElement),
     ) {
         TitleWithLines(titlePost)
 

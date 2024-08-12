@@ -69,7 +69,7 @@ fun ProfileViewContent(
                         showToast = true
                         textForToast = "Your profile and all data have been successfully deleted!"
                         delay(500) // delay for showToast
-                        viewModel.clearPhotoImagePath()
+                        viewModel.clearImageFromDevise()
                         viewModel.clearCache()
                         viewModel.deleteProfile()
                         navController.navigateToClearBackStack(Screen.FirstAuthScreen.route)
@@ -123,8 +123,8 @@ private fun ProfileImageBlock(
     val photoPickLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) { uri ->
             uri?.let {
-                viewModel.clearPhotoImagePath()
-                viewModel.saveImageToDevice(it)
+                viewModel.clearImageFromDevise()
+                viewModel.saveImage(it)
             }
         }
 
@@ -150,7 +150,7 @@ private fun ProfileImageBlock(
         CustomSpacer(v = 4.dp)
 
         CustomButton(
-            onClick = { viewModel.clearPhotoImagePath() },
+            onClick = { viewModel.clearImageFromDevise() },
             label = "Delete photo",
             defaultButton = true,
             height = 40.dp,
