@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.plugin.serialization)
 }
 
 android {
@@ -65,6 +66,8 @@ dependencies {
     implementation(libs.cme.status.bars)
     implementation(libs.datastore.preferences)
     implementation(libs.reactivecircus.cache)
+    implementation(libs.kotlinx.serialization)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

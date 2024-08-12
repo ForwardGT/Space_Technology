@@ -19,11 +19,14 @@ import com.example.spacetechnology.core.utils.view.CustomSpacer
 import com.example.spacetechnology.features.auth.presentation.view.TopBarNavigation
 import com.example.spacetechnology.features.my_posts.presentation.view.PostForMyPosts
 import com.example.spacetechnology.navigation.Screen
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MyPostsScreen(
     navController: NavController
 ) {
+    val viewModel: ViewModelCreateMyPostScreen = koinViewModel()
+
     Scaffold(
         bottomBar = {
             SpaceTechNavigationBar(navController = navController)
@@ -50,12 +53,7 @@ fun MyPostsScreen(
             ) {
                 CustomSpacer(v = 2.dp)
 
-                PostForMyPosts()
-                PostForMyPosts()
-                PostForMyPosts()
-                PostForMyPosts()
-                PostForMyPosts()
-                PostForMyPosts()
+                PostForMyPosts(viewModel)
             }
         }
     }

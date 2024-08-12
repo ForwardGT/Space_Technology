@@ -14,17 +14,19 @@ object SpaceTechColor {
     val navigationElement = Color(0xff5C6373)
     val gray = Color(0xffA4A5A6)
     val white = Color(0xffffffff)
-    private val red = Color(0xFFFF0000)
+    val red = Color(0xFFFF0000)
     private val darkRed = Color(0xffac1414)
     private val purple = Color(0xff4c2a70)
     private val lightPurple = Color(0xff8868a1)
     val green = Color(0xFF00FF00)
+    private val darkGreen = Color(0xff027143)
 
     //Gradients
     val buttonGradientDefault = listOf(navigationElement, gray)
     val postsGradientDefault = listOf(backgroundText, navigationElement)
     val buttonGradientFirstAuthScreen = listOf(purple, lightPurple)
     val buttonGradientDanger = listOf(red, darkRed)
+    val buttonGradientCreate = listOf(darkGreen, darkGreen)
 
     //TextFieldColor
     @Composable

@@ -92,7 +92,6 @@ fun ProfileViewContent(
         }
 
         Column {
-
             CustomButton(
                 onClick = { showDialogClearCache = true },
                 label = "Clear cache",

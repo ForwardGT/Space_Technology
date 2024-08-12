@@ -1,9 +1,10 @@
 package com.example.spacetechnology.features.my_posts.domain.entity
 
-import android.net.Uri
+import kotlinx.serialization.Serializable
 
-data class PostMyPostsState(
+@Serializable
+data class PostMyPosts(
     val title: String = "",
     val description: String = "",
-    val imageUri: Uri? = null
+    val imageUri: String = ""
 )
