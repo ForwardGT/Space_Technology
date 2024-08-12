@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.example.spacetechnology.R
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 @Composable
-fun SpaceTechTopBar() {
+fun SpaceTechMainScreenTopBar() {
     Row(
         modifier = Modifier
             .systemBarsPadding()

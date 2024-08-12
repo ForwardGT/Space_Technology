@@ -14,6 +14,7 @@ import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.view.CustomCircleProgressIndicator
 import com.example.spacetechnology.core.utils.view.MediumPreviewPosts
+import com.example.spacetechnology.features.auth.presentation.view.TopBarNavigation
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -38,6 +39,14 @@ fun NasaScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
         ) {
+
+            TopBarNavigation(
+                titleScreen = "NASA",
+                titleRightText = "",
+                needNavigationBack = false,
+                systemBarsPadding = false
+            )
+
             when {
                 errorStateLandPads || errorStateRocket || errorStateDragon -> {
                     CustomButton(

@@ -21,7 +21,7 @@ import com.example.spacetechnology.core.utils.extensions.navigation.navigateToCl
 import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.view.CustomSpacer
 import com.example.spacetechnology.core.utils.view.CustomTextField
-import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
+import com.example.spacetechnology.features.auth.presentation.view.TopBarNavigation
 import com.example.spacetechnology.navigation.Screen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -37,10 +37,9 @@ fun AuthScreen(
 
     Scaffold { paddingValues ->
 
-        AuthNavigationTopBar(
-            route = { navController.navigateTo(Screen.FirstAuthScreen.route) },
+        TopBarNavigation(
+            routeNavigationBack = { navController.navigateTo(Screen.FirstAuthScreen.route) },
             titleScreen = "Authorisation",
-            paddingValues = paddingValues
         )
         Column(
             verticalArrangement = Arrangement.Center,

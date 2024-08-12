@@ -15,16 +15,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
-import com.example.spacetechnology.core.utils.view.CustomSpacer
-import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
-import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
+import com.example.spacetechnology.core.utils.view.CustomButton
+import com.example.spacetechnology.core.utils.view.CustomSpacer
 import com.example.spacetechnology.core.utils.view.CustomTextField
+import com.example.spacetechnology.features.auth.presentation.view.TopBarNavigation
 import com.example.spacetechnology.navigation.Screen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -40,10 +37,9 @@ fun RegistrationScreen(
 
     Scaffold { paddingValues ->
 
-        AuthNavigationTopBar(
-            route = { navController.navigateTo(Screen.FirstAuthScreen.route) },
+        TopBarNavigation(
+            routeNavigationBack = { navController.navigateTo(Screen.FirstAuthScreen.route) },
             titleScreen = "Registration",
-            paddingValues = paddingValues
         )
         MainContentRegistration(
             paddingValues = paddingValues,
@@ -127,13 +123,5 @@ private fun MainContentRegistration(
                 label = "Registration",
             )
         }
-    }
-}
-
-@Preview
-@Composable
-fun Q() {
-    SpaceTechnologyTheme(darkTheme = true) {
-        RegistrationScreen(navController = rememberNavController())
     }
 }

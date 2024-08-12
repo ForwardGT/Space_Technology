@@ -35,9 +35,7 @@ fun CustomButton(
     height: Dp = 50.dp,
     width: Dp = 150.dp,
     fillMaxWidth: Boolean = false,
-    padding: PaddingValues = PaddingValues(
-        start = 0.dp, top = 0.dp, end = 0.dp, bottom = 0.dp
-    )
+    padding: PaddingValues = PaddingValues(all = 0.dp)
 ) {
     val viewWidth = with(LocalDensity.current) {
         (LocalView.current.rootView.height.toDp())
