@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.icons.Icons
@@ -33,16 +32,15 @@ fun TopBarNavigation(
     titleRightText: String = "",
     needRightElement: Boolean = false,
     needNavigationBack: Boolean = true,
-    systemBarsPadding: Boolean = true
+    systemBarsPadding: Boolean = false,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .thenIf(systemBarsPadding, Modifier.systemBarsPadding())
-            .padding(start = 6.dp, top = 6.dp, end = 6.dp),
+            .thenIf(systemBarsPadding, Modifier.systemBarsPadding()),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        Row {
+        Row{
 
             if (needNavigationBack) {
                 IconButton(

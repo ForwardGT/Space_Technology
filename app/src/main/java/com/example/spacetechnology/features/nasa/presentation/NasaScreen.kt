@@ -1,5 +1,6 @@
 package com.example.spacetechnology.features.nasa.presentation
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -9,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 import com.example.spacetechnology.core.utils.view.CustomButton
@@ -32,19 +34,19 @@ fun NasaScreen(
     Scaffold(
         bottomBar = {
             SpaceTechNavigationBar(navController)
-        }
+        },
     ) { paddingValues ->
         Column(
-            Modifier
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
                 .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
+                .padding(start = 8.dp, end = 8.dp)
         ) {
-
             TopBarNavigation(
                 titleScreen = "NASA",
                 titleRightText = "",
                 needNavigationBack = false,
-                systemBarsPadding = false
             )
 
             when {

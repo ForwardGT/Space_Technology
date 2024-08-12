@@ -19,6 +19,7 @@ object SpaceTechColor {
 
     //Gradients
     val buttonGradientDefault = listOf(navigationElement, gray)
+    val postsGradientDefault = listOf(backgroundText, navigationElement)
     val buttonGradientFirstAuthScreen = listOf(purple, lightPurple)
     val buttonGradientDanger = listOf(red, darkRed)
 

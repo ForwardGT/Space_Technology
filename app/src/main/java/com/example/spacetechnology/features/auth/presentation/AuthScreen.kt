@@ -37,63 +37,68 @@ fun AuthScreen(
 
     Scaffold { paddingValues ->
 
-        TopBarNavigation(
-            routeNavigationBack = { navController.navigateTo(Screen.FirstAuthScreen.route) },
-            titleScreen = "Authorisation",
-        )
         Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .imePadding()
         ) {
-
-            CustomTextField(
-                state = state,
-                label = "Email",
-                isPassword = false,
-                value = state.email,
-                onValueChange = { viewModel.setEmail(it) },
-                errorMessage = state.errors.emailError
-
+            TopBarNavigation(
+                routeNavigationBack = { navController.navigateTo(Screen.FirstAuthScreen.route) },
+                titleScreen = "Authorisation",
             )
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .imePadding()
+            ) {
+                CustomTextField(
+                    state = state,
+                    label = "Email",
+                    isPassword = false,
+                    value = state.email,
+                    onValueChange = { viewModel.setEmail(it) },
+                    errorMessage = state.errors.emailError
 
-            CustomTextField(
-                state = state,
-                label = "Password",
-                isPassword = true,
-                value = state.password,
-                onValueChange = { viewModel.setPassword(it) },
-                errorMessage = state.errors.passwordError
-            )
-
-            CustomSpacer(v = 20.dp)
-
-            Row {
-                CustomButton(
-                    onClick = { navController.navigateToClearBackStack(Screen.FirstAuthScreen.route) },
-                    label = "Exit",
-                    defaultButton = true
                 )
-                CustomSpacer(h = 16.dp)
-                CustomButton(
-                    onClick = {
-                        viewModel.getUserData(
-                            onResult = {
-                                if (it) {
-                                    scope.launch {
-                                        delay(800) // From imitation load
-                                        viewModel.setIsLoginIn(true)
+
+                CustomTextField(
+                    state = state,
+                    label = "Password",
+                    isPassword = true,
+                    value = state.password,
+                    onValueChange = { viewModel.setPassword(it) },
+                    errorMessage = state.errors.passwordError
+                )
+
+                CustomSpacer(v = 20.dp)
+
+                Row {
+                    CustomButton(
+                        onClick = { navController.navigateToClearBackStack(Screen.FirstAuthScreen.route) },
+                        label = "Exit",
+                        defaultButton = true
+                    )
+                    CustomSpacer(h = 16.dp)
+                    CustomButton(
+                        onClick = {
+                            viewModel.getUserData(
+                                onResult = {
+                                    if (it) {
+                                        scope.launch {
+                                            delay(800) // From imitation load
+                                            viewModel.setIsLoginIn(true)
+                                        }
                                     }
                                 }
-                            }
-                        )
-                    },
-                    label = "Login",
-                    defaultButton = true
-                )
+                            )
+                        },
+                        label = "Login",
+                        defaultButton = true
+                    )
+                }
             }
         }
     }

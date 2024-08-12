@@ -2,7 +2,6 @@ package com.example.spacetechnology.features.auth.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,23 +36,27 @@ fun RegistrationScreen(
 
     Scaffold { paddingValues ->
 
-        TopBarNavigation(
-            routeNavigationBack = { navController.navigateTo(Screen.FirstAuthScreen.route) },
-            titleScreen = "Registration",
-        )
-        MainContentRegistration(
-            paddingValues = paddingValues,
-            navController = navController,
-            viewModel = viewModel,
-            state = state
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            TopBarNavigation(
+                routeNavigationBack = { navController.navigateTo(Screen.FirstAuthScreen.route) },
+                titleScreen = "Registration",
+            )
+            MainContentRegistration(
+                navController = navController,
+                viewModel = viewModel,
+                state = state
+            )
+        }
     }
 }
 
 
 @Composable
 private fun MainContentRegistration(
-    paddingValues: PaddingValues,
     navController: NavController,
     viewModel: ViewModelAuth,
     state: AuthState
@@ -65,7 +68,6 @@ private fun MainContentRegistration(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues)
             .imePadding()
     ) {
         CustomTextField(
