@@ -11,7 +11,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import androidx.navigation.NavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.core.utils.view.CustomButton
@@ -68,7 +67,6 @@ fun CreateMyPostScreen(
                 onClick = {
                     viewModel.setPostsToMyPosts {
                         if (it) {
-                            viewModel.saveImage(stateText.imageUri.toUri())
                             navController.popBackStack()
                         }
                     }

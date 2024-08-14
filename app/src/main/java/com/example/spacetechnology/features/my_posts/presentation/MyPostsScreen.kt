@@ -38,8 +38,7 @@ fun MyPostsScreen(
                 needRightElement = true,
                 titleRightText = "Create",
             )
-
-            CustomSpacer(v = 2.dp)
+            CustomSpacer(v = 3.dp)
 
             PostForMyPosts(viewModel)
         }

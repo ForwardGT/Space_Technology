@@ -77,7 +77,7 @@ class DataStore(
         }
     }
 
-    suspend fun setPost(newPost: PostMyPosts, maxSize: Int = 2) {
+    suspend fun setPost(newPost: PostMyPosts, maxSize: Int = 3) {
         context.dataStore.edit { pref ->
             val currentPostsJson = pref[POSTS_LIST_KEY] ?: "[]"
             val currentPosts = Json.decodeFromString<List<PostMyPosts>>(currentPostsJson)
@@ -87,6 +87,12 @@ class DataStore(
                 currentPosts.drop(1) + newPost
             }
             pref[POSTS_LIST_KEY] = Json.encodeToString(updatedPosts)
+        }
+    }
+
+    suspend fun deleteAllPosts() {
+        context.dataStore.edit { pref ->
+            pref[POSTS_LIST_KEY] = "[]"
         }
     }
 

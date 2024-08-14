@@ -8,7 +8,7 @@ fun deleteUnusedImages(context: Context) {
         ?.sortedBy { it.lastModified() }
         ?: return
 
-    val keepLastFiles = files.takeLast(2)
+    val keepLastFiles = files.takeLast(6)
     files.forEach { file ->
         if (file !in keepLastFiles) {
             file.delete()

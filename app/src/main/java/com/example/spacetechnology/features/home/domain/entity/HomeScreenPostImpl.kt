@@ -1,8 +1,8 @@
 package com.example.spacetechnology.features.home.domain.entity
 
 import androidx.compose.runtime.Composable
-import com.example.spacetechnology.features.home.presentation.view.ClickableIcon
-import com.example.spacetechnology.features.home.presentation.view.OneCard
+import com.example.spacetechnology.features.home.presentation.view.CustomClickableIcon
+import com.example.spacetechnology.features.home.presentation.view.OneCardForMainScreen
 
 class HomeScreenPostImpl(
     private val description: String,
@@ -13,14 +13,15 @@ class HomeScreenPostImpl(
 
     @Composable
     override fun Post() {
-        OneCard(
+        OneCardForMainScreen(
             imagePreview = imagePreview,
-            description = description
-        ) {
-            ClickableIcon(
-                pathIcon = pathIcon,
-                pathUrl = pathUrl
-            )
-        }
+            description = description,
+            compFun = {
+                CustomClickableIcon(
+                    pathIcon = pathIcon,
+                    pathUrl = pathUrl
+                )
+            }
+        )
     }
 }

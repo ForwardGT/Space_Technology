@@ -53,7 +53,8 @@ fun NasaScreen(
                 errorStateLandPads || errorStateRocket || errorStateDragon -> {
                     CustomButton(
                         onClick = { viewModel.loadAllPosts() },
-                        scroll = true
+                        scroll = true,
+                        label = "Try Again Load"
                     )
                 }
 

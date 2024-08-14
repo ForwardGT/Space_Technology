@@ -1,12 +1,15 @@
 package com.example.spacetechnology.features.my_posts.presentation.view
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -26,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
+import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.features.my_posts.presentation.ViewModelCreateMyPostScreen
 
 @Composable
@@ -40,7 +44,7 @@ fun PostForMyPosts(
         items(statePosts) { posts ->
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .background(
                         brush = Brush.horizontalGradient(
                             SpaceTechColor.postsGradientDefault
@@ -53,8 +57,6 @@ fun PostForMyPosts(
                         shape = RoundedCornerShape(10.dp)
                     )
             ) {
-                Log.d("TAG", "PostForMyPosts: ${posts.imageUri}")
-
                 AsyncImage(
                     model = posts.imageUri.toUri().toString(),
                     contentDescription = null,
@@ -69,25 +71,52 @@ fun PostForMyPosts(
                         ),
                 )
 
-                Column {
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        text = posts.title,
-                        fontWeight = FontWeight.SemiBold,
-                        color = SpaceTechColor.white,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                    Text(
-                        textAlign = TextAlign.Center,
-                        text = posts.description,
-                        maxLines = 6,
-                        overflow = TextOverflow.Ellipsis,
-                        color = SpaceTechColor.white
-                    )
+                Column(
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .height(170.dp)
+                        .fillMaxWidth()
+                ) {
+                    Column {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            text = posts.title,
+                            fontWeight = FontWeight.SemiBold,
+                            color = SpaceTechColor.white,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                        Text(
+                            textAlign = TextAlign.Center,
+                            text = posts.description,
+                            maxLines = 5,
+                            overflow = TextOverflow.Ellipsis,
+                            color = SpaceTechColor.white
+                        )
+                    }
+                    Box {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            text = posts.datePost,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            color = SpaceTechColor.gray
+                        )
+                    }
                 }
             }
+        }
+        item {
+            CustomButton(
+                onClick = { viewModel.deleteAllPosts() },
+                label = "Delete all posts",
+                defaultButton = true,
+                fillMaxWidth = true,
+                gradient = SpaceTechColor.buttonGradientDanger,
+                padding = PaddingValues(bottom = 10.dp)
+            )
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.spacetechnology.features.home.domain.entity
 import com.example.spacetechnology.R
 
 object PostsForMainScreenBP {
+
     val spacexPosts = listOf(
         HomeScreenPostImpl(
             description = "Rockets SpaceX: Explore SpaceX's innovative designs and powerful launch vehicles.",

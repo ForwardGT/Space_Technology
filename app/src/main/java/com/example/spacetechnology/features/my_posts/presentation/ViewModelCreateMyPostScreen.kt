@@ -2,7 +2,6 @@ package com.example.spacetechnology.features.my_posts.presentation
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.spacetechnology.core.utils.deleteUnusedImages
@@ -16,6 +15,8 @@ import com.example.spacetechnology.features.my_posts.domain.entity.TextFieldMyPo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class ViewModelCreateMyPostScreen : ViewModel() {
 
@@ -36,31 +37,42 @@ class ViewModelCreateMyPostScreen : ViewModel() {
         getPostsFromMyPosts()
     }
 
+    fun deleteAllPosts() {
+        viewModelScope.launch {
+            dataStore.deleteAllPosts()
+            _myPosts.value = listOf()
+        }
+    }
+
     private fun getPostsFromMyPosts() {
         viewModelScope.launch {
             dataStore.getPostsForMyPosts().collect {
                 _myPosts.value = it
             }
-            Log.d("TAG", "setPostsToMyPosts: +1post ${_myPosts.value}")
         }
     }
 
-    fun ooo(str: String) {
+
+    private fun setDateForPost() {
+        val currentDateTime = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd MMMM, HH:mm:ss")
+        val formattedDateTime = currentDateTime.format(formatter)
         _stateTextField.reduce {
-            it.copy(imageUri = str)
+            it.copy(datePost = formattedDateTime)
         }
-
     }
+
 
     fun saveImage(uri: Uri) {
         viewModelScope.launch {
             val file = saveImageToDevice(uri, context, "${System.currentTimeMillis()}.jpg")
-            deleteUnusedImages(context)
             _stateTextField.reduce {
                 it.copy(imageUri = file.toURI().toString())
             }
+            deleteUnusedImages(context)
         }
     }
+
 
     fun setPostsToMyPosts(onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
@@ -75,6 +87,7 @@ class ViewModelCreateMyPostScreen : ViewModel() {
                 _errorTextField.value.descriptionError.isBlank() &&
                 _errorTextField.value.imageError.isBlank()
             ) {
+                setDateForPost()
                 dataStore.setPost(_stateTextField.value)
                 onResult(true)
             }
@@ -92,15 +105,6 @@ class ViewModelCreateMyPostScreen : ViewModel() {
     fun changeDescription(str: String) {
         _stateTextField.reduce {
             it.copy(description = str)
-        }
-    }
-
-
-    fun addImageToPosts(uri: Uri) {
-        viewModelScope.launch {
-            _stateTextField.reduce {
-                it.copy(imageUri = uri.toString())
-            }
         }
     }
 }

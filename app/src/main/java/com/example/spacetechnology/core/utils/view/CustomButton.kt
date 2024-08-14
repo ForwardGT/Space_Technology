@@ -27,9 +27,10 @@ import com.example.spacetechnology.core.utils.extensions.thenIf
 
 @Composable
 fun CustomButton(
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     scroll: Boolean = false,
-    label: String = "Try Again Load",
+    label: String,
     defaultButton: Boolean = false,
     gradient: List<Color> = SpaceTechColor.buttonGradientDefault,
     height: Dp = 50.dp,
@@ -46,6 +47,7 @@ fun CustomButton(
             .thenIf(!defaultButton, modifier = Modifier.fillMaxSize())
             .thenIf(scroll, modifier = Modifier.height(viewWidth))
             .then(Modifier.padding(padding))
+            .then(modifier)
     ) {
         Button(
             onClick = { onClick() },

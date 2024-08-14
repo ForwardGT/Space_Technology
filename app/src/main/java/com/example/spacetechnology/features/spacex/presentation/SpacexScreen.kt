@@ -54,7 +54,8 @@ fun SpacexScreen(
                 errorStateRocket || errorStateDragon || errorStateLandPads -> {
                     CustomButton(
                         onClick = { viewModel.loadAllPost() },
-                        scroll = true
+                        scroll = true,
+                        label = "Try Again Load"
                     )
                 }
 

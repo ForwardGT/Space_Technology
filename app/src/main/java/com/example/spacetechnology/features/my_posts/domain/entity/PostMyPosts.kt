@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 data class PostMyPosts(
     val title: String = "",
     val description: String = "",
-    val imageUri: String = ""
+    val imageUri: String = "",
+    val datePost: String = ""
 )

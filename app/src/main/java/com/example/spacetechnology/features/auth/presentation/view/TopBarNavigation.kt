@@ -14,15 +14,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
-import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.core.utils.extensions.thenIf
 import com.example.spacetechnology.core.utils.view.CustomSpacer
-import com.example.spacetechnology.features.my_posts.presentation.MyPostsScreen
 
 @Composable
 fun TopBarNavigation(
@@ -74,13 +70,5 @@ fun TopBarNavigation(
                 )
             }
         }
-    }
-}
-
-@Preview
-@Composable
-private fun Q() {
-    SpaceTechnologyTheme(true) {
-        MyPostsScreen(navController = rememberNavController())
     }
 }
