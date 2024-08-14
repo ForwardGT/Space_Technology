@@ -17,6 +17,9 @@ sealed class Screen(
 
     data object RegistrationScreen : Screen(REGISTRATION_SCREEN)
 
+    data object MyPostsScreen : Screen(MY_POSTS_SCREEN)
+
+    data object CreateMyPostScreen : Screen(CREATE_MY_POSTS_SCREEN)
 
     private companion object {
         const val HOME_SCREEN = "home"
@@ -26,5 +29,7 @@ sealed class Screen(
         const val FIRST_AUTH_SCREEN = "first"
         const val AUTH_SCREEN = "auth"
         const val REGISTRATION_SCREEN = "registration"
+        const val MY_POSTS_SCREEN = "my_posts_screen"
+        const val CREATE_MY_POSTS_SCREEN = "create_my_posts_screen"
     }
 }

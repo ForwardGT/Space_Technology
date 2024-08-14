@@ -2,7 +2,6 @@ package com.example.spacetechnology.features.auth.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,16 +14,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
-import com.example.spacetechnology.core.utils.view.CustomSpacer
-import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
-import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
-import com.example.spacetechnology.core.utils.view.CustomTextField
+import com.example.spacetechnology.core.utils.view.CustomButton
+import com.example.spacetechnology.core.utils.view.CustomSpacer
+import com.example.spacetechnology.core.utils.view.CustomTextFieldAuth
+import com.example.spacetechnology.features.auth.presentation.view.TopBarNavigation
 import com.example.spacetechnology.navigation.Screen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -40,24 +36,27 @@ fun RegistrationScreen(
 
     Scaffold { paddingValues ->
 
-        AuthNavigationTopBar(
-            route = { navController.navigateTo(Screen.FirstAuthScreen.route) },
-            titleScreen = "Registration",
-            paddingValues = paddingValues
-        )
-        MainContentRegistration(
-            paddingValues = paddingValues,
-            navController = navController,
-            viewModel = viewModel,
-            state = state
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            TopBarNavigation(
+                routeNavigationBack = { navController.navigateTo(Screen.FirstAuthScreen.route) },
+                titleScreen = "Registration",
+            )
+            MainContentRegistration(
+                navController = navController,
+                viewModel = viewModel,
+                state = state
+            )
+        }
     }
 }
 
 
 @Composable
 private fun MainContentRegistration(
-    paddingValues: PaddingValues,
     navController: NavController,
     viewModel: ViewModelAuth,
     state: AuthState
@@ -69,10 +68,9 @@ private fun MainContentRegistration(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues)
             .imePadding()
     ) {
-        CustomTextField(
+        CustomTextFieldAuth(
             state = state,
             label = "Email",
             isPassword = false,
@@ -81,7 +79,7 @@ private fun MainContentRegistration(
             errorMessage = state.errors.emailError
         )
 
-        CustomTextField(
+        CustomTextFieldAuth(
             state = state,
             label = "Password",
             isPassword = true,
@@ -90,7 +88,7 @@ private fun MainContentRegistration(
             errorMessage = state.errors.passwordError
         )
 
-        CustomTextField(
+        CustomTextFieldAuth(
             state = state,
             label = "Repeat password",
             isPassword = true,
@@ -127,13 +125,5 @@ private fun MainContentRegistration(
                 label = "Registration",
             )
         }
-    }
-}
-
-@Preview
-@Composable
-fun Q() {
-    SpaceTechnologyTheme(darkTheme = true) {
-        RegistrationScreen(navController = rememberNavController())
     }
 }

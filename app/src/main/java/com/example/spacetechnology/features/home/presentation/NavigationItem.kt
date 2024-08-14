@@ -3,6 +3,7 @@ package com.example.spacetechnology.features.home.presentation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.PostAdd
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.RocketLaunch
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -35,5 +36,11 @@ sealed class NavigationItem(
         screen = Screen.ProfileScreen,
         nameItem = "Profile",
         icon = Icons.Filled.Person
+    )
+
+    data object MyPosts : NavigationItem(
+        screen = Screen.MyPostsScreen,
+        nameItem = "MyPosts",
+        icon = Icons.Filled.PostAdd
     )
 }

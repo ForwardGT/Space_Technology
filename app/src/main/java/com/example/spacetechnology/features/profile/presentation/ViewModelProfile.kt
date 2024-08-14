@@ -5,6 +5,8 @@ import android.net.Uri
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.spacetechnology.core.utils.deleteImageFromDevice
+import com.example.spacetechnology.core.utils.saveImageToDevice
 import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.features.auth.domain.DataStore
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
@@ -12,13 +14,11 @@ import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.FileOutputStream
 
 class ViewModelProfile : ViewModel() {
 
-    private val repositorySpacex : RepositorySpacex by Injector.inject()
-    private val repositoryNasa : RepositoryNasa by Injector.inject()
+    private val repositorySpacex: RepositorySpacex by Injector.inject()
+    private val repositoryNasa: RepositoryNasa by Injector.inject()
     private val dataStore: DataStore by Injector.inject()
     private val context: Context by Injector.inject()
 
@@ -40,25 +40,23 @@ class ViewModelProfile : ViewModel() {
         }
     }
 
-    fun saveImageToDevice(uri: Uri) {
+    fun saveImage(uri: Uri) {
         viewModelScope.launch {
-            val file = File(context.filesDir, "profile_photo.jpg")
-            context.contentResolver.openInputStream(uri)?.use { input ->
-                FileOutputStream(file).use { output ->
-                    input.copyTo(output)
-                }
-            }
+            val file = saveImageToDevice(uri, context, "profile_photo.jpg")
             dataStore.setProfileImagePath(file.toURI().toString())
             _imageUri.value = file.toUri()
         }
     }
 
-    fun clearPhotoImagePath() {
+    fun clearImageFromDevise() {
         viewModelScope.launch {
-            dataStore.clearPhotoImagePath()
-            _imageUri.value = null
+            if (deleteImageFromDevice(context, "profile_photo.jpg")) {
+                dataStore.clearPhotoImagePath()
+                _imageUri.value = null
+            }
         }
     }
+
 
     private fun loadImageFromDevice() {
         viewModelScope.launch {

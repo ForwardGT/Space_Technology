@@ -20,8 +20,8 @@ import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateToClearBackStack
 import com.example.spacetechnology.core.utils.view.CustomButton
 import com.example.spacetechnology.core.utils.view.CustomSpacer
-import com.example.spacetechnology.core.utils.view.CustomTextField
-import com.example.spacetechnology.features.auth.presentation.view.AuthNavigationTopBar
+import com.example.spacetechnology.core.utils.view.CustomTextFieldAuth
+import com.example.spacetechnology.features.auth.presentation.view.TopBarNavigation
 import com.example.spacetechnology.navigation.Screen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -37,64 +37,68 @@ fun AuthScreen(
 
     Scaffold { paddingValues ->
 
-        AuthNavigationTopBar(
-            route = { navController.navigateTo(Screen.FirstAuthScreen.route) },
-            titleScreen = "Authorisation",
-            paddingValues = paddingValues
-        )
         Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .imePadding()
         ) {
-
-            CustomTextField(
-                state = state,
-                label = "Email",
-                isPassword = false,
-                value = state.email,
-                onValueChange = { viewModel.setEmail(it) },
-                errorMessage = state.errors.emailError
-
+            TopBarNavigation(
+                routeNavigationBack = { navController.navigateTo(Screen.FirstAuthScreen.route) },
+                titleScreen = "Authorisation",
             )
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .imePadding()
+            ) {
+                CustomTextFieldAuth(
+                    state = state,
+                    label = "Email",
+                    isPassword = false,
+                    value = state.email,
+                    onValueChange = { viewModel.setEmail(it) },
+                    errorMessage = state.errors.emailError
 
-            CustomTextField(
-                state = state,
-                label = "Password",
-                isPassword = true,
-                value = state.password,
-                onValueChange = { viewModel.setPassword(it) },
-                errorMessage = state.errors.passwordError
-            )
-
-            CustomSpacer(v = 20.dp)
-
-            Row {
-                CustomButton(
-                    onClick = { navController.navigateToClearBackStack(Screen.FirstAuthScreen.route) },
-                    label = "Exit",
-                    defaultButton = true
                 )
-                CustomSpacer(h = 16.dp)
-                CustomButton(
-                    onClick = {
-                        viewModel.getUserData(
-                            onResult = {
-                                if (it) {
-                                    scope.launch {
-                                        delay(800) // From imitation load
-                                        viewModel.setIsLoginIn(true)
+
+                CustomTextFieldAuth(
+                    state = state,
+                    label = "Password",
+                    isPassword = true,
+                    value = state.password,
+                    onValueChange = { viewModel.setPassword(it) },
+                    errorMessage = state.errors.passwordError
+                )
+
+                CustomSpacer(v = 20.dp)
+
+                Row {
+                    CustomButton(
+                        onClick = { navController.navigateToClearBackStack(Screen.FirstAuthScreen.route) },
+                        label = "Exit",
+                        defaultButton = true
+                    )
+                    CustomSpacer(h = 16.dp)
+                    CustomButton(
+                        onClick = {
+                            viewModel.getUserData(
+                                onResult = {
+                                    if (it) {
+                                        scope.launch {
+                                            delay(800) // From imitation load
+                                            viewModel.setIsLoginIn(true)
+                                        }
                                     }
                                 }
-                            }
-                        )
-                    },
-                    label = "Login",
-                    defaultButton = true
-                )
+                            )
+                        },
+                        label = "Login",
+                        defaultButton = true
+                    )
+                }
             }
         }
     }

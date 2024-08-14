@@ -7,6 +7,7 @@ import com.example.spacetechnology.cache.CacheFactoryImpl
 import com.example.spacetechnology.features.auth.domain.DataStore
 import com.example.spacetechnology.features.auth.presentation.ViewModelAuth
 import com.example.spacetechnology.features.home.presentation.ViewModelHome
+import com.example.spacetechnology.features.my_posts.presentation.ViewModelCreateMyPostScreen
 import com.example.spacetechnology.features.nasa.data.repository.RepositoryNasaImpl
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
 import com.example.spacetechnology.features.nasa.presentation.ViewModelNasa
@@ -40,7 +41,8 @@ class SpaceTechApplication : Application() {
                 repositorySpacex,
                 repositoryNasa,
                 dataStore,
-                cache
+                cache,
+                viewModelMyPostScreen
             )
         }
     }
@@ -64,6 +66,10 @@ private val viewModelAuth = module {
 
 private val viewModelProfile = module {
     viewModel { ViewModelProfile() }
+}
+
+private val viewModelMyPostScreen = module {
+    viewModel { ViewModelCreateMyPostScreen() }
 }
 
 private val repositorySpacex = module {

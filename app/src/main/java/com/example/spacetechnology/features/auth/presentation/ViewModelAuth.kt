@@ -94,7 +94,7 @@ class ViewModelAuth : ViewModel() {
                 it.copy(errors = errors)
             }
 
-            if (errors.emailError == "" && errors.passwordError == "" && errors.repeatPasswordError == "") {
+            if (errors.emailError.isBlank() && errors.passwordError.isBlank() && errors.repeatPasswordError.isBlank()) {
                 dataStore.setUserData(
                     userData = UserData(
                         email = _authState.value.email,

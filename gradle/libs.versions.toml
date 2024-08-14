@@ -18,7 +18,8 @@ koin-bom = "3.5.6"
 compose-icons-version = "compose-icons"
 datastore-preferences = "1.1.1"
 reactivecircus-cache-version = "0.13.0"
-
+plagin-kotlin-serial = "1.9.10"
+kotlin-serial = "1.5.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,8 +51,11 @@ compose-icons-extender = { module = "androidx.compose.material:material-icons-ex
 cme-status-bars = { module = "io.github.aagrishankov:cme-theme-status-bars", version = "0.0.1" }
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore-preferences" }
 reactivecircus-cache = { group = "io.github.reactivecircus.cache4k", name = "cache4k", version.ref = "reactivecircus-cache-version" }
+kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serial" }
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "plagin-kotlin-serial" }
+

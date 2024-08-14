@@ -1,5 +1,8 @@
 package com.example.spacetechnology.core.uikit.theme
 
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 object SpaceTechColor {
@@ -16,10 +19,33 @@ object SpaceTechColor {
     private val purple = Color(0xff4c2a70)
     private val lightPurple = Color(0xff8868a1)
     val green = Color(0xFF00FF00)
+    private val darkGreen = Color(0xff027143)
 
     //Gradients
     val buttonGradientDefault = listOf(navigationElement, gray)
+    val postsGradientDefault = listOf(navigationElement, backgroundText)
     val buttonGradientFirstAuthScreen = listOf(purple, lightPurple)
     val buttonGradientDanger = listOf(red, darkRed)
+    val buttonGradientCreate = listOf(darkGreen, darkGreen)
 
+    //TextFieldColor
+    @Composable
+    fun textFieldColors(): TextFieldColors {
+        return TextFieldDefaults.colors(
+            cursorColor = white,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
+            focusedContainerColor = navigationElement,
+            unfocusedContainerColor = navigationElement,
+            focusedTextColor = white,
+            unfocusedTextColor = gray,
+            disabledTextColor = gray,
+            unfocusedSupportingTextColor = red,
+            focusedSupportingTextColor = red,
+            disabledSupportingTextColor = Color.Red,
+            unfocusedLabelColor = white,
+            focusedLabelColor = gray,
+        )
+    }
 }

@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.spacetechnology.core.utils.openLinkInBrowser
 
 @Composable
-fun ClickableIcon(
+fun CustomClickableIcon(
     pathIcon: Int,
     pathUrl: String
 ) {
@@ -28,7 +28,9 @@ fun ClickableIcon(
         IconButton(
             modifier = Modifier.size(width = 100.dp, height = 50.dp),
             onClick = {
-                openLinkInBrowser(context, pathUrl)
+                if (pathUrl.isNotBlank()) {
+                    openLinkInBrowser(context, pathUrl)
+                }
             }
         ) {
             Image(

@@ -28,6 +28,7 @@ fun SpaceTechNavigationBar(
         NavigationItem.Home,
         NavigationItem.SpaceX,
         NavigationItem.Nasa,
+        NavigationItem.MyPosts,
         NavigationItem.Profile,
     )
 

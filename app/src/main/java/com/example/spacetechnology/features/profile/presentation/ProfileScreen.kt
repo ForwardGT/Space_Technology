@@ -2,6 +2,7 @@ package com.example.spacetechnology.features.profile.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -65,6 +66,7 @@ fun ProfileScreen(
             SpaceTechNavigationBar(navController)
         }
     ) { paddingValues ->
+
         Box(Modifier.padding(paddingValues)) {
 
             ModalNavigationDrawer(
@@ -96,7 +98,7 @@ fun ProfileScreen(
                 },
                 content = {
                     Column(modifier = Modifier.fillMaxSize()) {
-                        Box {
+                        Row {
                             IconButton(onClick = { scope.launch { drawerState.open() } },
                                 content = { Icon(Icons.Filled.Menu, null) }
                             )
