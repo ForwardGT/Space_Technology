@@ -1,7 +1,8 @@
 package com.example.spacetechnology.features.spacex.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class DiameterDragonDto(
-    @SerializedName("meters") val meters: Float
+    val meters: Float
 )

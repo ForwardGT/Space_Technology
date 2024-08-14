@@ -11,7 +11,7 @@ fun mapperTechNasa(
 
     val regex = """<span\s+class=["']highlight["']>.*?</span>""".toRegex()
 
-    request.posts.forEach {
+    request.results.forEach {
         val post = PostTechTransfer(
             name = it[1],
             description = it[3].replace(regex, ""),

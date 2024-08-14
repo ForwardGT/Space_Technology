@@ -1,7 +1,8 @@
 package com.example.spacetechnology.features.nasa.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class PostsTechTransferDto(
-    @SerializedName("results") val posts: List<List<String>>
+    val results: List<List<String>>
 )

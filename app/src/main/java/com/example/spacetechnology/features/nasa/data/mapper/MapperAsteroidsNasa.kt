@@ -8,17 +8,17 @@ fun mapperAsteroidsNasa(
 ): List<Asteroid> {
     val posts = mutableListOf<Asteroid>()
 
-    request.asteroids.forEach {
+    request.near_earth_objects.forEach {
         val post = Asteroid(
-            name = it.name,
-            url = it.url,
-            absMagnitude = it.absMagnitude,
-            estimatedDiameterMin = it.diameter.meters.estimatedDiameterMin,
-            estimatedDiameterMax = it.diameter.meters.estimatedDiameterMin,
-            orbitDeterminationDate = it.data.orbitDeterminationDate,
-            firstObservationDate = it.data.firstObservationDate,
-            orbitClassType = it.data.orbitClass.orbitClassType,
-            orbitClassDescription = it.data.orbitClass.orbitClassDescription
+            name = it.name_limited,
+            url = it.nasa_jpl_url,
+            absMagnitude = it.absolute_magnitude_h,
+            estimatedDiameterMin = it.estimated_diameter.meters.estimated_diameter_min,
+            estimatedDiameterMax = it.estimated_diameter.meters.estimated_diameter_max,
+            orbitDeterminationDate = it.orbital_data.orbit_determination_date,
+            firstObservationDate = it.orbital_data.first_observation_date,
+            orbitClassType = it.orbital_data.orbit_class.orbit_class_type,
+            orbitClassDescription = it.orbital_data.orbit_class.orbit_class_description
         )
         posts.add(post)
     }

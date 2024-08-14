@@ -8,7 +8,7 @@ fun mapperApodNasa(
 ): PostApodNasa {
     val postApod = PostApodNasa(
         date = apod.date,
-        urlImage = apod.urlImage,
+        urlImage = apod.url,
         description = apod.explanation,
         title = apod.title
     )

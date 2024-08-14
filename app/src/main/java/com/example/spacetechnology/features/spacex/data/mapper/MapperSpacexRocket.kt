@@ -11,12 +11,12 @@ fun mapperSpacexRocket(
     response.forEach { item ->
         val post = SpacexRocket(
             name = item.name,
-            diameter = item.diameter.meter,
+            diameter = item.diameter.meters,
             wikipedia = item.wikipedia,
-            image = item.image,
+            image = item.flickr_images,
             description = item.description,
-            height = item.height.meter,
-            firstFlight = item.firstFlight,
+            height = item.height.meters,
+            firstFlight = item.first_flight,
             stages = item.stages,
             boosters = item.boosters
         )

@@ -12,13 +12,13 @@ fun mapperSpacexDragon(
         val post = SpacexDragon(
             name = item.name,
             type = item.type,
-            crewCapacity = item.crewCapacity,
+            crewCapacity = item.crew_capacity,
             diameter = item.diameter.meters,
-            dryMassKg = item.dryMassKg,
+            dryMassKg = item.dry_mass_kg,
             wikipedia = item.wikipedia,
-            image = item.image,
+            image = item.flickr_images,
             description = item.description,
-            launchPayloadMass = item.launchPayloadMass.kg
+            launchPayloadMass = item.launch_payload_mass.kg
         )
         posts.add(post)
     }

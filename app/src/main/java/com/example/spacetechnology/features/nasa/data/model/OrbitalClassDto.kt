@@ -1,8 +1,9 @@
 package com.example.spacetechnology.features.nasa.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class OrbitalClassDto(
-    @SerializedName("orbit_class_type") val orbitClassType: String,
-    @SerializedName("orbit_class_description") val orbitClassDescription: String,
+    val orbit_class_type: String,
+    val orbit_class_description: String,
 )

@@ -1,15 +1,16 @@
 package com.example.spacetechnology.features.spacex.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class DragonInformationDto(
-    @SerializedName("name") val name: String,
-    @SerializedName("type") val type: String,
-    @SerializedName("crew_capacity") val crewCapacity: Int,
-    @SerializedName("diameter") val diameter: DiameterDragonDto,
-    @SerializedName("dry_mass_kg") val dryMassKg: Int,
-    @SerializedName("wikipedia") val wikipedia: String,
-    @SerializedName("flickr_images") val image: List<String>,
-    @SerializedName("description") val description: String,
-    @SerializedName("launch_payload_mass") val launchPayloadMass: LaunchPayLoadMassKgDto,
+    val name: String,
+    val type: String,
+    val crew_capacity: Int,
+    val diameter: DiameterDragonDto,
+    val dry_mass_kg: Int,
+    val wikipedia: String,
+    val flickr_images: List<String>,
+    val description: String,
+    val launch_payload_mass: LaunchPayLoadMassKgDto,
 )
