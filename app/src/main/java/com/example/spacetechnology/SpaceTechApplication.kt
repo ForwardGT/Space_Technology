@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.example.spacetechnology.cache.CacheFactory
 import com.example.spacetechnology.cache.CacheFactoryImpl
-import com.example.spacetechnology.features.auth.domain.DataStore
+import com.example.spacetechnology.dao.DataStore
 import com.example.spacetechnology.features.auth.presentation.ViewModelAuth
 import com.example.spacetechnology.features.home.presentation.ViewModelHome
 import com.example.spacetechnology.features.my_posts.presentation.ViewModelCreateMyPostScreen

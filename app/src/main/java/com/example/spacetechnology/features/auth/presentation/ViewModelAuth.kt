@@ -6,7 +6,7 @@ import com.example.spacetechnology.core.utils.extensions.reduce
 import com.example.spacetechnology.core.utils.validators.validatorLogin
 import com.example.spacetechnology.core.utils.validators.validatorRegistration
 import com.example.spacetechnology.di.Injector
-import com.example.spacetechnology.features.auth.domain.DataStore
+import com.example.spacetechnology.dao.DataStore
 import com.example.spacetechnology.features.auth.domain.entity.UserData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

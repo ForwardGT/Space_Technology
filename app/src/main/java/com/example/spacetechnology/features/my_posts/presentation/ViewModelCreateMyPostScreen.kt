@@ -9,7 +9,7 @@ import com.example.spacetechnology.core.utils.extensions.reduce
 import com.example.spacetechnology.core.utils.saveImageToDevice
 import com.example.spacetechnology.core.utils.validators.validatorPostsFromMyPosts
 import com.example.spacetechnology.di.Injector
-import com.example.spacetechnology.features.auth.domain.DataStore
+import com.example.spacetechnology.dao.DataStore
 import com.example.spacetechnology.features.my_posts.domain.entity.PostMyPosts
 import com.example.spacetechnology.features.my_posts.domain.entity.TextFieldMyPostsError
 import kotlinx.coroutines.flow.MutableStateFlow

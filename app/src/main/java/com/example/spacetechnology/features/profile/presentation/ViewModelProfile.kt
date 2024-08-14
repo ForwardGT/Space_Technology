@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.spacetechnology.core.utils.deleteImageFromDevice
 import com.example.spacetechnology.core.utils.saveImageToDevice
 import com.example.spacetechnology.di.Injector
-import com.example.spacetechnology.features.auth.domain.DataStore
+import com.example.spacetechnology.dao.DataStore
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
 import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
 import kotlinx.coroutines.flow.MutableStateFlow

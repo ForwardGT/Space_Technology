@@ -1,4 +1,4 @@
-package com.example.spacetechnology.features.auth.domain
+package com.example.spacetechnology.dao
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -19,6 +19,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("d
 class DataStore(
     private val context: Context
 ) {
+
     suspend fun setUserData(userData: UserData) {
         context.dataStore.edit { pref ->
             pref[EMAIL_KEY] = userData.email
@@ -77,7 +78,7 @@ class DataStore(
         }
     }
 
-    suspend fun setPost(newPost: PostMyPosts, maxSize: Int = 3) {
+    suspend fun setPost(newPost: PostMyPosts, maxSize: Int = 5) {
         context.dataStore.edit { pref ->
             val currentPostsJson = pref[POSTS_LIST_KEY] ?: "[]"
             val currentPosts = Json.decodeFromString<List<PostMyPosts>>(currentPostsJson)
