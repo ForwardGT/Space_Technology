@@ -5,6 +5,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.spacetechnology.core.utils.deleteUnusedImages
 import com.example.spacetechnology.core.utils.extensions.reduce
 import com.example.spacetechnology.core.utils.saveImageToDevice
 import com.example.spacetechnology.core.utils.validators.validatorPostsFromMyPosts
@@ -35,7 +36,7 @@ class ViewModelCreateMyPostScreen : ViewModel() {
         getPostsFromMyPosts()
     }
 
-    fun getPostsFromMyPosts() {
+    private fun getPostsFromMyPosts() {
         viewModelScope.launch {
             dataStore.getPostsForMyPosts().collect {
                 _myPosts.value = it
@@ -44,18 +45,24 @@ class ViewModelCreateMyPostScreen : ViewModel() {
         }
     }
 
+    fun ooo(str: String) {
+        _stateTextField.reduce {
+            it.copy(imageUri = str)
+        }
+
+    }
+
     fun saveImage(uri: Uri) {
         viewModelScope.launch {
-            val file = saveImageToDevice(uri, context, "image_my_post.jpg")
+            val file = saveImageToDevice(uri, context, "${System.currentTimeMillis()}.jpg")
+            deleteUnusedImages(context)
             _stateTextField.reduce {
                 it.copy(imageUri = file.toURI().toString())
             }
-
-//            _imageUri.value = file.toUri()
         }
     }
 
-    fun setPostsToMyPosts() {
+    fun setPostsToMyPosts(onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
             val errors = validatorPostsFromMyPosts(
                 _stateTextField.value.title,
@@ -68,8 +75,8 @@ class ViewModelCreateMyPostScreen : ViewModel() {
                 _errorTextField.value.descriptionError.isBlank() &&
                 _errorTextField.value.imageError.isBlank()
             ) {
-                dataStore.addPost(_stateTextField.value)
-                Log.d("TAG", "setPostsToMyPosts: +1post ${_stateTextField.value}")
+                dataStore.setPost(_stateTextField.value)
+                onResult(true)
             }
         }
     }

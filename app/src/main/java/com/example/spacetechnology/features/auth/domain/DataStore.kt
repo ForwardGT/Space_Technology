@@ -77,7 +77,7 @@ class DataStore(
         }
     }
 
-    suspend fun addPost(newPost: PostMyPosts, maxSize: Int = 2) {
+    suspend fun setPost(newPost: PostMyPosts, maxSize: Int = 2) {
         context.dataStore.edit { pref ->
             val currentPostsJson = pref[POSTS_LIST_KEY] ?: "[]"
             val currentPosts = Json.decodeFromString<List<PostMyPosts>>(currentPostsJson)

@@ -5,12 +5,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
-import com.example.spacetechnology.core.uikit.theme.SpaceTechnologyTheme
 import com.example.spacetechnology.core.utils.extensions.navigation.navigateTo
 import com.example.spacetechnology.core.utils.view.CustomSpacer
 import com.example.spacetechnology.features.auth.presentation.view.TopBarNavigation
@@ -46,13 +43,5 @@ fun MyPostsScreen(
 
             PostForMyPosts(viewModel)
         }
-    }
-}
-
-@Preview
-@Composable
-private fun Q() {
-    SpaceTechnologyTheme(true) {
-        MyPostsScreen(navController = rememberNavController())
     }
 }
