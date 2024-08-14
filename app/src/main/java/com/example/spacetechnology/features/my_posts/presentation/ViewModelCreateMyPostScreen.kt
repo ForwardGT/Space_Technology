@@ -1,10 +1,12 @@
 package com.example.spacetechnology.features.my_posts.presentation
 
+import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.spacetechnology.core.utils.extensions.reduce
+import com.example.spacetechnology.core.utils.saveImageToDevice
 import com.example.spacetechnology.core.utils.validators.validatorPostsFromMyPosts
 import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.features.auth.domain.DataStore
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 class ViewModelCreateMyPostScreen : ViewModel() {
 
     private val dataStore: DataStore by Injector.inject()
+    private val context: Context by Injector.inject()
 
     private val _stateTextField = MutableStateFlow(PostMyPosts())
     val stateTextField = _stateTextField.asStateFlow()
@@ -41,6 +44,16 @@ class ViewModelCreateMyPostScreen : ViewModel() {
         }
     }
 
+    fun saveImage(uri: Uri) {
+        viewModelScope.launch {
+            val file = saveImageToDevice(uri, context, "image_my_post.jpg")
+            _stateTextField.reduce {
+                it.copy(imageUri = file.toURI().toString())
+            }
+
+//            _imageUri.value = file.toUri()
+        }
+    }
 
     fun setPostsToMyPosts() {
         viewModelScope.launch {

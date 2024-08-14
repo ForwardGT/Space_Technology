@@ -81,7 +81,7 @@ private fun ImageForPostMyPosts(
     val photoPickLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) { uri ->
             uri?.let {
-                viewModel.addImageToPosts(it)
+                viewModel.saveImage(it)
             }
         }
 

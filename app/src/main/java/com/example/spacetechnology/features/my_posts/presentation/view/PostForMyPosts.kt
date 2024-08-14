@@ -3,11 +3,12 @@ package com.example.spacetechnology.features.my_posts.presentation.view
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import com.example.spacetechnology.core.uikit.theme.SpaceTechColor
 import com.example.spacetechnology.features.my_posts.presentation.ViewModelCreateMyPostScreen
@@ -32,16 +34,8 @@ fun PostForMyPosts(
 ) {
     val statePosts by viewModel.myPosts.collectAsState()
 
-    LazyRow(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                brush = Brush.horizontalGradient(
-                    SpaceTechColor.postsGradientDefault
-                ),
-                shape = RoundedCornerShape(10.dp)
-            )
-            .border(1.dp, SpaceTechColor.navigationElement, RoundedCornerShape(10.dp))
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(statePosts) { posts ->
             Row(
@@ -60,8 +54,9 @@ fun PostForMyPosts(
                     )
             ) {
                 Log.d("TAG", "PostForMyPosts: ${posts.imageUri}")
+
                 AsyncImage(
-                    model = posts.imageUri ,
+                    model = posts.imageUri.toUri().toString(),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -73,6 +68,7 @@ fun PostForMyPosts(
                             )
                         ),
                 )
+
                 Column {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
