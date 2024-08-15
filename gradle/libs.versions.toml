@@ -10,8 +10,6 @@ activityCompose = "1.9.1"
 composeBom = "2024.06.00"
 coilVersion = "2.6.0"
 lifecycle_version = "2.8.4"
-converter_gson_retrofit = "2.9.0"
-logging_interceptor_okhttp = "4.9.3"
 nav_version = "2.7.7"
 koin-bom = "3.5.6"
 compose-icons-version = "compose-icons"
@@ -39,8 +37,6 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion" }
 lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle_version" }
-converter-gson-retrofit2 = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converter_gson_retrofit" }
-logging-interceptor-okhttp = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging_interceptor_okhttp" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "nav_version" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin-bom" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-bom" }
@@ -56,8 +52,6 @@ ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor_version" }
 ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor_version" }
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor_version" }
-
-
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

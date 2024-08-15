@@ -54,8 +54,6 @@ dependencies {
 
     implementation(libs.coil.compose)
     implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.logging.interceptor.okhttp)
-    implementation(libs.converter.gson.retrofit2)
     implementation(libs.navigation.compose)
     implementation(libs.koin.compose)
     implementation(libs.koin.core)

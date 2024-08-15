@@ -1,6 +1,6 @@
 **Приложение под android** : Тематика - космос (SpaceX , NASA)  
 
-**технологический Стек:** Jetpack Compose, Jetpack Compose navigation, retrofit, Koin, Coil, okHttp, kotlinx.serialization
+**технологический Стек:** Jetpack Compose, Jetpack Compose navigation, Ktor client, Koin, Coil, okHttp, kotlinx.serialization
 , DataStore, Coroutines "Будут изменения и дополнения"  
 **Api:** *SpaceX* - https://github.com/r-spacex/SpaceX-API, *Nasa* - https://api.nasa.gov/  
 **Времени затрачено:**  "Неизвестно"  
