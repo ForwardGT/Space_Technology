@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class RocketInformationDto(
     val boosters: Int,
     val name: String,
-    val first: String,
+    val first_flight: String,
     val stages: Int,
     val flickr_images: List<String>,
     val description: String,

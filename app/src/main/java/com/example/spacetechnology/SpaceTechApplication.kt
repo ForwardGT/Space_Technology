@@ -13,6 +13,7 @@ import com.example.spacetechnology.features.nasa.data.repository.RepositoryNasaI
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
 import com.example.spacetechnology.features.nasa.presentation.ViewModelNasa
 import com.example.spacetechnology.features.profile.presentation.ViewModelProfile
+import com.example.spacetechnology.features.spacex.data.network.ApiServiceKtorSpacex
 import com.example.spacetechnology.features.spacex.data.repository.RepositorySpacexImpl
 import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
 import com.example.spacetechnology.features.spacex.presentation.ViewModelSpacex
@@ -44,7 +45,8 @@ class SpaceTechApplication : Application() {
                 dataStore,
                 cache,
                 viewModelMyPostScreen,
-                apiServiceNasa
+                apiServiceNasa,
+                apiServiceSpacex
             )
         }
     }
@@ -92,4 +94,8 @@ private val cache = module {
 
 private val apiServiceNasa = module {
     single { ApiServiceKtorNasa() }
+}
+
+private val apiServiceSpacex = module {
+    single { ApiServiceKtorSpacex() }
 }

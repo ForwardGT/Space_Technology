@@ -1,5 +1,8 @@
 package com.example.spacetechnology.features.spacex.data.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class LandPadsInformationDto(
     val name: String,
     val images: LandPadsInformationImageDto,

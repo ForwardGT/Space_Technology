@@ -5,7 +5,7 @@ import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexDragon
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexLandPads
 import com.example.spacetechnology.features.spacex.data.mapper.mapperSpacexRocket
-import com.example.spacetechnology.features.spacex.data.network.ApiFactorySpacex
+import com.example.spacetechnology.features.spacex.data.network.ApiServiceKtorSpacex
 import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
 import com.example.spacetechnology.features.spacex.domain.entity.SpacexDragon
 import com.example.spacetechnology.features.spacex.domain.entity.SpacexLandPads
@@ -14,6 +14,7 @@ import com.example.spacetechnology.features.spacex.domain.entity.SpacexRocket
 class RepositorySpacexImpl : RepositorySpacex {
 
     private val cache: CacheFactory by Injector.inject()
+    private val apiService: ApiServiceKtorSpacex by Injector.inject()
 
     private val dragonCache = cache.dragonCache()
     private val rocketCache = cache.rocketCache()
@@ -21,21 +22,21 @@ class RepositorySpacexImpl : RepositorySpacex {
 
     override suspend fun loadDragon(): List<SpacexDragon> {
         return dragonCache.get(DRAGON) {
-            val response = ApiFactorySpacex.apiService.getDragons()
+            val response = apiService.getDragons()
             mapperSpacexDragon(response)
         }
     }
 
     override suspend fun loadRocket(): List<SpacexRocket> {
         return rocketCache.get(ROCKET) {
-            val response = ApiFactorySpacex.apiService.getRockets()
+            val response = apiService.getRockets()
             mapperSpacexRocket(response)
         }
     }
 
     override suspend fun loadLandPads(): List<SpacexLandPads> {
         return landPadsCache.get(LAND_PADS) {
-            val response = ApiFactorySpacex.apiService.getLandPads()
+            val response = apiService.getLandPads()
             mapperSpacexLandPads(response)
         }
     }

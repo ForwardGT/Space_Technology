@@ -16,7 +16,7 @@ fun mapperSpacexRocket(
             image = item.flickr_images,
             description = item.description,
             height = item.height.meters,
-            firstFlight = item.first,
+            firstFlight = item.first_flight,
             stages = item.stages,
             boosters = item.boosters
         )
