@@ -54,7 +54,6 @@ dependencies {
 
     implementation(libs.coil.compose)
     implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.code.gson.google)
     implementation(libs.logging.interceptor.okhttp)
     implementation(libs.converter.gson.retrofit2)
     implementation(libs.navigation.compose)
@@ -67,7 +66,11 @@ dependencies {
     implementation(libs.datastore.preferences)
     implementation(libs.reactivecircus.cache)
     implementation(libs.kotlinx.serialization)
-
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

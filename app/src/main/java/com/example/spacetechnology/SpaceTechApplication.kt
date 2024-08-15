@@ -8,6 +8,7 @@ import com.example.spacetechnology.dao.DataStore
 import com.example.spacetechnology.features.auth.presentation.ViewModelAuth
 import com.example.spacetechnology.features.home.presentation.ViewModelHome
 import com.example.spacetechnology.features.my_posts.presentation.ViewModelCreateMyPostScreen
+import com.example.spacetechnology.features.nasa.data.network.ApiServiceKtorNasa
 import com.example.spacetechnology.features.nasa.data.repository.RepositoryNasaImpl
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
 import com.example.spacetechnology.features.nasa.presentation.ViewModelNasa
@@ -42,7 +43,8 @@ class SpaceTechApplication : Application() {
                 repositoryNasa,
                 dataStore,
                 cache,
-                viewModelMyPostScreen
+                viewModelMyPostScreen,
+                apiServiceNasa
             )
         }
     }
@@ -86,4 +88,8 @@ private val dataStore = module {
 
 private val cache = module {
     single<CacheFactory> { CacheFactoryImpl() }
+}
+
+private val apiServiceNasa = module {
+    single { ApiServiceKtorNasa() }
 }
