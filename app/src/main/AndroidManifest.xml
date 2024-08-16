@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".SpaceTechApplication"
@@ -26,9 +27,17 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".notification.PushService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/space_icon" />
+            android:resource="@drawable/baseline_rocket_launch_24" />
     </application>
 
 </manifest>

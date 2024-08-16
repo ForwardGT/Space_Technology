@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(platform(libs.firebase.boom))
     implementation(libs.firebase.messaging)
+    implementation(libs.accompanist.permissions)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

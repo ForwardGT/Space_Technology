@@ -17,6 +17,7 @@ import com.example.spacetechnology.features.spacex.data.network.ApiServiceKtorSp
 import com.example.spacetechnology.features.spacex.data.repository.RepositorySpacexImpl
 import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
 import com.example.spacetechnology.features.spacex.presentation.ViewModelSpacex
+import com.example.spacetechnology.notification.getTokenFromNotification
 import io.github.aagrishankov.platform.PreRenderCurrentThemeStatusBars
 import io.github.aagrishankov.platform.SystemThemeStatusBars
 import org.koin.android.ext.koin.androidContext
@@ -29,58 +30,35 @@ class SpaceTechApplication : Application() {
         super.onCreate()
 
         PreRenderCurrentThemeStatusBars.activeTheme = SystemThemeStatusBars.DARK
+        getTokenFromNotification()
 
         startKoin {
 
             androidContext(this@SpaceTechApplication)
 
             modules(
-                viewModelHome,
-                viewModelSpacex,
-                viewModelNasa,
-                viewModelAuth,
-                viewModelProfile,
-                repositorySpacex,
-                repositoryNasa,
+                viewModels,
+                repository,
                 dataStore,
                 cache,
-                viewModelMyPostScreen,
-                apiServiceNasa,
-                apiServiceSpacex
+                apiServices,
             )
         }
     }
 }
 
-private val viewModelHome = module {
+
+private val viewModels = module {
     viewModel { ViewModelHome() }
-}
-
-private val viewModelSpacex = module {
-    viewModel { ViewModelSpacex() }
-}
-
-private val viewModelNasa = module {
     viewModel { ViewModelNasa() }
-}
-
-private val viewModelAuth = module {
     viewModel { ViewModelAuth() }
-}
-
-private val viewModelProfile = module {
+    viewModel { ViewModelSpacex() }
     viewModel { ViewModelProfile() }
-}
-
-private val viewModelMyPostScreen = module {
     viewModel { ViewModelCreateMyPostScreen() }
 }
 
-private val repositorySpacex = module {
+private val repository = module {
     single<RepositorySpacex> { RepositorySpacexImpl() }
-}
-
-private val repositoryNasa = module {
     single<RepositoryNasa> { RepositoryNasaImpl() }
 }
 
@@ -92,10 +70,7 @@ private val cache = module {
     single<CacheFactory> { CacheFactoryImpl() }
 }
 
-private val apiServiceNasa = module {
+private val apiServices = module {
     single { ApiServiceKtorNasa() }
-}
-
-private val apiServiceSpacex = module {
     single { ApiServiceKtorSpacex() }
 }

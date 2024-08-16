@@ -1,5 +1,7 @@
 package com.example.spacetechnology.features.home.presentation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,8 +19,10 @@ import com.example.spacetechnology.core.uikit.navigation.SpaceTechNavigationBar
 import com.example.spacetechnology.features.home.domain.entity.PostsForMainScreenBP
 import com.example.spacetechnology.features.home.presentation.view.CardsPreviewSpaceTech
 import com.example.spacetechnology.features.home.presentation.view.SpaceTechMainScreenTopBar
+import com.example.spacetechnology.notification.RequiresNotificationPermission
 import org.koin.androidx.compose.koinViewModel
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun HomeScreen(
     navController: NavController
@@ -34,6 +38,9 @@ fun HomeScreen(
             SpaceTechNavigationBar(navController)
         }
     ) { paddingValues ->
+
+        RequiresNotificationPermission()
+
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier
