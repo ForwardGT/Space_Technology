@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "340925850589",
+    "project_id": "spacetechnology-space",
+    "storage_bucket": "spacetechnology-space.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340925850589:android:f29cadb08fea52a716cc34",
+        "android_client_info": {
+          "package_name": "com.example.spacetechnology"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuDeHWOQSiEbdKD0jxbgPhMssrFmsmmr4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
