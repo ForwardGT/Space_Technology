@@ -71,6 +71,8 @@ fun ProfileViewContent(
                         delay(500) // delay for showToast
                         viewModel.clearImageFromDevise()
                         viewModel.clearCache()
+                        viewModel.setStateSubscribeNews(false)
+                        viewModel.setStateSubscribeSales(false)
                         viewModel.deleteProfile()
                         navController.navigateToClearBackStack(Screen.FirstAuthScreen.route)
                     }

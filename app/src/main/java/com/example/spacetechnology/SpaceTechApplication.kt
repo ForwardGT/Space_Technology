@@ -17,6 +17,7 @@ import com.example.spacetechnology.features.spacex.data.network.ApiServiceKtorSp
 import com.example.spacetechnology.features.spacex.data.repository.RepositorySpacexImpl
 import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
 import com.example.spacetechnology.features.spacex.presentation.ViewModelSpacex
+import com.example.spacetechnology.notification.createNotificationChannels
 import com.example.spacetechnology.notification.getTokenFromNotification
 import io.github.aagrishankov.platform.PreRenderCurrentThemeStatusBars
 import io.github.aagrishankov.platform.SystemThemeStatusBars
@@ -31,6 +32,7 @@ class SpaceTechApplication : Application() {
 
         PreRenderCurrentThemeStatusBars.activeTheme = SystemThemeStatusBars.DARK
         getTokenFromNotification()
+        createNotificationChannels(applicationContext)
 
         startKoin {
 

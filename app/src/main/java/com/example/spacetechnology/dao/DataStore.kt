@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.spacetechnology.features.auth.domain.entity.UserData
 import com.example.spacetechnology.features.my_posts.domain.entity.PostMyPosts
+import com.example.spacetechnology.notification.SubscribeState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
@@ -98,11 +99,30 @@ class DataStore(
     }
 
 
+    suspend fun setSubscribeTopic(stateSubscribe: SubscribeState) {
+        context.dataStore.edit { pref ->
+            pref[IS_SUBSCRIBE_NEWS_KEY] = stateSubscribe.news
+            pref[IS_SUBSCRIBE_SALES_KEY] = stateSubscribe.sales
+        }
+    }
+
+    fun getSubscribeTopic(): Flow<SubscribeState> {
+        return context.dataStore.data.map { pref ->
+            return@map SubscribeState(
+                news = pref[IS_SUBSCRIBE_NEWS_KEY] ?: false,
+                sales = pref[IS_SUBSCRIBE_SALES_KEY] ?: false
+            )
+        }
+    }
+
+
     private companion object {
         val EMAIL_KEY = stringPreferencesKey("email")
         val PASSWORD_KEY = stringPreferencesKey("password")
         val IMAGE_URI_KEY = stringPreferencesKey("profile_image_path")
         val IS_LOGIN_KEY = booleanPreferencesKey("is_login")
         val POSTS_LIST_KEY = stringPreferencesKey("posts_list")
+        val IS_SUBSCRIBE_NEWS_KEY = booleanPreferencesKey("is_news")
+        val IS_SUBSCRIBE_SALES_KEY = booleanPreferencesKey("is_sales")
     }
 }

@@ -2,7 +2,6 @@ package com.example.spacetechnology.features.profile.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -52,6 +51,7 @@ fun ProfileScreen(
         DrawerNavigationItem.Profile,
         DrawerNavigationItem.ApiKey,
         DrawerNavigationItem.About,
+        DrawerNavigationItem.Notification,
     )
 
     val stateImageProfile by viewModel.imageUri.collectAsState()
@@ -98,11 +98,10 @@ fun ProfileScreen(
                 },
                 content = {
                     Column(modifier = Modifier.fillMaxSize()) {
-                        Row {
-                            IconButton(onClick = { scope.launch { drawerState.open() } },
-                                content = { Icon(Icons.Filled.Menu, null) }
-                            )
-                        }
+
+                        IconButton(onClick = { scope.launch { drawerState.open() } },
+                            content = { Icon(Icons.Filled.Menu, null) }
+                        )
 
                         when (selectedItem) {
 
@@ -116,6 +115,10 @@ fun ProfileScreen(
                             DrawerNavigationItem.ApiKey.title -> ApiKeyViewContent()
 
                             DrawerNavigationItem.About.title -> AboutAppViewContent()
+
+                            DrawerNavigationItem.Notification.title -> NotificationViewContent(
+                                viewModel = viewModel,
+                            )
                         }
                     }
                 }
@@ -123,6 +126,7 @@ fun ProfileScreen(
         }
     }
 }
+
 
 @Composable
 private fun ItemDrawer(

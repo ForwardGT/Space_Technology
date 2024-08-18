@@ -41,7 +41,7 @@ fun SpaceTechMainScreenTopBar() {
             Text(
                 color = SpaceTechColor.white,
                 modifier = Modifier.padding(top = 12.dp, end = 10.dp),
-                text = "Search"
+                text = ""
             )
         }
     }

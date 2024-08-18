@@ -6,11 +6,13 @@ import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.spacetechnology.core.utils.deleteImageFromDevice
+import com.example.spacetechnology.core.utils.extensions.reduce
 import com.example.spacetechnology.core.utils.saveImageToDevice
-import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.dao.DataStore
+import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
 import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
+import com.example.spacetechnology.notification.SubscribeState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -28,9 +30,46 @@ class ViewModelProfile : ViewModel() {
     private val _userEmail = MutableStateFlow("")
     val userEmail = _userEmail.asStateFlow()
 
+    private val _stateSubscribe = MutableStateFlow(SubscribeState())
+    val stateSubscribe = _stateSubscribe.asStateFlow()
+
     init {
+        loadStateSubscribe()
         loadImageFromDevice()
         showEmailProfile()
+    }
+
+    private fun loadStateSubscribe() {
+        viewModelScope.launch {
+            dataStore.getSubscribeTopic().collect { pref ->
+                _stateSubscribe.reduce {
+                    it.copy(
+                        news = pref.news,
+                        sales = pref.sales
+                    )
+                }
+            }
+        }
+    }
+
+    private fun setStateSubscribeDao() {
+        viewModelScope.launch {
+            dataStore.setSubscribeTopic(_stateSubscribe.value)
+        }
+    }
+
+    fun setStateSubscribeSales(sales: Boolean) {
+        _stateSubscribe.reduce {
+            it.copy(sales = sales)
+        }
+        setStateSubscribeDao()
+    }
+
+    fun setStateSubscribeNews(news: Boolean) {
+        _stateSubscribe.reduce {
+            it.copy(news = news)
+        }
+        setStateSubscribeDao()
     }
 
     fun clearCache() {

@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class DrawerNavigationItem(
@@ -21,5 +22,9 @@ sealed class DrawerNavigationItem(
     data object About : DrawerNavigationItem(
         iconItem = Icons.Filled.ContentPaste,
         title = "About"
+    )
+    data object Notification : DrawerNavigationItem(
+        iconItem = Icons.Filled.NotificationsActive,
+        title = "Notification"
     )
 }
