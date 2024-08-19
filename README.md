@@ -11,7 +11,7 @@
 - **Асинхронность**: Coroutines
 - **UI**: Jetpack Compose
 - **DI (Внедрение зависимостей)**: Koin
-- **Локальная БД**: DataStore
+- **Local DB**: DataStore
 - **Навигация**: Jetpack Compose Navigation
 - **Сетевые запросы**: Ktor client
 - **Загрузка изображений**: Coil
