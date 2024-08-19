@@ -19,6 +19,7 @@
 - **Кеширование**: Cache4k
 - **Уведомления**: Firebase Cloud Messaging
 - **Разрешения**: Accompanist permissions
+- **Pattern**: MVVM / переход в MVI
 
 ## API
 
