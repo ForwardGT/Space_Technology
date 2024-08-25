@@ -26,11 +26,6 @@ fun SpacexScreen(
     val viewModel: ViewModelSpacex = koinViewModel()
     val state by viewModel.state.collectAsState()
 
-    val errorStateDragon = state.isError || state.postDragon == null && !state.isLoadingDragon
-    val errorStateRocket = state.isError || state.postRocket == null && !state.isLoadingRockets
-    val errorStateLandPads = state.isError || state.postLandPads == null && !state.isLoadingLandPads
-    val loadingState = state.isLoadingDragon || state.isLoadingRockets || state.isLoadingLandPads
-
     Scaffold(
         bottomBar = {
             SpaceTechNavigationBar(navController)
@@ -51,7 +46,7 @@ fun SpacexScreen(
             )
 
             when {
-                errorStateRocket || errorStateDragon || errorStateLandPads -> {
+                state.loadedAllState -> {
                     CustomButton(
                         onClick = { viewModel.loadAllPost() },
                         scroll = true,
@@ -59,7 +54,7 @@ fun SpacexScreen(
                     )
                 }
 
-                loadingState -> {
+                state.loadingState -> {
                     CustomCircleProgressIndicator(needHeightScreen = true)
                 }
 
