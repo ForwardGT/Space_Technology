@@ -22,22 +22,19 @@ class RepositorySpacexImpl : RepositorySpacex {
 
     override suspend fun loadDragon(): List<SpacexDragon> {
         return dragonCache.get(DRAGON) {
-            val response = apiService.getDragons()
-            mapperSpacexDragon(response)
+            apiService.getDragons().mapperSpacexDragon()
         }
     }
 
     override suspend fun loadRocket(): List<SpacexRocket> {
         return rocketCache.get(ROCKET) {
-            val response = apiService.getRockets()
-            mapperSpacexRocket(response)
+            apiService.getRockets().mapperSpacexRocket()
         }
     }
 
     override suspend fun loadLandPads(): List<SpacexLandPads> {
         return landPadsCache.get(LAND_PADS) {
-            val response = apiService.getLandPads()
-            mapperSpacexLandPads(response)
+            apiService.getLandPads().mapperSpacexLandPads()
         }
     }
 

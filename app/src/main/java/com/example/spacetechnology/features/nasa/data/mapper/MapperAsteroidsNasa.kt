@@ -3,12 +3,10 @@ package com.example.spacetechnology.features.nasa.data.mapper
 import com.example.spacetechnology.features.nasa.data.model.AsteroidsNearEarthObjectsDto
 import com.example.spacetechnology.features.nasa.domain.entity.Asteroid
 
-fun mapperAsteroidsNasa(
-    request: AsteroidsNearEarthObjectsDto
-): List<Asteroid> {
+fun AsteroidsNearEarthObjectsDto.mapperAsteroidsNasa(): List<Asteroid> {
     val posts = mutableListOf<Asteroid>()
 
-    request.near_earth_objects.forEach {
+    this.near_earth_objects.forEach {
         val post = Asteroid(
             name = it.name_limited,
             url = it.nasa_jpl_url,

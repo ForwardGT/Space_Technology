@@ -3,12 +3,10 @@ package com.example.spacetechnology.features.spacex.data.mapper
 import com.example.spacetechnology.features.spacex.data.model.LandPadsInformationDto
 import com.example.spacetechnology.features.spacex.domain.entity.SpacexLandPads
 
-fun mapperSpacexLandPads(
-    response: List<LandPadsInformationDto>
-): List<SpacexLandPads> {
+fun List<LandPadsInformationDto>.mapperSpacexLandPads(): List<SpacexLandPads> {
     val posts = mutableListOf<SpacexLandPads>()
 
-    response.forEach { item ->
+    this.forEach { item ->
         val post = SpacexLandPads(
             name = item.name,
             wikipedia = item.wikipedia,

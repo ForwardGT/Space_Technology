@@ -3,12 +3,10 @@ package com.example.spacetechnology.features.spacex.data.mapper
 import com.example.spacetechnology.features.spacex.data.model.RocketInformationDto
 import com.example.spacetechnology.features.spacex.domain.entity.SpacexRocket
 
-fun mapperSpacexRocket(
-    response: List<RocketInformationDto>
-): List<SpacexRocket> {
+fun List<RocketInformationDto>.mapperSpacexRocket(): List<SpacexRocket> {
     val posts = mutableListOf<SpacexRocket>()
 
-    response.forEach { item ->
+    this.forEach { item ->
         val post = SpacexRocket(
             name = item.name,
             diameter = item.diameter.meters,

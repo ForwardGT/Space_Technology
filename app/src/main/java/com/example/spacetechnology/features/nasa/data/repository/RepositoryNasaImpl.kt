@@ -22,22 +22,19 @@ class RepositoryNasaImpl : RepositoryNasa {
 
     override suspend fun loadApod(): PostApodNasa {
         return apodCache.get(key = APOD) {
-            val responseApiService = apiService.getLastApod()
-            mapperApodNasa(responseApiService)
+            apiService.getLastApod().mapperApodNasa()
         }
     }
 
     override suspend fun loadTechTransfer(): List<PostTechTransfer> {
         return techTransferCache.get(key = TECH_TRANSFER) {
-            val responseApiService = apiService.getTechTransfer()
-            mapperTechNasa(responseApiService)
+            apiService.getTechTransfer().mapperTechNasa()
         }
     }
 
     override suspend fun loadAsteroids(): List<Asteroid> {
         return asteroidsCache.get(key = ASTEROIDS) {
-            val responseApiService = apiService.getAsteroids()
-            mapperAsteroidsNasa(responseApiService)
+            apiService.getAsteroids().mapperAsteroidsNasa()
         }
     }
 
