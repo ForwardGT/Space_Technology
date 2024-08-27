@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Space_Technology</string>
+    <string name="rockets_spacex_explore">Rockets SpaceX: Explore SpaceX\'s innovative designs and powerful launch vehicles.</string>
+    <string name="dragon_spacecraft">Dragon spacecraft SpaceX: Learn about the revolutionary vessels for cargo and crewed missions</string>
+    <string name="landpad_spacex">Landpad SpaceX: A designated platform for rocket landings, equipped with guiding markers and the SpaceX logo, often located on ocean barges or coastal sites.</string>
+    <string name="last_news_nasa">Last news NASA: Catch up on today\'s top news and major world events</string>
+    <string name="technologies_nasa_explore_nasa">Technologies NASA: Explore NASA\'s groundbreaking technologies transforming space and Earth.</string>
+    <string name="asteroids_nasa_uncover">Asteroids NASA: Uncover the secrets of asteroids: their origins, orbits, and potential Earth impacts.</string>
 </resources>

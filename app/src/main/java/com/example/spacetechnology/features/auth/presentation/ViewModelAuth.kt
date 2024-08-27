@@ -5,8 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.spacetechnology.core.utils.extensions.reduce
 import com.example.spacetechnology.core.utils.validators.validatorLogin
 import com.example.spacetechnology.core.utils.validators.validatorRegistration
-import com.example.spacetechnology.di.Injector
 import com.example.spacetechnology.dao.DataStore
+import com.example.spacetechnology.di.Injector
+import com.example.spacetechnology.features.auth.domain.AuthErrors
 import com.example.spacetechnology.features.auth.domain.entity.UserData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -113,7 +114,7 @@ class ViewModelAuth : ViewModel() {
                     it.copy(
                         registrationSuccess = false,
                         errors = it.errors.copy(
-                            repeatPasswordError = "Unknown error"
+                            repeatPasswordError = AuthErrors.UNKNOWN_ERROR
                         )
                     )
                 }
@@ -139,7 +140,7 @@ class ViewModelAuth : ViewModel() {
                         _authState.reduce {
                             it.copy(
                                 errors = it.errors.copy(
-                                    emailError = "Email doesn't exist."
+                                    emailError = AuthErrors.EMAIL_DOES_NOT_EXIST
                                 )
                             )
                         }
@@ -149,7 +150,7 @@ class ViewModelAuth : ViewModel() {
                         _authState.reduce {
                             it.copy(
                                 errors = it.errors.copy(
-                                    passwordError = "Wrong password"
+                                    passwordError = AuthErrors.WRONG_PASSWORD
                                 )
                             )
                         }
@@ -169,7 +170,7 @@ class ViewModelAuth : ViewModel() {
                     it.copy(
                         loginSuccess = false,
                         errors = it.errors.copy(
-                            passwordError = "Unknown error"
+                            passwordError = AuthErrors.UNKNOWN_ERROR
                         )
                     )
                 }

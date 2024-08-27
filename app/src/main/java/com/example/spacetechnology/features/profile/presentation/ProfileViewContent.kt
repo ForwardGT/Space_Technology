@@ -27,6 +27,7 @@ import com.example.spacetechnology.core.utils.view.CustomSpacer
 import com.example.spacetechnology.core.utils.view.CustomToast
 import com.example.spacetechnology.features.profile.presentation.view.PhotoProfile
 import com.example.spacetechnology.navigation.Screen
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -46,15 +47,12 @@ fun ProfileViewContent(
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
-
-        ) {
-
+    ) {
         ProfileImageBlock(
             viewModel = viewModel,
             emailProfile = emailProfile,
             stateImageProfile = stateImageProfile
         )
-
         CustomToast(
             message = textForToast,
             isVisible = showToast,
@@ -62,56 +60,104 @@ fun ProfileViewContent(
         )
 
         when {
-            showDialogDeleteProfile -> CustomAlertDialog(
-                onClickConfirm = {
-                    scope.launch {
-                        showDialogDeleteProfile = false
-                        showToast = true
-                        textForToast = "Your profile and all data have been successfully deleted!"
-                        delay(500) // delay for showToast
-                        viewModel.clearImageFromDevise()
-                        viewModel.clearCache()
-                        viewModel.setStateSubscribeNews(false)
-                        viewModel.setStateSubscribeSales(false)
-                        viewModel.deleteProfile()
-                        navController.navigateToClearBackStack(Screen.FirstAuthScreen.route)
-                    }
-                },
-                onClickDismiss = { showDialogDeleteProfile = false },
-                onClickDismissRequest = { showDialogDeleteProfile = false }
+            showDialogDeleteProfile -> ShowDialogDeleteProfile(
+                viewModel = viewModel,
+                navController = navController,
+                showDialogDeleteProfile = { showDialogDeleteProfile = it },
+                showToast = { showToast = it },
+                textForToast = { textForToast = it },
+                scope = scope
             )
 
-            showDialogClearCache -> CustomAlertDialog(
-                onClickConfirm = {
-                    showDialogClearCache = false
-                    viewModel.clearCache()
-                    showToast = true
-                    textForToast = "All cache cleared successfully!"
-                },
-                onClickDismiss = { showDialogClearCache = false },
-                onClickDismissRequest = { showDialogClearCache = false }
-            )
-        }
+            showDialogClearCache -> ShowDialogClearCache(
+                viewModel = viewModel,
+                showDialogClearCache = { showDialogClearCache = it },
+                showToast = { showToast = it },
+                textForToast = { textForToast = it }
 
-        Column {
-            CustomButton(
-                onClick = { showDialogClearCache = true },
-                label = "Clear cache",
-                defaultButton = true,
-                fillMaxWidth = true,
-                gradient = SpaceTechColor.buttonGradientDanger,
-                padding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
-            )
-            CustomButton(
-                onClick = { showDialogDeleteProfile = true },
-                label = "Delete profile",
-                defaultButton = true,
-                fillMaxWidth = true,
-                gradient = SpaceTechColor.buttonGradientDanger,
-                padding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
             )
         }
+        ButtonsProfile(
+            showDialogClearCache = { showDialogClearCache = it },
+            showDialogDeleteProfile = { showDialogDeleteProfile = it }
+        )
     }
+}
+
+
+@Composable
+private fun ButtonsProfile(
+    showDialogClearCache: (Boolean) -> Unit,
+    showDialogDeleteProfile: (Boolean) -> Unit
+) {
+    Column {
+        CustomButton(
+            onClick = { showDialogClearCache(true) },
+            label = "Clear cache",
+            defaultButton = true,
+            fillMaxWidth = true,
+            gradient = SpaceTechColor.buttonGradientDanger,
+            padding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
+        )
+        CustomButton(
+            onClick = { showDialogDeleteProfile(true) },
+            label = "Delete profile",
+            defaultButton = true,
+            fillMaxWidth = true,
+            gradient = SpaceTechColor.buttonGradientDanger,
+            padding = PaddingValues(start = 10.dp, end = 10.dp, bottom = 10.dp),
+        )
+    }
+}
+
+
+@Composable
+private fun ShowDialogClearCache(
+    viewModel: ViewModelProfile,
+    showDialogClearCache: (Boolean) -> Unit,
+    showToast: (Boolean) -> Unit,
+    textForToast: (String) -> Unit,
+) {
+    CustomAlertDialog(
+        onClickConfirm = {
+            showDialogClearCache(false)
+            viewModel.clearCache()
+            showToast(true)
+            textForToast("All cache cleared successfully!")
+        },
+        onClickDismiss = { showDialogClearCache(false) },
+        onClickDismissRequest = { showDialogClearCache(false) }
+    )
+}
+
+
+@Composable
+private fun ShowDialogDeleteProfile(
+    viewModel: ViewModelProfile,
+    navController: NavController,
+    showDialogDeleteProfile: (Boolean) -> Unit,
+    showToast: (Boolean) -> Unit,
+    textForToast: (String) -> Unit,
+    scope: CoroutineScope
+) {
+    CustomAlertDialog(
+        onClickConfirm = {
+            scope.launch {
+                showDialogDeleteProfile(false)
+                showToast(true)
+                textForToast("Your profile and all data have been successfully deleted!")
+                delay(500) // delay for showToast
+                viewModel.clearImageFromDevise()
+                viewModel.clearCache()
+                viewModel.setStateSubscribeNews(false)
+                viewModel.setStateSubscribeSales(false)
+                viewModel.deleteProfile()
+                navController.navigateToClearBackStack(Screen.FirstAuthScreen.route)
+            }
+        },
+        onClickDismiss = { showDialogDeleteProfile(false) },
+        onClickDismissRequest = { showDialogDeleteProfile(false) }
+    )
 }
 
 
