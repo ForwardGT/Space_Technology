@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +27,7 @@ import com.example.spacetechnology.core.utils.view.CustomToast
 import com.example.spacetechnology.features.profile.presentation.view.PhotoProfile
 import com.example.spacetechnology.navigation.Screen
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -42,7 +42,6 @@ fun ProfileViewContent(
     var showDialogDeleteProfile by remember { mutableStateOf(false) }
     var showDialogClearCache by remember { mutableStateOf(false) }
     var showToast by remember { mutableStateOf(false) }
-    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -66,7 +65,6 @@ fun ProfileViewContent(
                 showDialogDeleteProfile = { showDialogDeleteProfile = it },
                 showToast = { showToast = it },
                 textForToast = { textForToast = it },
-                scope = scope
             )
 
             showDialogClearCache -> ShowDialogClearCache(
@@ -138,15 +136,16 @@ private fun ShowDialogDeleteProfile(
     showDialogDeleteProfile: (Boolean) -> Unit,
     showToast: (Boolean) -> Unit,
     textForToast: (String) -> Unit,
-    scope: CoroutineScope
 ) {
+    val scope = CoroutineScope(Dispatchers.Main)
+
     CustomAlertDialog(
         onClickConfirm = {
             scope.launch {
                 showDialogDeleteProfile(false)
                 showToast(true)
                 textForToast("Your profile and all data have been successfully deleted!")
-                delay(500) // delay for showToast
+                delay(500) // delay for show Toast
                 viewModel.clearImageFromDevise()
                 viewModel.clearCache()
                 viewModel.setStateSubscribeNews(false)

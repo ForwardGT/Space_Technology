@@ -3,7 +3,7 @@ package com.example.spacetechnology.notification
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 
-class PushService: FirebaseMessagingService() {
+class PushServiceUpdateToken: FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
