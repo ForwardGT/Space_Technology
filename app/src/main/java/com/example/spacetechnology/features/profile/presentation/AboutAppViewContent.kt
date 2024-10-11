@@ -2,6 +2,7 @@ package com.example.spacetechnology.features.profile.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -19,6 +20,7 @@ fun AboutAppViewContent() {
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
+            .padding(10.dp)
     ) {
 
         MainHeadline(text = "SpaceX and NASA: Pioneering Technologies in Space Exploration")
@@ -84,6 +86,8 @@ private fun MainHeadline(text: String) {
 @Composable
 private fun SecondHeadline(text: String) {
     Text(
+        modifier = Modifier.fillMaxWidth(),
+        textAlign = TextAlign.Center,
         color = SpaceTechColor.white,
         fontSize = 20.sp,
         fontWeight = FontWeight.SemiBold,
@@ -95,6 +99,8 @@ private fun SecondHeadline(text: String) {
 @Composable
 private fun TextContent(text: String) {
     Text(
+        modifier = Modifier.fillMaxWidth(),
+        textAlign = TextAlign.Center,
         color = SpaceTechColor.white,
         text = text
     )
