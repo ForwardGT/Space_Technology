@@ -57,7 +57,7 @@
 </p>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/d4ebaea8-2b78-4e67-9bfc-140eea7f546b" alt="Экран с графиками" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/9ba063f2-f8da-4fa0-b9a3-28797288a36c" alt="Экран с графиками" width="25%"/>
   <img src="https://github.com/user-attachments/assets/73788024-47f3-4fc2-af0d-ccc236617d8e" alt="Экран событий" width="25%"/>
   <img src="https://github.com/user-attachments/assets/30a5805a-ef53-49c3-a283-83648883b6af" alt="Экран авторизации" width="25%"/>
 </p>
