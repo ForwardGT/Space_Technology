@@ -33,33 +33,34 @@
 ## Скриншоты 📸
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/02454051-3e80-4c60-9f32-9ddb96de6ade" alt="Главный экран" width="25%"/>
-  <img src="https://github.com/user-attachments/assets/0dffcbaf-918e-43c1-b95d-bf3d923b6077" alt="Экран с информацией" width="25%"/>
-  <img src="https://github.com/user-attachments/assets/c291ceec-46e9-4b21-8966-9cb47e0c6f68" alt="Экран настроек" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/8c2bf667-bea1-4b7c-a607-26d9135a7e73" alt="Главный экран" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/6165e3ac-2a99-45bc-a9cb-72ec6f39bb2f" alt="Экран с информацией" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/e95964de-afee-49b9-bd70-497573db62fe" alt="Экран настроек" width="25%"/>
 </p>
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/36eab361-5afd-4665-a394-766838811968" alt="Экран загрузки данных" width="25%"/>
-  <img src="https://github.com/user-attachments/assets/6ab5658e-11d4-47c4-9d35-ecd9962cb0a6" alt="Экран карты" width="25%"/>
-  <img src="https://github.com/user-attachments/assets/e2985039-b98c-43cf-b7b0-f5661b8cfc9a" alt="Экран профиля" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/bfc8a583-6bfc-4283-8b4f-00363f0d9165" alt="Экран карты" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/dbe1e200-37eb-44db-b362-13b689085732" alt="Экран профиля" width="25%"/>
+</p>
+
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1d07fbed-8ced-4121-ae59-465162da72f4" alt="Экран статистики" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/cf9c2e03-0a94-46eb-ae0e-6419efd9b229" alt="Экран отчета" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/a404efad-5328-4dfb-be18-2b1a3c59071c" alt="Экран итогов" width="25%"/>
 </p>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/eff9d531-332a-4723-b0a9-198acc93a7e5" alt="Экран статистики" width="25%"/>
-  <img src="https://github.com/user-attachments/assets/309f1825-c8d7-4013-ac9b-c13071ea8d29" alt="Экран отчета" width="25%"/>
-  <img src="https://github.com/user-attachments/assets/15617ff4-8924-4d2e-96f2-eb68d14f5413" alt="Экран итогов" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/8efe4ac5-2308-4f33-87c4-516829d403cb" alt="Экран с деталями" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/5195d22d-6430-4c42-984d-f4e031b7dc7e" alt="Экран списка элементов" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/ebe3ea6d-6002-4779-b542-756fe8d72e34" alt="Информационный экран" width="25%"/>
 </p>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/5f6f6bf7-dfc5-40ef-b51e-0217c12bbd52" alt="Экран с деталями" width="25%"/>
-  <img src="https://github.com/user-attachments/assets/ab8ddbf6-2f61-4aa6-93c4-9dcca5d77c7b" alt="Экран списка элементов" width="25%"/>
-  <img src="https://github.com/user-attachments/assets/f135935c-db84-41ee-82f5-ba0a5101360f" alt="Информационный экран" width="25%"/>
-</p>
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/9ba063f2-f8da-4fa0-b9a3-28797288a36c" alt="Экран с графиками" width="25%"/>
-  <img src="https://github.com/user-attachments/assets/73788024-47f3-4fc2-af0d-ccc236617d8e" alt="Экран событий" width="25%"/>
-  <img src="https://github.com/user-attachments/assets/30a5805a-ef53-49c3-a283-83648883b6af" alt="Экран авторизации" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/2cd92beb-72d7-4cda-b377-3afa9a0a52cf" alt="Экран с графиками" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/9ceb368c-bce9-433a-93df-f7b92fb83c92" alt="Экран событий" width="25%"/>
+  <img src="https://github.com/user-attachments/assets/71b582cb-99cf-4471-b897-de9863b4dc3c" alt="Экран авторизации" width="25%"/>
 </p>
 
 <p align="center">
