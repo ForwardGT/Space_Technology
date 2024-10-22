@@ -10,6 +10,7 @@ import com.example.spacetechnology.navigation.screens.addMyPostsScreen
 import com.example.spacetechnology.navigation.screens.addNasaScreen
 import com.example.spacetechnology.navigation.screens.addProfileScreen
 import com.example.spacetechnology.navigation.screens.addRegistrationScreen
+import com.example.spacetechnology.navigation.screens.addShortsScreen
 import com.example.spacetechnology.navigation.screens.addSpacexScreen
 
 fun NavGraphBuilder.addSettingNavGraph(
@@ -24,4 +25,5 @@ fun NavGraphBuilder.addSettingNavGraph(
     addRegistrationScreen(navController)
     addMyPostsScreen(navController)
     addCreateMyPostScreen(navController)
+    addShortsScreen(navController)
 }

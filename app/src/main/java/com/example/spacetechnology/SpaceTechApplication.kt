@@ -13,6 +13,7 @@ import com.example.spacetechnology.features.nasa.data.repository.RepositoryNasaI
 import com.example.spacetechnology.features.nasa.domain.entity.RepositoryNasa
 import com.example.spacetechnology.features.nasa.presentation.ViewModelNasa
 import com.example.spacetechnology.features.profile.presentation.ViewModelProfile
+import com.example.spacetechnology.features.shorts.presentation.ViewModelShorts
 import com.example.spacetechnology.features.spacex.data.network.ApiServiceKtorSpacex
 import com.example.spacetechnology.features.spacex.data.repository.RepositorySpacexImpl
 import com.example.spacetechnology.features.spacex.domain.RepositorySpacex
@@ -57,6 +58,7 @@ private val viewModels = module {
     viewModel { ViewModelSpacex() }
     viewModel { ViewModelProfile() }
     viewModel { ViewModelCreateMyPostScreen() }
+    viewModel { ViewModelShorts() }
 }
 
 private val repository = module {

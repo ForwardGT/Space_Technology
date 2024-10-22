@@ -30,6 +30,7 @@ fun SpaceTechNavigationBar(
         NavigationItem.Nasa,
         NavigationItem.MyPosts,
         NavigationItem.Profile,
+        NavigationItem.MyShorts
     )
 
     NavigationBar(

@@ -2,6 +2,7 @@ package com.example.spacetechnology.features.home.presentation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.OndemandVideo
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PostAdd
 import androidx.compose.material.icons.filled.Public
@@ -42,5 +43,11 @@ sealed class NavigationItem(
         screen = Screen.MyPostsScreen,
         nameItem = "MyPosts",
         icon = Icons.Filled.PostAdd
+    )
+
+    data object MyShorts : NavigationItem(
+        screen = Screen.MyShorts,
+        nameItem = "MyShorts",
+        icon = Icons.Filled.OndemandVideo
     )
 }
