@@ -47,7 +47,7 @@ class ViewModelShorts : ViewModel() {
                     shortElements = updatedShortElements
                 )
             }
-            delay(timeMillis = _state.value.currentSpeedRewind)
+            delay(timeMillis = _state.value.currentSpeedRewind) // Delay for update progress bar
         }
     }
 

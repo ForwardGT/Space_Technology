@@ -145,7 +145,7 @@ private fun ShowDialogDeleteProfile(
                 showDialogDeleteProfile(false)
                 showToast(true)
                 textForToast("Your profile and all data have been successfully deleted!")
-                delay(500) // delay for show Toast
+                delay(500) // Delay for show Toast
                 viewModel.clearImageFromDevise()
                 viewModel.clearCache()
                 viewModel.setStateSubscribeNews(false)
